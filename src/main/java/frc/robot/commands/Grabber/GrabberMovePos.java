@@ -13,16 +13,18 @@ import frc.robot.subsystems.Grabber.GrabberPlacement;
 public class GrabberMovePos extends Command {
   GrabberPlacement place;
   boolean finish;
+
   /** Creates a new moveGrabber. */
   public GrabberMovePos(GrabberPlacement place) {
-    addRequirements(RobotContainer.m_Grabber);
+    addRequirements(RobotContainer.s_Grabber);
     this.place = place;
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
@@ -33,29 +35,22 @@ public class GrabberMovePos extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    if (place == GrabberPlacement.L1){
-      RobotContainer.m_Grabber.moveTurningMotor(Constants.GrabberConstants.LEVEL_1_TO_3);
-    } else if (place == GrabberPlacement.L2){
-      RobotContainer.m_Grabber.moveTurningMotor(Constants.GrabberConstants.LEVEL_1_TO_3);
-    } else if (place == GrabberPlacement.L3){
-      RobotContainer.m_Grabber.moveTurningMotor(Constants.GrabberConstants.LEVEL_1_TO_3);
-    } else if (place == GrabberPlacement.L4){
-      RobotContainer.m_Grabber.moveTurningMotor(Constants.GrabberConstants.LEVEL_4);
-    } else if (place == GrabberPlacement.GROUND){
-      RobotContainer.m_Grabber.moveTurningMotor(Constants.GrabberConstants.GROUND_POSITION);
-    } else if (place == GrabberPlacement.FEEDER){
-      RobotContainer.m_Grabber.moveTurningMotor(Constants.GrabberConstants.FEEDER_POSITION);
-    } else if (place == GrabberPlacement.BARGE){
-      RobotContainer.m_Grabber.moveTurningMotor(Constants.GrabberConstants.BARGE_POSITION);
-    } else if (place == GrabberPlacement.REST){
-      RobotContainer.m_Grabber.moveTurningMotor(Constants.GrabberConstants.REST_POSITION);
-    } else if (place == GrabberPlacement.LOWALGAE){
-      RobotContainer.m_Grabber.moveTurningMotor(Constants.GrabberConstants.LOW_ALGAE_POSITION);
-    } else if (place == GrabberPlacement.HIGHALGAE){
-      RobotContainer.m_Grabber.moveTurningMotor(Constants.GrabberConstants.HIGH_ALGAE_POSITION);
-    } 
+    switch (place) {
+          case L1 -> RobotContainer.s_Grabber.moveTurningMotor(Constants.GrabberConstants.LEVEL_1_TO_3);
+          case L2 -> RobotContainer.s_Grabber.moveTurningMotor(Constants.GrabberConstants.LEVEL_1_TO_3);
+          case L3 -> RobotContainer.s_Grabber.moveTurningMotor(Constants.GrabberConstants.LEVEL_1_TO_3);
+          case L4 -> RobotContainer.s_Grabber.moveTurningMotor(Constants.GrabberConstants.LEVEL_4);
+          case GROUND -> RobotContainer.s_Grabber.moveTurningMotor(Constants.GrabberConstants.GROUND_POSITION);
+          case FEEDER -> RobotContainer.s_Grabber.moveTurningMotor(Constants.GrabberConstants.FEEDER_POSITION);
+          case BARGE -> RobotContainer.s_Grabber.moveTurningMotor(Constants.GrabberConstants.BARGE_POSITION);
+          case REST -> RobotContainer.s_Grabber.moveTurningMotor(Constants.GrabberConstants.REST_POSITION);
+          case LOWALGAE -> RobotContainer.s_Grabber.moveTurningMotor(Constants.GrabberConstants.LOW_ALGAE_POSITION);
+          case HIGHALGAE -> RobotContainer.s_Grabber.moveTurningMotor(Constants.GrabberConstants.HIGH_ALGAE_POSITION);
+          case PROCESSOR -> RobotContainer.s_Grabber.moveTurningMotor(Constants.GrabberConstants.PROCESSOR_POSITION);
+          default -> {
+        }
+      }
   }
-
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {

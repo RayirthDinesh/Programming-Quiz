@@ -104,13 +104,13 @@ public class Robot extends TimedRobot {
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
     // this line or comment it out.
-    curPlaceGrab = RobotContainer.m_Grabber.getPlacement();
-    curPlaceElevator = RobotContainer.m_Elevator.getLevel();
-    if (RobotContainer.m_Grabber.getState() == States.INITIALIZING) {
+    curPlaceGrab = RobotContainer.s_Grabber.getPlacement();
+    curPlaceElevator = RobotContainer.s_Elevator.getLevel();
+    if (RobotContainer.s_Grabber.getState() == States.INITIALIZING) {
       CommandScheduler.getInstance().schedule(new GrabberReset());
     }
-    if (RobotContainer.m_Elevator.getState() == stateReset.INITIALIZING) {
-      System.out.println("HIIII");
+    if (RobotContainer.s_Elevator.getState() == stateReset.INITIALIZING) {
+
       CommandScheduler.getInstance().schedule(new ElevatorReset());
     }
 
@@ -122,39 +122,37 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during operator control. */
   @Override
   public void teleopPeriodic() {
-    if (curPlaceGrab != RobotContainer.m_Grabber.getPlacement()
-        && RobotContainer.m_Grabber.getState() == States.ENCODER) {
+    // if (curPlaceGrab != RobotContainer.s_Grabber.getPlacement()
+    //     && RobotContainer.s_Grabber.getState() == States.ENCODER) {
 
-      if (curPlaceElevator != RobotContainer.m_Elevator.getLevel()
-          && RobotContainer.m_Elevator.getState() == stateReset.INITIALIZED) {
-        curPlaceGrab = RobotContainer.m_Grabber.getPlacement();
-        curPlaceElevator = RobotContainer.m_Elevator.getLevel();
+    //   if (curPlaceElevator != RobotContainer.s_Elevator.getLevel()
+    //       && RobotContainer.s_Elevator.getState() == stateReset.INITIALIZED) {
+        if (RobotContainer.operatorJoystick.getPOV(0) == 0) {
+
+          new ElevatorAndGrabberButtonStates(stateLevel.HIGHALGAE, GrabberPlacement.HIGHALGAE).schedule();
+
+        }
+        if (RobotContainer.operatorJoystick.getPOV(0) == 270) {
+          new ElevatorAndGrabberButtonStates(stateLevel.BARGE, GrabberPlacement.BARGE).schedule();
+
+        }
+
+        if (RobotContainer.operatorJoystick.getPOV(0) == 180) {
+          new ElevatorAndGrabberButtonStates(stateLevel.LOWALGAE, GrabberPlacement.LOWALGAE).schedule();
+        }
+
+        if (RobotContainer.operatorJoystick.getPOV(0) == 90) {
+          new ElevatorAndGrabberButtonStates(stateLevel.PROCESSOR, GrabberPlacement.PROCESSOR).schedule();
+        }
+
+        if (RobotContainer.driverJoystick.getPOV(0) == 0) {
+          new SwerveEncoderJoymode().schedule();
+        }
+        curPlaceGrab = RobotContainer.s_Grabber.getPlacement();
+        curPlaceElevator = RobotContainer.s_Elevator.getLevel();
         CommandScheduler.getInstance().schedule(new ElevatorAndGrabberMovePos(curPlaceGrab, curPlaceElevator));
-        SmartDashboard.putString("place", curPlaceElevator.toString());
-        SmartDashboard.putString("place", curPlaceGrab.toString());
-      }
-    }
-
-    if (RobotContainer.operatorJoystick.getPOV(0) == 0) {
-
-      new ElevatorAndGrabberButtonStates(stateLevel.HIGHALGAE, GrabberPlacement.HIGHALGAE).schedule();
-
-    } else if (RobotContainer.operatorJoystick.getPOV(0) == 270) {
-      new ElevatorAndGrabberButtonStates(stateLevel.BARGE, GrabberPlacement.BARGE).schedule();
-
-    }
-
-    else if (RobotContainer.operatorJoystick.getPOV(0) == 180) {
-      new ElevatorAndGrabberButtonStates(stateLevel.LOWALGAE, GrabberPlacement.LOWALGAE).schedule();
-    }
-
-    else if (RobotContainer.operatorJoystick.getPOV(0) == 90) {
-      new ElevatorAndGrabberButtonStates(stateLevel.PROCESSOR, GrabberPlacement.PROCESSOR).schedule();
-    }
-
-    if (RobotContainer.driverJoystick.getPOV(0) == 0) {
-      new SwerveEncoderJoymode();
-    }
+    //   }
+    // }
 
   }
 

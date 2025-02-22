@@ -29,7 +29,7 @@ public class SwerveEncoderJoymode extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    RobotContainer.encoderJoymodeState = !RobotContainer.encoderJoymodeState;
+    RobotContainer.s_Swerve.encoderJoymodeState = !RobotContainer.s_Swerve.encoderJoymodeState;
   }
 
   // Returns true when the command should end.

@@ -22,8 +22,7 @@ public class Elevator extends SubsystemBase {
   TalonFX followerMotor = new TalonFX(Constants.ElevatorConstants.FOLLOWER_MOTOR_PORT);
   DigitalInput limitSwitch = new DigitalInput(Constants.ElevatorConstants.LIMITSWITCH_PORT);
 
-  GenericEntry limitswitchEntry = Shuffleboard.getTab("elevator").add("limitswitch",false).getEntry();
-  GenericEntry currentPosEntry = Shuffleboard.getTab("elevator").add("Current Positon", 0).getEntry();
+  
 
   public static enum stateLevel {
     L1,
@@ -46,8 +45,13 @@ public class Elevator extends SubsystemBase {
 
   static stateReset currentState = stateReset.INITIALIZING;
   static stateLevel currentLevel = stateLevel.REST;
-  
   static double currentPos;
+
+  GenericEntry elevatorLimitswitchEntry = Shuffleboard.getTab("Elevator").add("Elevatorlimitswitch",limitSwitch.get()).getEntry();
+  GenericEntry elevatorCurrentPosEntry = Shuffleboard.getTab("Elevator").add("Elevator Current Positon", 0).getEntry();
+  GenericEntry elevatorTargetPosEntry = Shuffleboard.getTab("Elevator").add("Elevator Target Position", 0).getEntry();
+  GenericEntry elevatorCurrentStateInitEntry = Shuffleboard.getTab("Elevator").add("Elevator State Init", currentState.toString()).getEntry();
+  GenericEntry elevatorCurrentStateLevelEntry = Shuffleboard.getTab("Elevator").add("Elevator State Level", currentLevel.toString()).getEntry();
 
   public Elevator() {
     TalonFXConfiguration configs = new TalonFXConfiguration();
@@ -77,10 +81,8 @@ public class Elevator extends SubsystemBase {
     if (getPosition() <= Constants.ElevatorConstants.BOTTOM_HARD_LIMIT || getPosition() >= Constants.ElevatorConstants.TOP_HARD_LIMIT) {
       masterMotor.disable();
     } else if (getPosition() < Constants.ElevatorConstants.BOTTOM_SOFT_LIMIT) {
-      System.out.println("hi");
       currentPos = Constants.ElevatorConstants.BOTTOM_SOFT_LIMIT+10;
     } else if (getPosition() > Constants.ElevatorConstants.TOP_SOFT_LIMIT) {
-      System.out.println("hi");
       currentPos = Constants.ElevatorConstants.TOP_SOFT_LIMIT-10;    
     } 
     masterMotor.setControl(new MotionMagicVoltage(currentPos));
@@ -135,20 +137,18 @@ public class Elevator extends SubsystemBase {
 
   @Override
   public void periodic() {
-    limitswitchEntry.setBoolean(getLimitSwitch());
-    SmartDashboard.putBoolean("Limitswitch", getLimitSwitch());
-    SmartDashboard.putString("Level", getLevel().toString());
-    SmartDashboard.putString("State", getState().toString()); 
-    SmartDashboard.putNumber("Target Position", currentPos);
-    SmartDashboard.putNumber("Current Position", getPosition());
+    elevatorLimitswitchEntry.setBoolean(getLimitSwitch());
+    elevatorCurrentPosEntry.setDouble(getPosition());
+    elevatorTargetPosEntry.setDouble(currentPos);
+    elevatorCurrentStateInitEntry.setString(currentState.toString());
+    elevatorCurrentStateLevelEntry.setString(currentLevel.toString());
 
     switch (currentState) {
       case NOT_INITIALIZED:
         break;
       case INITIALIZING:
         break;
-      case INITIALIZED:
-        
+      case INITIALIZED:     
       default:
         break;
     }

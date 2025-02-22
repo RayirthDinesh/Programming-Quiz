@@ -15,16 +15,16 @@ public class GrabberReset extends Command {
   /** Creates a new reset. */
   public GrabberReset() {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(RobotContainer.m_Grabber);
+    addRequirements(RobotContainer.s_Grabber);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    if (!RobotContainer.m_Grabber.getLimitSwitch()){
-      System.out.println("Disable");
-      RobotContainer.m_Grabber.disableMotor();
-      RobotContainer.m_Grabber.setState(States.NOT_INITIALIZED);
+    if (!RobotContainer.s_Grabber.getLimitSwitch()){
+
+      RobotContainer.s_Grabber.disableMotor();
+      RobotContainer.s_Grabber.setState(States.NOT_INITIALIZED);
       finish = true;
     }
 
@@ -33,22 +33,22 @@ public class GrabberReset extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (!RobotContainer.m_Grabber.getLimitSwitch() && RobotContainer.m_Grabber.getState() == States.INITIALIZING){
-      RobotContainer.m_Grabber.setPos(0);
-      RobotContainer.m_Grabber.moveTurningMotor(0);
-      RobotContainer.m_Grabber.setState(States.INITIALIZED);
+    if (!RobotContainer.s_Grabber.getLimitSwitch() && RobotContainer.s_Grabber.getState() == States.INITIALIZING){
+      RobotContainer.s_Grabber.setPos(0);
+      RobotContainer.s_Grabber.moveTurningMotor(0);
+      RobotContainer.s_Grabber.setState(States.INITIALIZED);
       finish = true;
     } else {
-      RobotContainer.m_Grabber.moveTurningMotor(RobotContainer.m_Grabber.getPos() - 0.03);
+      RobotContainer.s_Grabber.moveTurningMotor(RobotContainer.s_Grabber.getPos() - 0.03);
     }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    // RobotContainer.m_Grabber.setPos(0);
-    // RobotContainer.m_Grabber.moveTurningMotor(0);
-    // RobotContainer.m_Grabber.setState(States.INITIALIZED);
+    // RobotContainer.s_Grabber.setPos(0);
+    // RobotContainer.s_Grabber.moveTurningMotor(0);
+    // RobotContainer.s_Grabber.setState(States.INITIALIZED);
   }
 
   // Returns true when the command should end.

@@ -15,8 +15,10 @@ import com.revrobotics.spark.config.MAXMotionConfig;
 import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 import com.revrobotics.spark.config.SparkMaxConfig;
 
+import edu.wpi.first.networktables.GenericEntry;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -54,13 +56,14 @@ public class Grabber extends SubsystemBase {
     NOTHING
   }
 
-  double target;
+  static double target;
 
   static Timer timer = new Timer();
   SparkMax max = new SparkMax(Constants.GrabberConstants.FOLLOWER_NEOMOTOR_PORT, MotorType.kBrushless);
   SparkMax maxLeader = new SparkMax(Constants.GrabberConstants.LEADER_NEOMOTOR_PORT, MotorType.kBrushless);
   TalonFX turning = new TalonFX(Constants.GrabberConstants.JOINT_MOTOR_PORT);
   DigitalInput limitswitch = new DigitalInput(Constants.GrabberConstants.LIMITSWITCH_PORT);
+
 
   SparkMaxConfig config = new SparkMaxConfig();
   SparkMaxConfig leaderConfig = new SparkMaxConfig();
@@ -77,6 +80,14 @@ public class Grabber extends SubsystemBase {
 
   static double auxFF = 0;
   static double grabberAngle;
+
+  GenericEntry jointLimitswitchEntry = Shuffleboard.getTab("Grabber").add("Joint limitswitch", limitswitch.get()).getEntry();
+  GenericEntry jontCurrentPosEntry = Shuffleboard.getTab("Grabber").add("Joint Current Positon", 0).getEntry();
+  GenericEntry jointTargetPosEntry = Shuffleboard.getTab("Grabber").add("JointTarget Position", target).getEntry();
+  GenericEntry jointInitStateEntry = Shuffleboard.getTab("Grabber").add("Joint State Init", curStates.toString()).getEntry();
+  GenericEntry jointLevelStateEntry = Shuffleboard.getTab("Grabber").add("Joint State Level", curPlacement.toString()).getEntry();
+  GenericEntry grabberIntakeOuttakeEntry = Shuffleboard.getTab("Grabber").add("Grabber Intake Outtake", intakeOuttake.toString()).getEntry();
+
 
   public Grabber() {
     var slot0config = talonConfig.Slot0;
@@ -146,22 +157,22 @@ public class Grabber extends SubsystemBase {
   }
 
   public void moveTurningMotor(double pos) {
-
+    target=pos;
     if (curStates == States.ENCODER) {
 
       if (getPos() < Constants.GrabberConstants.BOTTOM_HARD_LIMIT || getPos() > Constants.GrabberConstants.TOP_HARD_LIMIT) {
         turning.disable();
-        pos = 0;
+        target = 0;
       }
       if (getPos() < Constants.GrabberConstants.BOTTOM_SOFT_LIMIT) {
-        pos = Constants.GrabberConstants.BOTTOM_SOFT_LIMIT + 1;
+        target = Constants.GrabberConstants.BOTTOM_SOFT_LIMIT + 1;
       }
       if (getPos() > Constants.GrabberConstants.TOP_SOFT_LIMIT) {
-        pos = Constants.GrabberConstants.TOP_SOFT_LIMIT - 1;
+        target = Constants.GrabberConstants.TOP_SOFT_LIMIT - 1;
       }
     }
     //
-    turning.setControl(motion.withPosition(pos * Constants.GrabberConstants.GEAR_RATIO));
+    turning.setControl(motion.withPosition(target * Constants.GrabberConstants.GEAR_RATIO));
   }
 
   public boolean getLimitSwitch() {
@@ -198,11 +209,13 @@ public class Grabber extends SubsystemBase {
     grabberAngle = 0 + ((getPos() * 360 / Constants.GrabberConstants.GEAR_RATIO)); // try removing gear ratios
     auxFF = /* FFWEntry.getDouble(-0.15) */ -0.35 * Math.sin(Math.toRadians(grabberAngle)); // -0.128
     // auxFF = 0.35 * Math.sin(Math.toRadians((getPos()-25)));
-    SmartDashboard.putNumber("no", auxFF);
+    jointLimitswitchEntry.setBoolean(getLimitSwitch());
+    jontCurrentPosEntry.setDouble(getPos());
+    jointTargetPosEntry.setDouble(target);
+    jointInitStateEntry.setString(curStates.toString());
+    jointLevelStateEntry.setString(curPlacement.toString());
+    grabberIntakeOuttakeEntry.setString(intakeOuttake.toString());
 
-    SmartDashboard.putNumber("currentPos", getPos());
-    SmartDashboard.putNumber("angel", Math.sin(Math.toRadians((getPos()))));
-    SmartDashboard.putBoolean("limit", getLimitSwitch());
 
     switch (curStates) {
       case NOT_INITIALIZED:
@@ -213,32 +226,29 @@ public class Grabber extends SubsystemBase {
         setState(States.ENCODER);
       case ENCODER:
         switch (intakeOuttake) {
-          case NOTHING:
-            maxLeader.set(0);
-            break;
-          case INTAKE:
-            maxLeader.set(-0.6);
-            if (getOutputCurrent() >= Constants.GrabberConstants.CURRENT_LIMIT) {
-              // System.out.println("here" + getOutputCurrent());
-              Ticker(0.5, false);
-              maxLeader.set(-0.4);
+          case NOTHING -> {
+            maxLeader.set(0);}
+          case INTAKE -> {
+              maxLeader.set(-0.6);
+              if (getOutputCurrent() >= Constants.GrabberConstants.CURRENT_LIMIT) {
+                  
+                  // System.out.println("here" + getOutputCurrent());
+                  Ticker(0.5, false);
+                  maxLeader.set(-0.4);
+              }
             }
-            break;
 
-          case OUTTAKE:
+          case OUTTAKE -> {
+              maxLeader.set(0.3);
+              Ticker(1, true);
+                // maxLeader.set(0.2);
+            }
 
-            maxLeader.set(0.3);
-            Ticker(1, true);
-
-            // maxLeader.set(0.2);
-            break;
-
-          default:
-            maxLeader.set(0);
-            break;
+          default -> maxLeader.set(0);
 
         }
         break;
+
 
     }
 

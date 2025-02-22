@@ -15,51 +15,35 @@ public class ElevatorButtonStates extends Command {
   boolean finish = false;
   stateLevel state;
   public ElevatorButtonStates(stateLevel state) {
-    addRequirements(RobotContainer.m_Elevator);
+    addRequirements(RobotContainer.s_Elevator);
     this.state = state;
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    finish = true;
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    finish = true;
+   
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
     switch (state){
-      case HIGHALGAE:
-        RobotContainer.m_Elevator.setLevel(stateLevel.HIGHALGAE);
-        System.out.println("high algae");
-        break;
-      case LOWALGAE:
-        RobotContainer.m_Elevator.setLevel(stateLevel.LOWALGAE);
-        System.out.println("low algae");
-        break;
-      case PROCESSOR:
-        RobotContainer.m_Elevator.setLevel(stateLevel.PROCESSOR);
-        System.out.println("processor");
-        break;
-      case BARGE:
-        RobotContainer.m_Elevator.setLevel(stateLevel.BARGE);
-        System.out.println("barge");
-        break;
-      case FEEDER:
-        RobotContainer.m_Elevator.setLevel(stateLevel.FEEDER);
-        System.out.println("feeder");
-        break;
-      case GROUND:
-        RobotContainer.m_Elevator.setLevel(stateLevel.GROUND);
-        System.out.println("ground");
-        break;
-      default:
-        break;
+      case HIGHALGAE -> RobotContainer.s_Elevator.setLevel(stateLevel.HIGHALGAE);
+      case LOWALGAE -> RobotContainer.s_Elevator.setLevel(stateLevel.LOWALGAE);
+      case PROCESSOR -> RobotContainer.s_Elevator.setLevel(stateLevel.PROCESSOR);
+      case BARGE -> RobotContainer.s_Elevator.setLevel(stateLevel.BARGE);
+      case FEEDER -> RobotContainer.s_Elevator.setLevel(stateLevel.FEEDER);
+      case GROUND -> RobotContainer.s_Elevator.setLevel(stateLevel.GROUND);
+      default -> {
+          }
     }
   }
 

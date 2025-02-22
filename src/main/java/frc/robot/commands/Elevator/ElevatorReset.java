@@ -13,15 +13,15 @@ public class ElevatorReset extends Command {
   /** Creates a new Reset. */
   public ElevatorReset() {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(RobotContainer.m_Elevator);
+    addRequirements(RobotContainer.s_Elevator);
   }
   boolean finish = false;
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    if (!RobotContainer.m_Elevator.getLimitSwitch()) {
-      RobotContainer.m_Elevator.disable();
-      RobotContainer.m_Elevator.changeState(stateReset.NOT_INITIALIZED);
+    if (!RobotContainer.s_Elevator.getLimitSwitch()) {
+      RobotContainer.s_Elevator.disable();
+      RobotContainer.s_Elevator.changeState(stateReset.NOT_INITIALIZED);
     }
   }
 
@@ -29,8 +29,8 @@ public class ElevatorReset extends Command {
   @Override
   public void execute() {
     // System.out.println(finish);
-    if (RobotContainer.m_Elevator.getLimitSwitch()) {
-        RobotContainer.m_Elevator.movePosition(RobotContainer.m_Elevator.getPosition()+0.3);
+    if (RobotContainer.s_Elevator.getLimitSwitch()) {
+        RobotContainer.s_Elevator.movePosition(RobotContainer.s_Elevator.getPosition()+0.3);
     } else {  
       finish = true;
     }
@@ -39,9 +39,9 @@ public class ElevatorReset extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    RobotContainer.m_Elevator.changeState(stateReset.INITIALIZED);
-    RobotContainer.m_Elevator.setPosition(0);
-    RobotContainer.m_Elevator.movePosition(0);
+    RobotContainer.s_Elevator.changeState(stateReset.INITIALIZED);
+    RobotContainer.s_Elevator.setPosition(0);
+    RobotContainer.s_Elevator.movePosition(0);
   }
 
   // Returns true when the command should end.

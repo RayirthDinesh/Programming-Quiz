@@ -14,7 +14,7 @@ public class GrabberManualMoveDown extends Command {
   boolean finish = false;
   public GrabberManualMoveDown() {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(RobotContainer.m_Grabber);
+    addRequirements(RobotContainer.s_Grabber);
   }
 
   // Called when the command is initially scheduled.
@@ -31,7 +31,7 @@ public class GrabberManualMoveDown extends Command {
   @Override
   public void end(boolean interrupted) {
     SmartDashboard.putBoolean("key", false);
-    RobotContainer.m_Grabber.moveTurningMotor(RobotContainer.m_Grabber.getPos() - 0.03);
+    RobotContainer.s_Grabber.moveTurningMotor(RobotContainer.s_Grabber.getPos() - 0.03);
   }
 
   // Returns true when the command should end.

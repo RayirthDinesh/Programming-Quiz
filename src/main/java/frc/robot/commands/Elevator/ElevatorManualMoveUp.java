@@ -11,7 +11,7 @@ import frc.robot.RobotContainer;
 public class ElevatorManualMoveUp extends Command {
   /** Creates a new buttonUp. */
   public ElevatorManualMoveUp() {
-    addRequirements(RobotContainer.m_Elevator);
+    addRequirements(RobotContainer.s_Elevator);
     // Use addRequirements() here to declare subsystem dependencies.
   }
   boolean finish = false;
@@ -28,7 +28,7 @@ public class ElevatorManualMoveUp extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    RobotContainer.m_Elevator.movePosition(RobotContainer.m_Elevator.getPosition()+50);
+    RobotContainer.s_Elevator.movePosition(RobotContainer.s_Elevator.getPosition()+50);
   }
 
   // Returns true when the command should end.

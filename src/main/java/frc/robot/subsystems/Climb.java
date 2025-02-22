@@ -8,7 +8,10 @@ import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.controls.MotionMagicVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.NeutralModeValue;
+
+import edu.wpi.first.networktables.GenericEntry;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -31,6 +34,12 @@ public class Climb extends SubsystemBase {
   TalonFX motor = new TalonFX(Constants.ClimbConstants.MOTOR_PORT);
   TalonFXConfiguration config = new TalonFXConfiguration();
   public DigitalInput limitswitch1 = new DigitalInput(Constants.ClimbConstants.LIMITSWITCH_PORT);
+
+  GenericEntry climbLimitswitchEntry = Shuffleboard.getTab("Climb").add("Climb limitswitch", limitswitch1.get()).getEntry();
+  GenericEntry climbCurrentPosEntry = Shuffleboard.getTab("Climb").add("Climb Current Positon", 0).getEntry();
+  GenericEntry climbCurrentStateEntry = Shuffleboard.getTab("Climb").add("Climb Current State", current_state.toString()).getEntry();
+  GenericEntry climbTargetPosEntry = Shuffleboard.getTab("Climb").add("Climb Target Position", 0).getEntry();
+
   double targetPos = 0;
   public Climb() {
 
@@ -102,11 +111,10 @@ public class Climb extends SubsystemBase {
 
   @Override
   public void periodic() {
-    SmartDashboard.putNumber("currentpos", get_pos());
-    SmartDashboard.putBoolean("huai te shih", getLimitSwitch());
-    SmartDashboard.putNumber("outputcurrent", get_current());
-    SmartDashboard.putString("state", current_state.toString());
-    SmartDashboard.putNumber("target Pos", targetPos);
+    climbLimitswitchEntry.setBoolean(getLimitSwitch());
+    climbCurrentPosEntry.setDouble(get_pos());
+    climbCurrentStateEntry.setString(current_state.toString());
+    climbTargetPosEntry.setDouble(targetPos);
     // This method will be called once per scheduler run
     switch (current_state) {
       case NOT_INTIALIZED:
@@ -125,7 +133,7 @@ public class Climb extends SubsystemBase {
       case ClimbConstants_ENDED:
         break;
       default: 
-
+        break;
 
     }
   }

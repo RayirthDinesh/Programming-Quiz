@@ -63,6 +63,7 @@ public final class Constants {
     public static final double REST_POSITION = 0;
     public static final double LOW_ALGAE_POSITION = 0;
     public static final double HIGH_ALGAE_POSITION = 0;
+    public static final double PROCESSOR_POSITION = 0;
   }
 
   public final class GrabberConstants {
@@ -84,6 +85,7 @@ public final class Constants {
     public static final double REST_POSITION = 0;
     public static final double LOW_ALGAE_POSITION = 0;
     public static final double HIGH_ALGAE_POSITION = 0;
+    public static final double PROCESSOR_POSITION = 0;
 
     public static final double GEAR_RATIO = 100;
     public static final double CURRENT_LIMIT = 12;

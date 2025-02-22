@@ -13,7 +13,7 @@ public class ClimbMove extends Command {
   /** Creates a new button. */
   public ClimbMove() {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(RobotContainer.m_Climb);
+    addRequirements(RobotContainer.s_Climb);
   }
 
 
@@ -30,8 +30,8 @@ public class ClimbMove extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    if(RobotContainer.m_Climb.getState() == states.ClimbConstants_ENDED || RobotContainer.m_Climb.getState() == states.INTIALIZED)
-      RobotContainer.m_Climb.set_state(states.BUTTON_CLICKED_ACTIVATE);
+    if(RobotContainer.s_Climb.getState() == states.ClimbConstants_ENDED || RobotContainer.s_Climb.getState() == states.INTIALIZED)
+      RobotContainer.s_Climb.set_state(states.BUTTON_CLICKED_ACTIVATE);
   }
 //
   // Returns true when the command should end.

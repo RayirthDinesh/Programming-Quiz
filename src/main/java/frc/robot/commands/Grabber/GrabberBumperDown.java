@@ -14,7 +14,7 @@ public class GrabberBumperDown extends Command {
   boolean finish;
   public GrabberBumperDown() {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(RobotContainer.m_Grabber);
+    addRequirements(RobotContainer.s_Grabber);
   }
 
   // Called when the command is initially scheduled.
@@ -30,25 +30,13 @@ public class GrabberBumperDown extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    switch (RobotContainer.m_Grabber.getPlacement()){
-      case L1:
-        RobotContainer.m_Grabber.setPlacement(GrabberPlacement.L4);
-        System.out.println("L4");
-        break;
-      case L2:
-        RobotContainer.m_Grabber.setPlacement(GrabberPlacement.L1);
-        System.out.println("L1");
-        break;
-      case L3:
-        RobotContainer.m_Grabber.setPlacement(GrabberPlacement.L2);
-        System.out.println("L2");
-        break;
-      case L4:
-        RobotContainer.m_Grabber.setPlacement(GrabberPlacement.L3);
-        System.out.println("L3");
-        break;
-      default:
-        break;
+    switch (RobotContainer.s_Grabber.getPlacement()){
+      case REST -> RobotContainer.s_Grabber.setPlacement(GrabberPlacement.L1);
+      case L1 -> RobotContainer.s_Grabber.setPlacement(GrabberPlacement.L4);
+      case L2 -> RobotContainer.s_Grabber.setPlacement(GrabberPlacement.L1);
+      case L3 -> RobotContainer.s_Grabber.setPlacement(GrabberPlacement.L2);
+      case L4 -> RobotContainer.s_Grabber.setPlacement(GrabberPlacement.L3);
+      default -> RobotContainer.s_Grabber.setPlacement(GrabberPlacement.L1);
     }
   }
 

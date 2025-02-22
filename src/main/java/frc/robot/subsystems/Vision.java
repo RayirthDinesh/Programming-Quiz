@@ -49,7 +49,7 @@ public class Vision extends SubsystemBase {
     MIDDLE,
   }
 
-  public autoAim currentAutoAim = autoAim.NONE;
+  public static autoAim currentAutoAim = autoAim.NONE;
 
 
   // GenericEntry autoPEntry = Shuffleboard.getTab("autoPID").add("P",
@@ -61,6 +61,7 @@ public class Vision extends SubsystemBase {
   GenericEntry angleOffset = Shuffleboard.getTab("autoPID").add("angle", 100).getEntry();
   GenericEntry errorEntry = Shuffleboard.getTab("autoPID").add("Error", 0).getEntry();
   GenericEntry aprilEntry = Shuffleboard.getTab("autoPID").add("Apriltag", false).getEntry();
+  GenericEntry autoAimEntry = Shuffleboard.getTab("Vision").add("Auto Aim", currentAutoAim.toString()).getEntry();
 
   // GenericEntry turnEntry = Shuffleboard.getTab("autoPID").add("Turn",
   // 0).getEntry();
@@ -117,6 +118,8 @@ public class Vision extends SubsystemBase {
     // SmartDashboard.putNumber("LimelightY", y);
     // SmartDashboard.putNumber("LimelightArea", area);
 
+    autoAimEntry.setString(getAutoAim().toString());
+ 
     errorEntry.setDouble(x);
     aprilEntry.setBoolean(isApriltag());
     // This method will be called once per scheduler run
@@ -188,7 +191,6 @@ public class Vision extends SubsystemBase {
   // return autoAnglePID.calculate(targetX + 0.2);
 
   public double getTagPose() {
-    System.out.println(angularLockPID.calculate(botPoseBlueTable[5]));
     return angularLockPID.calculate(botPoseBlueTable[5]);
   }
  

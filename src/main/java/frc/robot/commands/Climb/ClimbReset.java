@@ -16,16 +16,16 @@ public class ClimbReset extends Command {
 
   /** Creates a new reset. */
   public ClimbReset() {
-    addRequirements(RobotContainer.m_Climb);
+    addRequirements(RobotContainer.s_Climb);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    if (!RobotContainer.m_Climb.getLimitSwitch()) {
-      RobotContainer.m_Climb.set_state(states.NOT_INTIALIZED);
-      RobotContainer.m_Climb.disable_motor();
-      System.out.println(RobotContainer.m_Climb.getState());
+    if (!RobotContainer.s_Climb.getLimitSwitch()) {
+      RobotContainer.s_Climb.set_state(states.NOT_INTIALIZED);
+      RobotContainer.s_Climb.disable_motor();
+      System.out.println(RobotContainer.s_Climb.getState());
       finish = true;
     }
   }
@@ -33,12 +33,12 @@ public class ClimbReset extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (RobotContainer.m_Climb.current_state == states.INTIALIZING && RobotContainer.m_Climb.getLimitSwitch()) {
+    if (RobotContainer.s_Climb.current_state == states.INTIALIZING && RobotContainer.s_Climb.getLimitSwitch()) {
       System.out.println("here");
-      RobotContainer.m_Climb.move_motor(RobotContainer.m_Climb.get_pos() - 0.3);
-    } else if (RobotContainer.m_Climb.current_state == states.INTIALIZING) {
+      RobotContainer.s_Climb.move_motor(RobotContainer.s_Climb.get_pos() - 0.3);
+    } else if (RobotContainer.s_Climb.current_state == states.INTIALIZING) {
       System.out.println("done intializing");
-      RobotContainer.m_Climb.set_state(states.INTIALIZED);
+      RobotContainer.s_Climb.set_state(states.INTIALIZED);
       finish = true;
     }
   }
@@ -47,8 +47,8 @@ public class ClimbReset extends Command {
   @Override
   public void end(boolean interrupted) {
    
-    RobotContainer.m_Climb.set_pos();
-    RobotContainer.m_Climb.move_motor(0);
+    RobotContainer.s_Climb.set_pos();
+    RobotContainer.s_Climb.move_motor(0);
   }
 
   // Returns true when the command should end.

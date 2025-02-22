@@ -1,5 +1,6 @@
 package frc.robot.subsystems;
 
+import java.lang.reflect.Field;
 import java.util.Map;
 
 import com.ctre.phoenix6.configs.Pigeon2Configuration;
@@ -33,23 +34,24 @@ import frc.robot.SwerveModules;
 
 public class Swerve extends SubsystemBase {
   /** Creates a new Swerve. */
+  Field2d field = new Field2d();
+  ComplexWidget fieldWidget = Shuffleboard.getTab("Swerve").add("Field", field).withWidget(BuiltInWidgets.kField);
 
   public SwerveDriveOdometry swerveOdometry;
   public SwerveModules[] mSwerveMods;
   public static Pigeon2 gyro;
   public ChassisSpeeds mSpeeds;
   public SwerveDrivePoseEstimator robotPose;
+  public boolean encoderJoymodeState = false; 
 
-  Field2d field = new Field2d();
-  ComplexWidget fieldShuffleboard = Shuffleboard.getTab("Field").add("2025-Field", field)
-      .withWidget(BuiltInWidgets.kField).withProperties(Map.of("robot icon size", 20));
+  // ShuffleboardTab joystickTab = Shuffleboard.getTab("Joystick");
+  // public GenericEntry pEntry = joystickTab.add("P Gain", 0.08).getEntry();
+  // public GenericEntry iEntry = joystickTab.add("I Gain", 0.00).getEntry();
+  // public GenericEntry dEntry = joystickTab.add("D Gain", 0.005).getEntry();
+  // public GenericEntry currentRotValueEntry = joystickTab.add("Current Rotation Value", 0.005).getEntry();
+  // public GenericEntry targetrotValueEntry = joystickTab.add("Target Rotation Value", 0.005).getEntry();
+  GenericEntry EncoderModeEntry = Shuffleboard.getTab("Swerve").add("Encoder Mode",encoderJoymodeState).getEntry();
 
-  ShuffleboardTab joystickTab = Shuffleboard.getTab("Joystick");
-  public GenericEntry pEntry = joystickTab.add("P Gain", 0.08).getEntry();
-  public GenericEntry iEntry = joystickTab.add("I Gain", 0.00).getEntry();
-  public GenericEntry dEntry = joystickTab.add("D Gain", 0.005).getEntry();
-  public GenericEntry currentRotValueEntry = joystickTab.add("Current Rotation Value", 0.005).getEntry();
-  public GenericEntry targetrotValueEntry = joystickTab.add("Target Rotation Value", 0.005).getEntry();
 
   public Swerve() {
 
@@ -233,6 +235,7 @@ public class Swerve extends SubsystemBase {
   public void periodic() {
     swerveOdometry.update(getGyroYaw(), getModulePositions());
     // This method will be called once per scheduler run
+    EncoderModeEntry.setBoolean(encoderJoymodeState);
     SmartDashboard.putNumber("Gyro Yaw", getGyroYaw().getDegrees());
 
     for (SwerveModules mod : mSwerveMods) {

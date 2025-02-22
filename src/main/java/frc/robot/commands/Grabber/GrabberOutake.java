@@ -15,7 +15,7 @@ public class GrabberOutake extends Command {
   boolean finished = false;
   public GrabberOutake() {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(RobotContainer.m_Grabber);
+    addRequirements(RobotContainer.s_Grabber);
   }
 
   // Called when the command is initially scheduled.
@@ -31,7 +31,7 @@ public class GrabberOutake extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    RobotContainer.m_Grabber.setIntakeOutake(IntakeOuttake.OUTTAKE);
+    RobotContainer.s_Grabber.setIntakeOutake(IntakeOuttake.OUTTAKE);
   }
 
   // Returns true when the command should end.

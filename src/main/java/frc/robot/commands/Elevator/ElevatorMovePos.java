@@ -7,9 +7,8 @@ package frc.robot.commands.Elevator;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
-import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.Elevator.stateLevel;
-import frc.robot.subsystems.Grabber.GrabberPlacement;;
+
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class ElevatorMovePos extends Command {
@@ -18,7 +17,7 @@ public class ElevatorMovePos extends Command {
   boolean finish;
   /** Creates a new moveElevator. */
   public ElevatorMovePos(stateLevel state) {
-    addRequirements(RobotContainer.m_Elevator);
+    addRequirements(RobotContainer.s_Elevator);
     this.state = state;
     // Use addRequirements() here to declare subsystem dependencies.
   }
@@ -37,27 +36,20 @@ public class ElevatorMovePos extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    if (state == stateLevel.L1){
-      RobotContainer.m_Elevator.movePosition(Constants.ElevatorConstants.LEVEL_1);
-    } else if (state == stateLevel.L2){
-      RobotContainer.m_Elevator.movePosition(Constants.ElevatorConstants.LEVEL_2);
-    } else if (state== stateLevel.L3){
-      RobotContainer.m_Elevator.movePosition(Constants.ElevatorConstants.LEVEL_3);
-    } else if (state == stateLevel.L4){
-      RobotContainer.m_Elevator.movePosition(Constants.ElevatorConstants.LEVEL_4);
-    } else if (state == stateLevel.GROUND){
-      RobotContainer.m_Elevator.movePosition(Constants.ElevatorConstants.GROUND_POSITION);
-    } else if (state == stateLevel.FEEDER){
-      RobotContainer.m_Elevator.movePosition(Constants.ElevatorConstants.FEEDER_POSITION);
-    } else if (state == stateLevel.BARGE){
-      RobotContainer.m_Elevator.movePosition(Constants.ElevatorConstants.BARGE_POSITION);
-    } else if (state == stateLevel.REST){
-      RobotContainer.m_Elevator.movePosition(Constants.ElevatorConstants.REST_POSITION);
-    } else if (state == stateLevel.LOWALGAE){
-      RobotContainer.m_Elevator.movePosition(Constants.ElevatorConstants.LOW_ALGAE_POSITION);
-    } else if (state == stateLevel.HIGHALGAE){
-      RobotContainer.m_Elevator.movePosition(Constants.ElevatorConstants.HIGH_ALGAE_POSITION);
-    } 
+    switch (state) {
+      case L1 -> RobotContainer.s_Elevator.movePosition(Constants.ElevatorConstants.LEVEL_1);
+      case L2 -> RobotContainer.s_Elevator.movePosition(Constants.ElevatorConstants.LEVEL_2);
+      case L3 -> RobotContainer.s_Elevator.movePosition(Constants.ElevatorConstants.LEVEL_3);
+      case L4 -> RobotContainer.s_Elevator.movePosition(Constants.ElevatorConstants.LEVEL_4);
+      case GROUND -> RobotContainer.s_Elevator.movePosition(Constants.ElevatorConstants.GROUND_POSITION);
+      case FEEDER -> RobotContainer.s_Elevator.movePosition(Constants.ElevatorConstants.FEEDER_POSITION);
+      case BARGE -> RobotContainer.s_Elevator.movePosition(Constants.ElevatorConstants.BARGE_POSITION);
+      case REST -> RobotContainer.s_Elevator.movePosition(Constants.ElevatorConstants.REST_POSITION);
+      case LOWALGAE -> RobotContainer.s_Elevator.movePosition(Constants.ElevatorConstants.LOW_ALGAE_POSITION);
+      case HIGHALGAE -> RobotContainer.s_Elevator.movePosition(Constants.ElevatorConstants.HIGH_ALGAE_POSITION);
+      case PROCESSOR -> RobotContainer.s_Elevator.movePosition(Constants.ElevatorConstants.PROCESSOR_POSITION);
+      default -> throw new AssertionError(state.name());
+    }
   }
 
   // Returns true when the command should end.

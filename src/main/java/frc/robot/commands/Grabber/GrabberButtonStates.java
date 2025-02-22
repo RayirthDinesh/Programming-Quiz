@@ -16,7 +16,7 @@ public class GrabberButtonStates extends Command {
   boolean finish;
   public GrabberButtonStates(GrabberPlacement place) {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(RobotContainer.m_Grabber);
+    addRequirements(RobotContainer.s_Grabber);
     this.place = place;
   }
 
@@ -34,32 +34,14 @@ public class GrabberButtonStates extends Command {
   @Override
   public void end(boolean interrupted) {
     switch (place){
-      case HIGHALGAE:
-        RobotContainer.m_Grabber.setPlacement(GrabberPlacement.HIGHALGAE);
-        System.out.println("high algae");
-        break;
-      case LOWALGAE:
-        RobotContainer.m_Grabber.setPlacement(GrabberPlacement.LOWALGAE);
-        System.out.println("low algae");
-        break;
-      case PROCESSOR:
-        RobotContainer.m_Grabber.setPlacement(GrabberPlacement.PROCESSOR);
-        System.out.println("processor");
-        break;
-      case BARGE:
-        RobotContainer.m_Grabber.setPlacement(GrabberPlacement.BARGE);
-        System.out.println("barge");
-        break;
-      case FEEDER:
-        RobotContainer.m_Grabber.setPlacement(GrabberPlacement.FEEDER);
-        System.out.println("feeder");
-        break;
-      case GROUND:
-        RobotContainer.m_Grabber.setPlacement(GrabberPlacement.GROUND);
-        System.out.println("ground");
-        break;
-      default:
-        break;
+      case HIGHALGAE -> RobotContainer.s_Grabber.setPlacement(GrabberPlacement.HIGHALGAE);
+      case LOWALGAE -> RobotContainer.s_Grabber.setPlacement(GrabberPlacement.LOWALGAE);
+      case PROCESSOR -> RobotContainer.s_Grabber.setPlacement(GrabberPlacement.PROCESSOR);
+      case BARGE -> RobotContainer.s_Grabber.setPlacement(GrabberPlacement.BARGE);
+      case FEEDER -> RobotContainer.s_Grabber.setPlacement(GrabberPlacement.FEEDER);
+      case GROUND -> RobotContainer.s_Grabber.setPlacement(GrabberPlacement.GROUND);
+      default -> {
+          }
     }
 
   }

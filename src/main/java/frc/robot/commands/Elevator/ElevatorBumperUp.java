@@ -16,7 +16,7 @@ public class ElevatorBumperUp extends Command {
   boolean finish = false;
 
   public ElevatorBumperUp() {
-    addRequirements(RobotContainer.m_Elevator);
+    addRequirements(RobotContainer.s_Elevator);
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -34,29 +34,13 @@ public class ElevatorBumperUp extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    switch (RobotContainer.m_Elevator.getLevel()) {
-      case REST:
-        RobotContainer.m_Elevator.setLevel(stateLevel.L1);
-        System.out.println("L1 elev");
-        break;
-      case L1:
-        RobotContainer.m_Elevator.setLevel(stateLevel.L2);
-        System.out.println("L2 elev");
-        break;
-      case L2:
-        RobotContainer.m_Elevator.setLevel(stateLevel.L3);
-        System.out.println("L3 elev");
-        break;
-      case L3:
-        RobotContainer.m_Elevator.setLevel(stateLevel.L4);
-        System.out.println("L4 elev");
-        break;
-      case L4:
-        RobotContainer.m_Grabber.setPlacement(GrabberPlacement.L1);
-        System.out.println("L1 elev");
-        break;
-      default:
-        break;
+    switch (RobotContainer.s_Elevator.getLevel()) {
+      case REST -> RobotContainer.s_Elevator.setLevel(stateLevel.L1);
+      case L1 -> RobotContainer.s_Elevator.setLevel(stateLevel.L2);
+      case L2 -> RobotContainer.s_Elevator.setLevel(stateLevel.L3);
+      case L3 -> RobotContainer.s_Elevator.setLevel(stateLevel.L4);
+      case L4 -> RobotContainer.s_Elevator.setLevel(stateLevel.L1);
+      default -> RobotContainer.s_Elevator.setLevel(stateLevel.L1);
     }
   }
 
