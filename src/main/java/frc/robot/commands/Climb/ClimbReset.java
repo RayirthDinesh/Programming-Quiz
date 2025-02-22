@@ -36,7 +36,7 @@ public class ClimbReset extends Command {
     if (RobotContainer.s_Climb.current_state == states.INTIALIZING && RobotContainer.s_Climb.getLimitSwitch()) {
       System.out.println("here");
       RobotContainer.s_Climb.move_motor(RobotContainer.s_Climb.get_pos() - 0.3);
-    } else if (RobotContainer.s_Climb.current_state == states.INTIALIZING) {
+    } else if (RobotContainer.s_Climb.current_state == states.INTIALIZING && !RobotContainer.s_Climb.getLimitSwitch()) {
       System.out.println("done intializing");
       RobotContainer.s_Climb.set_state(states.INTIALIZED);
       finish = true;

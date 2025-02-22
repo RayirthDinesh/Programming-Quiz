@@ -32,6 +32,9 @@ public class ElevatorReset extends Command {
     if (RobotContainer.s_Elevator.getLimitSwitch()) {
         RobotContainer.s_Elevator.movePosition(RobotContainer.s_Elevator.getPosition()+0.3);
     } else {  
+      RobotContainer.s_Elevator.changeState(stateReset.INITIALIZED);
+      RobotContainer.s_Elevator.setPosition(0);
+      RobotContainer.s_Elevator.movePosition(0);
       finish = true;
     }
   }
@@ -39,9 +42,7 @@ public class ElevatorReset extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    RobotContainer.s_Elevator.changeState(stateReset.INITIALIZED);
-    RobotContainer.s_Elevator.setPosition(0);
-    RobotContainer.s_Elevator.movePosition(0);
+
   }
 
   // Returns true when the command should end.

@@ -122,11 +122,11 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during operator control. */
   @Override
   public void teleopPeriodic() {
-    // if (curPlaceGrab != RobotContainer.s_Grabber.getPlacement()
-    //     && RobotContainer.s_Grabber.getState() == States.ENCODER) {
+    if (curPlaceGrab != RobotContainer.s_Grabber.getPlacement()
+        && RobotContainer.s_Grabber.getState() == States.ENCODER) {
 
-    //   if (curPlaceElevator != RobotContainer.s_Elevator.getLevel()
-    //       && RobotContainer.s_Elevator.getState() == stateReset.INITIALIZED) {
+      if (curPlaceElevator != RobotContainer.s_Elevator.getLevel()
+          && RobotContainer.s_Elevator.getState() == stateReset.INITIALIZED) {
         if (RobotContainer.operatorJoystick.getPOV(0) == 0) {
 
           new ElevatorAndGrabberButtonStates(stateLevel.HIGHALGAE, GrabberPlacement.HIGHALGAE).schedule();
@@ -151,8 +151,8 @@ public class Robot extends TimedRobot {
         curPlaceGrab = RobotContainer.s_Grabber.getPlacement();
         curPlaceElevator = RobotContainer.s_Elevator.getLevel();
         CommandScheduler.getInstance().schedule(new ElevatorAndGrabberMovePos(curPlaceGrab, curPlaceElevator));
-    //   }
-    // }
+      }
+    }
 
   }
 
