@@ -74,13 +74,13 @@ public class Swerve extends SubsystemBase {
     robotPose = new SwerveDrivePoseEstimator(Constants.SwerveConstants.SWERVE_KINEMATICS, getGyroYaw(), getModulePositions(),
         getPose());
 
-    RobotConfig config = null;
-    try {
-      config = RobotConfig.fromGUISettings();
-    } catch (Exception e) {
-      // Handle exception as needed
-      e.printStackTrace();
-    }
+    // RobotConfig config = null;
+    // try {
+    //   config = RobotConfig.fromGUISettings();
+    // } catch (Exception e) {
+    //   // Handle exception as needed
+    //   e.printStackTrace();
+    // }
 
  
     // AutoBuilder.configure(

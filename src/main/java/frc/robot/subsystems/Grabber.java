@@ -120,6 +120,18 @@ public class Grabber extends SubsystemBase {
     SmartDashboard.putNumber("target", 0);
   }
 
+  public void slowMode(){
+    talonConfig.MotionMagic.MotionMagicAcceleration = 5;
+    talonConfig.MotionMagic.MotionMagicCruiseVelocity = 5;
+    turning.getConfigurator().refresh(talonConfig);
+  }
+
+  public void normalMode(){
+    talonConfig.MotionMagic.MotionMagicAcceleration = 15;
+    talonConfig.MotionMagic.MotionMagicCruiseVelocity = 15;
+    turning.getConfigurator().refresh(talonConfig);
+  }
+
   public double getOutputCurrent() {
     return maxLeader.getOutputCurrent();
   }

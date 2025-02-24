@@ -2,20 +2,19 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands.Swerve;
+package frc.robot.commands.Grabber;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.RobotContainer;
+import frc.robot.subsystems.Grabber.GrabberPlacement;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
-public class SwerveEncoderJoymode extends Command {
-  /** Creates a new SwerveEncoderJoymode. */
+public class GrabberScram extends Command {
+  /** Creates a new GrabberScram. */
   boolean finish;
-  boolean encoderJoymode;
-  public SwerveEncoderJoymode(boolean encoderJoymode) {
-    addRequirements(RobotContainer.s_Swerve);
-    this.encoderJoymode = encoderJoymode;
+  public GrabberScram() {
     // Use addRequirements() here to declare subsystem dependencies.
+    addRequirements(RobotContainer.s_Grabber);
   }
 
   // Called when the command is initially scheduled.
@@ -31,7 +30,7 @@ public class SwerveEncoderJoymode extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    RobotContainer.s_Swerve.encoderJoymodeState = encoderJoymode;
+    RobotContainer.s_Grabber.setPlacement(GrabberPlacement.REST);
   }
 
   // Returns true when the command should end.

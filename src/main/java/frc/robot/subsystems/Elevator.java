@@ -53,8 +53,9 @@ public class Elevator extends SubsystemBase {
   GenericEntry elevatorCurrentStateInitEntry = Shuffleboard.getTab("Elevator").add("Elevator State Init", currentState.toString()).getEntry();
   GenericEntry elevatorCurrentStateLevelEntry = Shuffleboard.getTab("Elevator").add("Elevator State Level", currentLevel.toString()).getEntry();
 
+  TalonFXConfiguration configs = new TalonFXConfiguration();
   public Elevator() {
-    TalonFXConfiguration configs = new TalonFXConfiguration();
+    
     // This TalonFX should be configured with a kP of 1, a kI of 0, a kD of 10, and a kV of 2 on slot 0
     configs.Slot0.kP = 1;
     configs.Slot0.kI = 0;
@@ -74,6 +75,18 @@ public class Elevator extends SubsystemBase {
 
     // Write these configs to the TalonFX
     masterMotor.getConfigurator().apply(configs);
+  }
+
+  public void slowMode(){
+    configs.MotionMagic.MotionMagicAcceleration = 1;
+    configs.MotionMagic.MotionMagicCruiseVelocity = 1;
+    masterMotor.getConfigurator().refresh(configs);
+  }
+
+  public void normalMode(){
+    configs.MotionMagic.MotionMagicAcceleration = 5;
+    configs.MotionMagic.MotionMagicCruiseVelocity = 5;
+    masterMotor.getConfigurator().refresh(configs);
   }
 
   public void movePosition(double pos) {
@@ -142,6 +155,8 @@ public class Elevator extends SubsystemBase {
     elevatorTargetPosEntry.setDouble(currentPos);
     elevatorCurrentStateInitEntry.setString(currentState.toString());
     elevatorCurrentStateLevelEntry.setString(currentLevel.toString());
+
+    System.out.println(configs);
 
     switch (currentState) {
       case NOT_INITIALIZED:

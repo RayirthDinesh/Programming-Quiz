@@ -144,14 +144,16 @@ public class Robot extends TimedRobot {
         if (RobotContainer.operatorJoystick.getPOV(0) == 90) {
           new ElevatorAndGrabberButtonStates(stateLevel.PROCESSOR, GrabberPlacement.PROCESSOR).schedule();
         }
-
-        if (RobotContainer.driverJoystick.getPOV(0) == 0) {
-          new SwerveEncoderJoymode().schedule();
-        }
         curPlaceGrab = RobotContainer.s_Grabber.getPlacement();
         curPlaceElevator = RobotContainer.s_Elevator.getLevel();
         CommandScheduler.getInstance().schedule(new ElevatorAndGrabberMovePos(curPlaceGrab, curPlaceElevator));
       }
+    }
+    if (RobotContainer.driverJoystick.getPOV(0) == 0) {
+      new SwerveEncoderJoymode(true).schedule();
+    }
+    if (RobotContainer.driverJoystick.getPOV(0) == 180) {
+      new SwerveEncoderJoymode(false).schedule();
     }
 
   }

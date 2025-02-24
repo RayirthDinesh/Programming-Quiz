@@ -15,6 +15,8 @@ import frc.robot.commands.Grabber.GrabberIntake;
 import frc.robot.commands.Grabber.GrabberOutake;
 import frc.robot.commands.ParallelCommands.ElevatorAndGrabberBumperDown;
 import frc.robot.commands.ParallelCommands.ElevatorAndGrabberButtonStates;
+import frc.robot.commands.ParallelCommands.ElevatorAndGrabberRecalibrate;
+import frc.robot.commands.ParallelCommands.ElevatorAndGrabberScram;
 import frc.robot.commands.ParallelCommands.ElevatorandGrabberBumperUp;
 import frc.robot.subsystems.Climb;
 import frc.robot.subsystems.Elevator;
@@ -45,6 +47,9 @@ public class RobotContainer {
   public static JoystickButton CenterAim = new JoystickButton(driverJoystick, 4);
   public static JoystickButton LeftAim = new JoystickButton(driverJoystick, 1);
   public static JoystickButton RightAim = new JoystickButton(driverJoystick, 3);
+
+  public static JoystickButton Scram = new JoystickButton(driverJoystick, 5);
+  public static JoystickButton Recalibrate = new JoystickButton(driverJoystick, 9);
 
 
   private final SendableChooser<Command> autoChooser = new SendableChooser<>();
@@ -123,6 +128,9 @@ public class RobotContainer {
       RightAim.onFalse(new InstantCommand(() -> s_Vision.setAutoAim(Vision.autoAim.NONE)));
       LeftAim.onFalse(new InstantCommand(() -> s_Vision.setAutoAim(Vision.autoAim.NONE)));
       CenterAim.onFalse(new InstantCommand(() -> s_Vision.setAutoAim(Vision.autoAim.NONE)));
+
+      Scram.onTrue(new ElevatorAndGrabberScram());
+      Recalibrate.onTrue(new ElevatorAndGrabberRecalibrate());
   
   
     }
