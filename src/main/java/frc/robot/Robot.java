@@ -4,22 +4,21 @@
 
 package frc.robot;
 
+import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frc.robot.commands.Elevator.ElevatorMovePos;
 import frc.robot.commands.Elevator.ElevatorReset;
-import frc.robot.commands.Grabber.GrabberMovePos;
 import frc.robot.commands.Grabber.GrabberReset;
 import frc.robot.commands.ParallelCommands.ElevatorAndGrabberButtonStates;
 import frc.robot.commands.ParallelCommands.ElevatorAndGrabberMovePos;
 import frc.robot.commands.Swerve.SwerveEncoderJoymode;
 import frc.robot.commands.Swerve.SwerveTeleop;
+import frc.robot.subsystems.Elevator.stateLevel;
+import frc.robot.subsystems.Elevator.stateReset;
 import frc.robot.subsystems.Grabber.GrabberPlacement;
 import frc.robot.subsystems.Grabber.States;
-import frc.robot.subsystems.Elevator.stateReset;
-import frc.robot.subsystems.Elevator.stateLevel;;
+;
 
 /**
  * The methods in this class are called automatically corresponding to each
@@ -117,38 +116,31 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
+    CameraServer.startAutomaticCapture();
   }
+
 
   /** This function is called periodically during operator control. */
   @Override
   public void teleopPeriodic() {
-    if (curPlaceGrab != RobotContainer.s_Grabber.getPlacement()
-        && RobotContainer.s_Grabber.getState() == States.ENCODER) {
+    // if (curPlaceGrab != RobotContainer.s_Grabber.getPlacement()
+    //     && RobotContainer.s_Grabber.getState() == States.ENCODER) {
 
-      if (curPlaceElevator != RobotContainer.s_Elevator.getLevel()
-          && RobotContainer.s_Elevator.getState() == stateReset.INITIALIZED) {
-        if (RobotContainer.operatorJoystick.getPOV(0) == 0) {
-
-          new ElevatorAndGrabberButtonStates(stateLevel.HIGHALGAE, GrabberPlacement.HIGHALGAE).schedule();
-
-        }
-        if (RobotContainer.operatorJoystick.getPOV(0) == 270) {
+    //   if (curPlaceElevator != RobotContainer.s_Elevator.getLevel()
+    //       && RobotContainer.s_Elevator.getState() == stateReset.INITIALIZED) {
+        if (RobotContainer.operatorJoystick.getPOV() == 270) {
           new ElevatorAndGrabberButtonStates(stateLevel.BARGE, GrabberPlacement.BARGE).schedule();
 
         }
 
-        if (RobotContainer.operatorJoystick.getPOV(0) == 180) {
-          new ElevatorAndGrabberButtonStates(stateLevel.LOWALGAE, GrabberPlacement.LOWALGAE).schedule();
-        }
-
-        if (RobotContainer.operatorJoystick.getPOV(0) == 90) {
-          new ElevatorAndGrabberButtonStates(stateLevel.PROCESSOR, GrabberPlacement.PROCESSOR).schedule();
+        if (RobotContainer.operatorJoystick.getPOV() == 90) {
+          new ElevatorAndGrabberButtonStates(stateLevel.GROUND, GrabberPlacement.GROUND).schedule();
         }
         curPlaceGrab = RobotContainer.s_Grabber.getPlacement();
         curPlaceElevator = RobotContainer.s_Elevator.getLevel();
         CommandScheduler.getInstance().schedule(new ElevatorAndGrabberMovePos(curPlaceGrab, curPlaceElevator));
-      }
-    }
+    //   }
+    // }
     if (RobotContainer.driverJoystick.getPOV(0) == 0) {
       new SwerveEncoderJoymode(true).schedule();
     }

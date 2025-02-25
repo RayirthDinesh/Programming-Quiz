@@ -1,0 +1,65 @@
+{
+  "version": "2025.0",
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 8.04375,
+        "y": 6.17975
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 8.462765567332303,
+        "y": 6.3241005148922484
+      },
+      "isLocked": false,
+      "linkedName": "Start 2"
+    },
+    {
+      "anchor": {
+        "x": 3.6660000000000004,
+        "y": 5.5264999999999995
+      },
+      "prevControl": {
+        "x": 4.292857835787656,
+        "y": 5.824096788499536
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": "Reef TL"
+    }
+  ],
+  "rotationTargets": [],
+  "constraintZones": [],
+  "pointTowardsZones": [
+    {
+      "fieldPosition": {
+        "x": 4.5,
+        "y": 4.0
+      },
+      "rotationOffset": 0.0,
+      "minWaypointRelativePos": 0.95,
+      "maxWaypointRelativePos": 1.0,
+      "name": "Point Towards Zone"
+    }
+  ],
+  "eventMarkers": [],
+  "globalConstraints": {
+    "maxVelocity": 3.0,
+    "maxAcceleration": 3.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0,
+    "nominalVoltage": 12.0,
+    "unlimited": false
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": -58.37300939412404
+  },
+  "reversed": false,
+  "folder": "Start to Reef 2 - Finished",
+  "idealStartingState": {
+    "velocity": 0,
+    "rotation": 179.30300543543697
+  },
+  "useDefaultConstraints": true
+}

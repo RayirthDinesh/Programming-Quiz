@@ -21,10 +21,8 @@ import frc.robot.commands.ParallelCommands.ElevatorandGrabberBumperUp;
 import frc.robot.subsystems.Climb;
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.Elevator.stateLevel;
-import frc.robot.subsystems.Elevator.stateReset;
 import frc.robot.subsystems.Grabber;
 import frc.robot.subsystems.Grabber.GrabberPlacement;
-import frc.robot.subsystems.Grabber.States;
 import frc.robot.subsystems.Swerve;
 import frc.robot.subsystems.Vision;
 
@@ -48,7 +46,7 @@ public class RobotContainer {
   public static JoystickButton LeftAim = new JoystickButton(driverJoystick, 1);
   public static JoystickButton RightAim = new JoystickButton(driverJoystick, 3);
 
-  public static JoystickButton Scram = new JoystickButton(driverJoystick, 5);
+
   public static JoystickButton Recalibrate = new JoystickButton(driverJoystick, 9);
 
 
@@ -69,6 +67,11 @@ public class RobotContainer {
   public static JoystickButton Feeder = new JoystickButton(operatorJoystick, 3);
   public static JoystickButton Ground = new JoystickButton(operatorJoystick, 4);
   public static JoystickButton moveClimb = new JoystickButton(operatorJoystick, 10);
+
+  public static JoystickButton HighAlgae = new JoystickButton(operatorJoystick, 4);
+  public static JoystickButton LowAlgae = new JoystickButton(operatorJoystick, 2);
+  public static JoystickButton Processor = new JoystickButton(operatorJoystick, 1);
+  public static JoystickButton Scram = new JoystickButton(operatorJoystick, 5);
 
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
@@ -96,7 +99,7 @@ public class RobotContainer {
    * joysticks}.
    */
   private void configureBindings() {
-    if(s_Grabber.getState() == States.ENCODER && s_Elevator.getState() == stateReset.INITIALIZED){
+    // if(s_Grabber.getState() == States.ENCODER && s_Elevator.getState() == stateReset.INITIALIZED){
       m_IntakeButton.onTrue(new GrabberIntake());
       m_OuttakeButton.onTrue(new GrabberOutake());
   
@@ -115,8 +118,9 @@ public class RobotContainer {
       // Processor.onTrue(new ElevatorAndGrabberButtonStates(stateLevel.PROCESSOR, GrabberPlacement.PROCESSOR));
       
       Feeder.onTrue(new ElevatorAndGrabberButtonStates(stateLevel.FEEDER, GrabberPlacement.FEEDER));
-      Ground.onTrue(new ElevatorAndGrabberButtonStates(stateLevel.GROUND, GrabberPlacement.GROUND));
-  
+      HighAlgae.onTrue(new ElevatorAndGrabberButtonStates(stateLevel.HIGHALGAE, GrabberPlacement.HIGHALGAE));
+      LowAlgae.onTrue(new ElevatorAndGrabberButtonStates(stateLevel.LOWALGAE, GrabberPlacement.LOWALGAE));
+      Processor.onTrue(new ElevatorAndGrabberButtonStates(stateLevel.PROCESSOR, GrabberPlacement.PROCESSOR));
   
       Next.onTrue(new ElevatorandGrabberBumperUp());
       Previous.onTrue(new ElevatorAndGrabberBumperDown());
@@ -133,7 +137,7 @@ public class RobotContainer {
       Recalibrate.onTrue(new ElevatorAndGrabberRecalibrate());
   
   
-    }
+    // }
     
   }
 

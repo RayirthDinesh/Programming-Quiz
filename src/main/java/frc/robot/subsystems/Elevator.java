@@ -156,8 +156,6 @@ public class Elevator extends SubsystemBase {
     elevatorCurrentStateInitEntry.setString(currentState.toString());
     elevatorCurrentStateLevelEntry.setString(currentLevel.toString());
 
-    System.out.println(configs);
-
     switch (currentState) {
       case NOT_INITIALIZED:
         break;

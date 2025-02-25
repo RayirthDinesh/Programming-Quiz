@@ -1,0 +1,91 @@
+{
+  "version": "2025.0",
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 3.42225,
+        "y": 2.377249999999999
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 4.08699363641794,
+        "y": 1.9907302551884594
+      },
+      "isLocked": false,
+      "linkedName": "Reef BL"
+    },
+    {
+      "anchor": {
+        "x": 2.5155000000000003,
+        "y": 3.3034999999999997
+      },
+      "prevControl": {
+        "x": 3.1319687608404108,
+        "y": 2.4476143780662545
+      },
+      "nextControl": {
+        "x": 1.842977579625023,
+        "y": 4.23720874015145
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 1.472,
+        "y": 6.843
+      },
+      "prevControl": {
+        "x": 1.251446770226219,
+        "y": 6.960712670670382
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": "Feeder T"
+    }
+  ],
+  "rotationTargets": [],
+  "constraintZones": [],
+  "pointTowardsZones": [
+    {
+      "fieldPosition": {
+        "x": 4.5,
+        "y": 4.0
+      },
+      "rotationOffset": 0.0,
+      "minWaypointRelativePos": 0.0,
+      "maxWaypointRelativePos": 0.1,
+      "name": "Reef"
+    },
+    {
+      "fieldPosition": {
+        "x": 1.0,
+        "y": 7.5
+      },
+      "rotationOffset": 0.0,
+      "minWaypointRelativePos": 1.75,
+      "maxWaypointRelativePos": 2.0,
+      "name": "Top Feeder"
+    }
+  ],
+  "eventMarkers": [],
+  "globalConstraints": {
+    "maxVelocity": 3.0,
+    "maxAcceleration": 3.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0,
+    "nominalVoltage": 12.0,
+    "unlimited": false
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": 127.05652819007892
+  },
+  "reversed": false,
+  "folder": "Reef to Feeder - Finished",
+  "idealStartingState": {
+    "velocity": 0,
+    "rotation": 59.03624346792647
+  },
+  "useDefaultConstraints": true
+}

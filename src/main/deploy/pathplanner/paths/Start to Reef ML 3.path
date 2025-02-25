@@ -1,0 +1,65 @@
+{
+  "version": "2025.0",
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 8.034,
+        "y": 5.06825
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 8.320875586205068,
+        "y": 5.2440160002767096
+      },
+      "isLocked": false,
+      "linkedName": "Start 3"
+    },
+    {
+      "anchor": {
+        "x": 2.6520000000000006,
+        "y": 4.05425
+      },
+      "prevControl": {
+        "x": 2.0475000000000003,
+        "y": 7.505749999999999
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": "Reef ML"
+    }
+  ],
+  "rotationTargets": [],
+  "constraintZones": [],
+  "pointTowardsZones": [
+    {
+      "fieldPosition": {
+        "x": 4.5,
+        "y": 4.0
+      },
+      "rotationOffset": 0.0,
+      "minWaypointRelativePos": 0.95,
+      "maxWaypointRelativePos": 1.0,
+      "name": "Point Towards Zone"
+    }
+  ],
+  "eventMarkers": [],
+  "globalConstraints": {
+    "maxVelocity": 3.0,
+    "maxAcceleration": 3.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0,
+    "nominalVoltage": 12.0,
+    "unlimited": false
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": 0.3031494437141113
+  },
+  "reversed": false,
+  "folder": "Start to Reef 3 - Finished",
+  "idealStartingState": {
+    "velocity": 0,
+    "rotation": -179.6952380895789
+  },
+  "useDefaultConstraints": true
+}
