@@ -30,9 +30,13 @@ public class ClimbMove extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    if(RobotContainer.s_Climb.getState() == states.ClimbConstants_ENDED || RobotContainer.s_Climb.getState() == states.INTIALIZED)
+    if(RobotContainer.s_Climb.getState() == states.CLIMB_ENDED) {
+      RobotContainer.s_Climb.set_state(states.WENT_BACK_UP);
+    } else if (RobotContainer.s_Climb.getState() == states.DONE_BACK_UP || RobotContainer.s_Climb.getState() == states.INTIALIZED) {
       RobotContainer.s_Climb.set_state(states.BUTTON_CLICKED_ACTIVATE);
+    }
   }
+    
 //
   // Returns true when the command should end.
   @Override

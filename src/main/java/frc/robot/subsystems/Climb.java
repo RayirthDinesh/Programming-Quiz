@@ -25,7 +25,9 @@ public class Climb extends SubsystemBase {
     INTIALIZING,
     INTIALIZED,
     BUTTON_CLICKED_ACTIVATE,
-    ClimbConstants_ENDED
+    CLIMB_ENDED,
+    WENT_BACK_UP,
+    DONE_BACK_UP
   }
 
 
@@ -129,8 +131,14 @@ public class Climb extends SubsystemBase {
         if(get_current() >= Constants.ClimbConstants.CURRENT_LIMIT){
           motor.stopMotor();
         }
-        current_state = states.ClimbConstants_ENDED;
-      case ClimbConstants_ENDED:
+        current_state = states.CLIMB_ENDED;
+      case CLIMB_ENDED:
+        break;
+      case WENT_BACK_UP:
+        move_motor(0);
+        targetPos = 0;
+        current_state = states.DONE_BACK_UP;
+      case DONE_BACK_UP:
         break;
       default: 
         break;
