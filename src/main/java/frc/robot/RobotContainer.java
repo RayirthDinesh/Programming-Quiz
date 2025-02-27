@@ -22,7 +22,6 @@ import frc.robot.commands.ParallelCommands.ElevatorAndGrabberMovePos;
 import frc.robot.commands.ParallelCommands.ElevatorAndGrabberRecalibrate;
 import frc.robot.commands.ParallelCommands.ElevatorAndGrabberScram;
 import frc.robot.commands.ParallelCommands.ElevatorandGrabberBumperUp;
-import frc.robot.commands.Swerve.SwerveAutoAlign;
 import frc.robot.subsystems.Climb;
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.Elevator.stateLevel;
@@ -30,7 +29,6 @@ import frc.robot.subsystems.Elevator.stateReset;
 import frc.robot.subsystems.Grabber;
 import frc.robot.subsystems.Grabber.GrabberPlacement;
 import frc.robot.subsystems.Grabber.States;
-import frc.robot.subsystems.Vision.autoAim;
 import frc.robot.subsystems.Swerve;
 import frc.robot.subsystems.Vision;
 
@@ -103,7 +101,8 @@ public class RobotContainer {
     NamedCommands.registerCommand("Low Algae", new ElevatorAndGrabberMovePos(GrabberPlacement.LOWALGAE, stateLevel.LOWALGAE));
     NamedCommands.registerCommand("Intake", new GrabberIntake());
     NamedCommands.registerCommand("Outtake", new GrabberOutake());
-    NamedCommands.registerCommand("AutoAim", new SwerveAutoAlign());
+    NamedCommands.registerCommand("AutoAimOn", new InstantCommand(() -> s_Swerve.autoaimstate=true));
+    NamedCommands.registerCommand("AutoAimOff", new InstantCommand(() -> s_Swerve.autoaimstate=false));
     NamedCommands.registerCommand("AutoAimRight", new InstantCommand(() -> s_Vision.setAutoAim(Vision.autoAim.RIGHT)));
     NamedCommands.registerCommand("AutoAimMid", new InstantCommand(() -> s_Vision.setAutoAim(Vision.autoAim.MIDDLE)));
     NamedCommands.registerCommand("AutoAimLeft", new InstantCommand(() -> s_Vision.setAutoAim(Vision.autoAim.LEFT)));

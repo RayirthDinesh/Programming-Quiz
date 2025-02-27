@@ -12,6 +12,7 @@ import frc.robot.commands.Elevator.ElevatorReset;
 import frc.robot.commands.Grabber.GrabberReset;
 import frc.robot.commands.ParallelCommands.ElevatorAndGrabberButtonStates;
 import frc.robot.commands.ParallelCommands.ElevatorAndGrabberMovePos;
+import frc.robot.commands.Swerve.SwerveAutoAlign;
 import frc.robot.commands.Swerve.SwerveEncoderJoymode;
 import frc.robot.commands.Swerve.SwerveTeleop;
 import frc.robot.subsystems.Elevator.stateLevel;
@@ -84,6 +85,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
+
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
 
     // schedule the autonomous command (example)
@@ -91,6 +93,8 @@ public class Robot extends TimedRobot {
       m_autonomousCommand.schedule();
     }
     RobotContainer.s_Swerve.resetModulesToAbsolute();
+
+    CommandScheduler.getInstance().schedule(new SwerveAutoAlign());
 
     curPlaceGrab = RobotContainer.s_Grabber.getPlacement();
     curPlaceElevator = RobotContainer.s_Elevator.getLevel();
