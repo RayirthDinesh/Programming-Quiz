@@ -53,6 +53,8 @@ public final class Constants {
     public static final double TOP_SOFT_LIMIT = 20;
     public static final double TOP_HARD_LIMIT = 30;
 
+    // public static 
+
     public static final double LEVEL_1 = 1;
     public static final double LEVEL_2 = 2;
     public static final double LEVEL_3 = 3;
@@ -77,15 +79,17 @@ public final class Constants {
     public static final int BOTTOM_SOFT_LIMIT = -3000;
     public static final int TOP_SOFT_LIMIT = 2000;
 
-    public static final double LEVEL_1_TO_3 = -0.238701171875;
-    public static final double LEVEL_4 = -0.2;
-    public static final double GROUND_POSITION = -0.3;
-    public static final double FEEDER_POSITION = -0.4;
-    public static final double BARGE_POSITION = -0.5;
+    public static final double LEVEL_1 = -25 / 360;
+    public static final double LEVEL_4 = -30 / 360;
+    public static final double GROUND_POSITION = -30 / 360;
+    public static final double FEEDER_POSITION = 30 / 360;
+    public static final double BARGE_POSITION = 35 / 360;
     public static final double REST_POSITION = 0;
-    public static final double LOW_ALGAE_POSITION = 0;
-    public static final double HIGH_ALGAE_POSITION = 0;
-    public static final double PROCESSOR_POSITION = 0;
+    public static final double LOW_ALGAE_POSITION = -35 / 360;
+    public static final double HIGH_ALGAE_POSITION = -35 / 360;
+    public static final double PROCESSOR_POSITION = -30 / 360;
+
+    public static final double LEVEL_1_TO_3 = -35 / 360;
 
     public static final double GEAR_RATIO = 100;
     public static final double CURRENT_LIMIT = 12;
