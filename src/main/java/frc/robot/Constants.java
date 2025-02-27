@@ -79,7 +79,6 @@ public final class Constants {
     public static final int BOTTOM_SOFT_LIMIT = -3000;
     public static final int TOP_SOFT_LIMIT = 2000;
 
-    public static final double LEVEL_1 = -25 / 360;
     public static final double LEVEL_4 = -30 / 360;
     public static final double GROUND_POSITION = -30 / 360;
     public static final double FEEDER_POSITION = 30 / 360;

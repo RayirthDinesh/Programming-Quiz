@@ -90,7 +90,24 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
     }
+    RobotContainer.s_Swerve.resetModulesToAbsolute();
+
+    curPlaceGrab = RobotContainer.s_Grabber.getPlacement();
+    curPlaceElevator = RobotContainer.s_Elevator.getLevel();
+    if (RobotContainer.s_Grabber.getState() == States.INITIALIZING) {
+      CommandScheduler.getInstance().schedule(new GrabberReset());
+    }
+    if (RobotContainer.s_Elevator.getState() == stateReset.INITIALIZING) {
+
+      CommandScheduler.getInstance().schedule(new ElevatorReset());
+    }
+
+    if (m_autonomousCommand != null) {
+      m_autonomousCommand.cancel();
+    }
+    CameraServer.startAutomaticCapture();
   }
+  
 
   /** This function is called periodically during autonomous. */
   @Override
@@ -123,11 +140,11 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during operator control. */
   @Override
   public void teleopPeriodic() {
-    // if (curPlaceGrab != RobotContainer.s_Grabber.getPlacement()
-    //     && RobotContainer.s_Grabber.getState() == States.ENCODER) {
+    if (curPlaceGrab != RobotContainer.s_Grabber.getPlacement()
+        && RobotContainer.s_Grabber.getState() == States.ENCODER) {
 
-    //   if (curPlaceElevator != RobotContainer.s_Elevator.getLevel()
-    //       && RobotContainer.s_Elevator.getState() == stateReset.INITIALIZED) {
+      if (curPlaceElevator != RobotContainer.s_Elevator.getLevel()
+          && RobotContainer.s_Elevator.getState() == stateReset.INITIALIZED) {
         if (RobotContainer.operatorJoystick.getPOV() == 270) {
           new ElevatorAndGrabberButtonStates(stateLevel.BARGE, GrabberPlacement.BARGE).schedule();
 
@@ -139,8 +156,8 @@ public class Robot extends TimedRobot {
         curPlaceGrab = RobotContainer.s_Grabber.getPlacement();
         curPlaceElevator = RobotContainer.s_Elevator.getLevel();
         CommandScheduler.getInstance().schedule(new ElevatorAndGrabberMovePos(curPlaceGrab, curPlaceElevator));
-    //   }
-    // }
+      }
+    }
     if (RobotContainer.driverJoystick.getPOV(0) == 0) {
       new SwerveEncoderJoymode(true).schedule();
     }

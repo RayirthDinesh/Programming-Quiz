@@ -1,5 +1,8 @@
 package frc.robot;
 
+import com.pathplanner.lib.auto.NamedCommands;
+import com.pathplanner.lib.commands.PathPlannerAuto;
+
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 import edu.wpi.first.wpilibj.shuffleboard.ComplexWidget;
@@ -15,14 +18,19 @@ import frc.robot.commands.Grabber.GrabberIntake;
 import frc.robot.commands.Grabber.GrabberOutake;
 import frc.robot.commands.ParallelCommands.ElevatorAndGrabberBumperDown;
 import frc.robot.commands.ParallelCommands.ElevatorAndGrabberButtonStates;
+import frc.robot.commands.ParallelCommands.ElevatorAndGrabberMovePos;
 import frc.robot.commands.ParallelCommands.ElevatorAndGrabberRecalibrate;
 import frc.robot.commands.ParallelCommands.ElevatorAndGrabberScram;
 import frc.robot.commands.ParallelCommands.ElevatorandGrabberBumperUp;
+import frc.robot.commands.Swerve.SwerveAutoAlign;
 import frc.robot.subsystems.Climb;
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.Elevator.stateLevel;
+import frc.robot.subsystems.Elevator.stateReset;
 import frc.robot.subsystems.Grabber;
 import frc.robot.subsystems.Grabber.GrabberPlacement;
+import frc.robot.subsystems.Grabber.States;
+import frc.robot.subsystems.Vision.autoAim;
 import frc.robot.subsystems.Swerve;
 import frc.robot.subsystems.Vision;
 
@@ -79,9 +87,31 @@ public class RobotContainer {
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
+
+  
   public RobotContainer() {
+    NamedCommands.registerCommand("Rest", new ElevatorAndGrabberMovePos(GrabberPlacement.REST, stateLevel.REST));
+    NamedCommands.registerCommand("L1", new ElevatorAndGrabberMovePos(GrabberPlacement.L1, stateLevel.L1));
+    NamedCommands.registerCommand("L2", new ElevatorAndGrabberMovePos(GrabberPlacement.L2, stateLevel.L2));
+    NamedCommands.registerCommand("L3", new ElevatorAndGrabberMovePos(GrabberPlacement.L4, stateLevel.L3));
+    NamedCommands.registerCommand("L4", new ElevatorAndGrabberMovePos(GrabberPlacement.L4, stateLevel.L4));
+    NamedCommands.registerCommand("Barge", new ElevatorAndGrabberMovePos(GrabberPlacement.BARGE, stateLevel.BARGE));
+    NamedCommands.registerCommand("Processor", new ElevatorAndGrabberMovePos(GrabberPlacement.PROCESSOR, stateLevel.PROCESSOR));
+    NamedCommands.registerCommand("Feeder", new ElevatorAndGrabberMovePos(GrabberPlacement.FEEDER, stateLevel.FEEDER));
+    NamedCommands.registerCommand("Ground", new ElevatorAndGrabberMovePos(GrabberPlacement.GROUND, stateLevel.GROUND));
+    NamedCommands.registerCommand("High Algae", new ElevatorAndGrabberMovePos(GrabberPlacement.HIGHALGAE, stateLevel.HIGHALGAE));
+    NamedCommands.registerCommand("Low Algae", new ElevatorAndGrabberMovePos(GrabberPlacement.LOWALGAE, stateLevel.LOWALGAE));
+    NamedCommands.registerCommand("Intake", new GrabberIntake());
+    NamedCommands.registerCommand("Outtake", new GrabberOutake());
+    NamedCommands.registerCommand("AutoAim", new SwerveAutoAlign());
+    NamedCommands.registerCommand("AutoAimRight", new InstantCommand(() -> s_Vision.setAutoAim(Vision.autoAim.RIGHT)));
+    NamedCommands.registerCommand("AutoAimMid", new InstantCommand(() -> s_Vision.setAutoAim(Vision.autoAim.MIDDLE)));
+    NamedCommands.registerCommand("AutoAimLeft", new InstantCommand(() -> s_Vision.setAutoAim(Vision.autoAim.LEFT)));
     // Configure the trigger bindings
     configureBindings();
+    //autoChooser.setDefaultOption("SPEAKER Routine", new SpeakerRoutine());
+    autoChooser.addOption("SidePathAway", new PathPlannerAuto("side"));
+
   }
 
   /**
@@ -99,7 +129,7 @@ public class RobotContainer {
    * joysticks}.
    */
   private void configureBindings() {
-    // if(s_Grabber.getState() == States.ENCODER && s_Elevator.getState() == stateReset.INITIALIZED){
+    if(s_Grabber.getState() == States.ENCODER && s_Elevator.getState() == stateReset.INITIALIZED){
       m_IntakeButton.onTrue(new GrabberIntake());
       m_OuttakeButton.onTrue(new GrabberOutake());
   
@@ -137,7 +167,7 @@ public class RobotContainer {
       Recalibrate.onTrue(new ElevatorAndGrabberRecalibrate());
   
   
-    // }
+    }
     
   }
 
