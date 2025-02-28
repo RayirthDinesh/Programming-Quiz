@@ -96,8 +96,9 @@ public class Robot extends TimedRobot {
       m_autonomousCommand.schedule();
     }
     RobotContainer.s_Swerve.resetModulesToAbsolute();
+    CommandScheduler.getInstance().setDefaultCommand(RobotContainer.s_Swerve, new SwerveTeleop());
 
-    CommandScheduler.getInstance().schedule(new SwerveAutoAlign());
+    //CommandScheduler.getInstance().schedule(new SwerveAutoAlign());
 
     curPlaceGrab = RobotContainer.s_Grabber.getPlacement();
     curPlaceElevator = RobotContainer.s_Elevator.getLevel();
@@ -126,6 +127,7 @@ public class Robot extends TimedRobot {
     // continue until interrupted by another command, remove
     // this line or comment it out.
     RobotContainer.s_Swerve.resetModulesToAbsolute();
+    CommandScheduler.getInstance().setDefaultCommand(RobotContainer.s_Swerve, new SwerveTeleop());
     curPlaceGrab = RobotContainer.s_Grabber.getPlacement();
     curPlaceElevator = RobotContainer.s_Elevator.getLevel();
 
@@ -175,8 +177,7 @@ public class Robot extends TimedRobot {
   @Override
   public void testInit() {
     // Cancels all running commands at the start of test mode.
-    RobotContainer.s_Swerve.resetModulesToAbsolute();
-    CommandScheduler.getInstance().setDefaultCommand(RobotContainer.s_Swerve, new SwerveTeleop());
+   
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }

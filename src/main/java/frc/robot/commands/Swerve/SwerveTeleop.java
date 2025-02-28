@@ -106,12 +106,12 @@ public class SwerveTeleop extends Command {
     } else {
       translationVal = squareAxis(logAxis(translationSup.getAsDouble()), Constants.SwerveConstants.STICK_DEADBAND + 0.3);
       strafeVal = squareAxis(logAxis(strafeSup.getAsDouble()), Constants.SwerveConstants.STICK_DEADBAND + 0.3);
-      if (!RobotContainer.s_Swerve.encoderJoymodeState) {
+      if (RobotContainer.s_Swerve.encoderJoymodeState) {
         rotationval = rotPid.calculate(RobotContainer.s_Swerve.getGyroYaw().getDegrees(), rawRotation) / 14
-            * Constants.SwerveConstants.MAX_ANGULAR_VELOCITY_RADIANS_PER_SECOND / 3;
-      } else if (RobotContainer.s_Swerve.encoderJoymodeState) {
+            * Constants.SwerveConstants.MAX_ANGULAR_VELOCITY_RADIANS_PER_SECOND / 6;
+      } else if (!RobotContainer.s_Swerve.encoderJoymodeState) {
         rotationval = squareAxis(logAxis(rawRotation), Constants.SwerveConstants.STICK_ROTATION_DEADBAND)
-             * Constants.SwerveConstants.MAX_ANGULAR_VELOCITY_RADIANS_PER_SECOND  / 4;
+             * Constants.SwerveConstants.MAX_ANGULAR_VELOCITY_RADIANS_PER_SECOND  / 6;
       }
     }
     

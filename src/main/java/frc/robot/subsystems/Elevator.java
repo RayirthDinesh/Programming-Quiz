@@ -58,13 +58,13 @@ public class Elevator extends SubsystemBase {
   public Elevator() {
     
     // This TalonFX should be configured with a kP of 1, a kI of 0, a kD of 10, and a kV of 2 on slot 0
-    configs.Slot0.kP = 1;
+    configs.Slot0.kP = 12;
     configs.Slot0.kI = 0;
     configs.Slot0.kD = 0;
     
     // Set the position to 0 rotations for initial use
     masterMotor.setPosition(0);
-    followerMotor.setControl(new Follower(13, true));
+    followerMotor.setControl(new Follower(Constants.ElevatorConstants.FOLLOWER_MOTOR_PORT, true));
     
     // Get Position and Velocity
     var position = masterMotor.getPosition();
