@@ -76,12 +76,9 @@ public class SwerveTeleop extends Command {
   public void execute() {
     translationSup = () -> RobotContainer.driverJoystick.getRawAxis(1);
     strafeSup = () -> RobotContainer.driverJoystick.getRawAxis(0);
-    if (!RobotContainer.s_Swerve.encoderJoymodeState) {
-      rotationSupX = () -> RobotContainer.driverJoystick.getRawAxis(2);
-      rotationSupY = () -> RobotContainer.driverJoystick.getRawAxis(5);
-    } else {
+  
       rotationSup = () -> -RobotContainer.driverJoystick.getRawAxis(2);
-    }
+    
     // robotCentricSup = () -> RobotContainer.robotCentric.getAsBoolean(); (work on
     // it if u need to)
 
@@ -90,11 +87,9 @@ public class SwerveTeleop extends Command {
       RobotContainer.s_Swerve.zeroHeading();
       initFlag = false;
     }
-    if (!RobotContainer.s_Swerve.encoderJoymodeState) {
-      rawRotation = getJoystickAngle(rotationSupX.getAsDouble(), rotationSupY.getAsDouble());
-    } else {
+
       rawRotation = rotationSup.getAsDouble();
-    }
+    
 
     // translationVal = squareAxis(logAxis(translationSup.getAsDouble()), Constants.stickDeadband + 0.3);
     if (RobotContainer.operatorJoystick.isConnected() && RobotContainer.s_Vision.getAutoAim() != autoAim.NONE
@@ -106,14 +101,10 @@ public class SwerveTeleop extends Command {
     } else {
       translationVal = squareAxis(logAxis(translationSup.getAsDouble()), Constants.SwerveConstants.STICK_DEADBAND + 0.3);
       strafeVal = squareAxis(logAxis(strafeSup.getAsDouble()), Constants.SwerveConstants.STICK_DEADBAND + 0.3);
-      if (RobotContainer.s_Swerve.encoderJoymodeState) {
-        rotationval = rotPid.calculate(RobotContainer.s_Swerve.getGyroYaw().getDegrees(), rawRotation) / 14
-            * Constants.SwerveConstants.MAX_ANGULAR_VELOCITY_RADIANS_PER_SECOND / 6;
-      } else if (!RobotContainer.s_Swerve.encoderJoymodeState) {
         rotationval = squareAxis(logAxis(rawRotation), Constants.SwerveConstants.STICK_ROTATION_DEADBAND)
              * Constants.SwerveConstants.MAX_ANGULAR_VELOCITY_RADIANS_PER_SECOND  / 6;
       }
-    }
+    
     
 
     /*
@@ -154,7 +145,6 @@ public class SwerveTeleop extends Command {
 
     RobotContainer.s_Swerve.drive(new Translation2d(translationVal, strafeVal).times(Constants.SwerveConstants.MAX_SPEED_METERS_PER_SECOND),
         rotationval, true, true);
-
   }
 
   @Override

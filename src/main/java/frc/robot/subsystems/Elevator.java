@@ -58,7 +58,7 @@ public class Elevator extends SubsystemBase {
   public Elevator() {
     
     // This TalonFX should be configured with a kP of 1, a kI of 0, a kD of 10, and a kV of 2 on slot 0
-    configs.Slot0.kP = 12;
+    configs.Slot0.kP = 23;
     configs.Slot0.kI = 0;
     configs.Slot0.kD = 0;
     
@@ -101,7 +101,7 @@ public class Elevator extends SubsystemBase {
     } else if (getPosition() > Constants.ElevatorConstants.TOP_SOFT_LIMIT) {
       currentPos = Constants.ElevatorConstants.TOP_SOFT_LIMIT-10;    
     } 
-    masterMotor.setControl(new MotionMagicVoltage(currentPos));
+    masterMotor.setControl(new MotionMagicVoltage(currentPos * Constants.ElevatorConstants.GEAR_RATIO));
   }
 
   public void setPosition(double position) {
@@ -109,7 +109,7 @@ public class Elevator extends SubsystemBase {
   }
 
   public double getPosition() {
-    return masterMotor.getPosition().getValueAsDouble();
+    return masterMotor.getPosition().getValueAsDouble() / Constants.ElevatorConstants.GEAR_RATIO;
   }
 
   public stateLevel moveWithEncoder(double axisVal) {

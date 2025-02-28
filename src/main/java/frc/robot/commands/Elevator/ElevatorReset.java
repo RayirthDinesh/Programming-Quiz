@@ -5,8 +5,10 @@
 package frc.robot.commands.Elevator;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.Constants;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.Elevator.stateReset;
+import frc.robot.subsystems.Grabber.States;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class ElevatorReset extends Command {
@@ -45,6 +47,9 @@ public class ElevatorReset extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    if (RobotContainer.s_Elevator.getState() == stateReset.INITIALIZED){
+      RobotContainer.s_Elevator.movePosition(-2 / Constants.ElevatorConstants.GEAR_RATIO);
+    }
 
   }
 

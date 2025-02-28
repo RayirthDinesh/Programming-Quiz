@@ -127,7 +127,6 @@ public class Robot extends TimedRobot {
     // continue until interrupted by another command, remove
     // this line or comment it out.
     RobotContainer.s_Swerve.resetModulesToAbsolute();
-    CommandScheduler.getInstance().setDefaultCommand(RobotContainer.s_Swerve, new SwerveTeleop());
     curPlaceGrab = RobotContainer.s_Grabber.getPlacement();
     curPlaceElevator = RobotContainer.s_Elevator.getLevel();
 
@@ -147,6 +146,8 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during operator control. */
   @Override
   public void teleopPeriodic() {
+    CommandScheduler.getInstance().setDefaultCommand(RobotContainer.s_Swerve, new SwerveTeleop());
+
     if (curPlaceGrab != RobotContainer.s_Grabber.getPlacement()
         && RobotContainer.s_Grabber.getState() == States.ENCODER) {
 
