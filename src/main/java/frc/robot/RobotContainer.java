@@ -128,7 +128,6 @@ public class RobotContainer {
    * joysticks}.
    */
   private void configureBindings() {
-    if(s_Grabber.getState() == States.ENCODER && s_Elevator.getState() == stateReset.INITIALIZED){
       m_IntakeButton.onTrue(new GrabberIntake());
       m_OuttakeButton.onTrue(new GrabberOutake());
   
@@ -166,7 +165,7 @@ public class RobotContainer {
       Recalibrate.onTrue(new ElevatorAndGrabberRecalibrate());
   
   
-    }
+    // }
     
   }
 

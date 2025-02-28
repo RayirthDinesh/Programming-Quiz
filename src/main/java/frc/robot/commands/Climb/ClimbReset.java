@@ -5,6 +5,7 @@
 package frc.robot.commands.Climb;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.Constants;
 import frc.robot.Robot;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.Climb;
@@ -13,6 +14,7 @@ import frc.robot.subsystems.Climb.states;
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class ClimbReset extends Command {
   boolean finish = false;
+
 
   /** Creates a new reset. */
   public ClimbReset() {
@@ -46,9 +48,12 @@ public class ClimbReset extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-   
     RobotContainer.s_Climb.set_pos();
     RobotContainer.s_Climb.move_motor(0);
+    if(RobotContainer.s_Climb.current_state == states.INTIALIZED){
+      RobotContainer.s_Climb.move_motor(20/Constants.ClimbConstants.GEAR_RATIO);
+    }
+
   }
 
   // Returns true when the command should end.

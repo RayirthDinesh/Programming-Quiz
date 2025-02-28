@@ -12,17 +12,20 @@ import frc.robot.subsystems.Elevator.stateReset;
 public class ElevatorReset extends Command {
   /** Creates a new Reset. */
   public ElevatorReset() {
+
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(RobotContainer.s_Elevator);
   }
-  boolean finish = false;
+  public boolean finish = false;
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
     if (!RobotContainer.s_Elevator.getLimitSwitch()) {
       RobotContainer.s_Elevator.disable();
       RobotContainer.s_Elevator.changeState(stateReset.NOT_INITIALIZED);
+      finish=true;
     }
+
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -31,7 +34,7 @@ public class ElevatorReset extends Command {
     // System.out.println(finish);
     if (RobotContainer.s_Elevator.getLimitSwitch()) {
         RobotContainer.s_Elevator.movePosition(RobotContainer.s_Elevator.getPosition()+0.3);
-    } else {  
+    } else if(!finish){  
       RobotContainer.s_Elevator.changeState(stateReset.INITIALIZED);
       RobotContainer.s_Elevator.setPosition(0);
       RobotContainer.s_Elevator.movePosition(0);

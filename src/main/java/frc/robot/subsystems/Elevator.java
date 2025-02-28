@@ -8,6 +8,7 @@ import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.controls.Follower;
 import com.ctre.phoenix6.controls.MotionMagicVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
+import com.ctre.phoenix6.signals.NeutralModeValue;
 
 import edu.wpi.first.networktables.GenericEntry;
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -75,6 +76,8 @@ public class Elevator extends SubsystemBase {
 
     // Write these configs to the TalonFX
     masterMotor.getConfigurator().apply(configs);
+    masterMotor.setNeutralMode(NeutralModeValue.Coast);
+    followerMotor.setNeutralMode(NeutralModeValue.Coast);
   }
 
   public void slowMode(){

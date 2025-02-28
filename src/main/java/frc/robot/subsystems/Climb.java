@@ -7,15 +7,12 @@ package frc.robot.subsystems;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.controls.MotionMagicVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
-import com.ctre.phoenix6.signals.NeutralModeValue;
 
 import edu.wpi.first.networktables.GenericEntry;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
-import frc.robot.RobotContainer;
 
 public class Climb extends SubsystemBase {
 
@@ -48,18 +45,18 @@ public class Climb extends SubsystemBase {
 
 
     var slot0Configs = config.Slot0; 
-    slot0Configs.kP = 1;
+    slot0Configs.kP = 25;
     slot0Configs.kI = 0;
     slot0Configs.kD = 0;
     //slot0Configs.kG = -1.152;
 
-    config.MotionMagic.MotionMagicAcceleration = 2;
-    config.MotionMagic.MotionMagicCruiseVelocity = 2;
+    config.MotionMagic.MotionMagicAcceleration = 15;
+    config.MotionMagic.MotionMagicCruiseVelocity = 15;
     config.CurrentLimits.SupplyCurrentLimit = 2;
     
 
     motor.getConfigurator().apply(config);
-    motor.setNeutralMode(NeutralModeValue.Brake);
+    //motor.setNeutralMode(NeutralModeValue.Brake);
     
 
   }
@@ -78,7 +75,7 @@ public class Climb extends SubsystemBase {
       
     }
     System.out.println(String.valueOf(pos));
-    motor.setControl(new MotionMagicVoltage(pos));
+    motor.setControl(new MotionMagicVoltage(pos*Constants.ClimbConstants.GEAR_RATIO));
   }
 
   public void set_state(states target_state) {
@@ -101,7 +98,7 @@ public class Climb extends SubsystemBase {
   }
 
   public double get_pos() {
-    return motor.getPosition().getValueAsDouble();
+    return motor.getPosition().getValueAsDouble()/Constants.ClimbConstants.GEAR_RATIO;
   }
 
   public double get_current() {
@@ -135,8 +132,8 @@ public class Climb extends SubsystemBase {
       case CLIMB_ENDED:
         break;
       case WENT_BACK_UP:
-        move_motor(0);
-        targetPos = 0;
+        move_motor(20/Constants.ClimbConstants.GEAR_RATIO);
+        targetPos = 20/Constants.ClimbConstants.GEAR_RATIO;
         current_state = states.DONE_BACK_UP;
       case DONE_BACK_UP:
         break;

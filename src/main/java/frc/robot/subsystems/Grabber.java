@@ -102,7 +102,7 @@ public class Grabber extends SubsystemBase {
     magicmotionconfig.MotionMagicCruiseVelocity = 15;
 
     turning.getConfigurator().apply(talonConfig);
-    turning.setNeutralMode(NeutralModeValue.Brake);
+    turning.setNeutralMode(NeutralModeValue.Coast);
 
     config
         .follow(11, true)
@@ -170,19 +170,20 @@ public class Grabber extends SubsystemBase {
 
   public void moveTurningMotor(double pos) {
     target=pos;
-    if (curStates == States.ENCODER) {
+    System.out.println(pos);
+    // if (curStates == States.ENCODER) {
 
-      if (getPos() < Constants.GrabberConstants.BOTTOM_HARD_LIMIT || getPos() > Constants.GrabberConstants.TOP_HARD_LIMIT) {
-        turning.disable();
-        target = 0;
-      }
-      if (getPos() < Constants.GrabberConstants.BOTTOM_SOFT_LIMIT) {
-        target = Constants.GrabberConstants.BOTTOM_SOFT_LIMIT + 1;
-      }
-      if (getPos() > Constants.GrabberConstants.TOP_SOFT_LIMIT) {
-        target = Constants.GrabberConstants.TOP_SOFT_LIMIT - 1;
-      }
-    }
+    //   if (getPos() < Constants.GrabberConstants.BOTTOM_HARD_LIMIT || getPos() > Constants.GrabberConstants.TOP_HARD_LIMIT) {
+    //     turning.disable();
+    //     target = 0;
+    //   }
+    //   if (getPos() < Constants.GrabberConstants.BOTTOM_SOFT_LIMIT) {
+    //     target = Constants.GrabberConstants.BOTTOM_SOFT_LIMIT + 1;
+    //   }
+    //   if (getPos() > Constants.GrabberConstants.TOP_SOFT_LIMIT) {
+    //     target = Constants.GrabberConstants.TOP_SOFT_LIMIT - 1;
+    //   }
+    // }
     //
     turning.setControl(motion.withPosition(target * Constants.GrabberConstants.GEAR_RATIO));
   }

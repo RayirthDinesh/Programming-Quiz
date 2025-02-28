@@ -8,13 +8,16 @@ import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.commands.Climb.ClimbReset;
 import frc.robot.commands.Elevator.ElevatorReset;
 import frc.robot.commands.Grabber.GrabberReset;
 import frc.robot.commands.ParallelCommands.ElevatorAndGrabberButtonStates;
 import frc.robot.commands.ParallelCommands.ElevatorAndGrabberMovePos;
+import frc.robot.commands.ParallelCommands.ResetAll;
 import frc.robot.commands.Swerve.SwerveAutoAlign;
 import frc.robot.commands.Swerve.SwerveEncoderJoymode;
 import frc.robot.commands.Swerve.SwerveTeleop;
+import frc.robot.subsystems.Climb.states;
 import frc.robot.subsystems.Elevator.stateLevel;
 import frc.robot.subsystems.Elevator.stateReset;
 import frc.robot.subsystems.Grabber.GrabberPlacement;
@@ -98,12 +101,10 @@ public class Robot extends TimedRobot {
 
     curPlaceGrab = RobotContainer.s_Grabber.getPlacement();
     curPlaceElevator = RobotContainer.s_Elevator.getLevel();
-    if (RobotContainer.s_Grabber.getState() == States.INITIALIZING) {
-      CommandScheduler.getInstance().schedule(new GrabberReset());
-    }
-    if (RobotContainer.s_Elevator.getState() == stateReset.INITIALIZING) {
-
-      CommandScheduler.getInstance().schedule(new ElevatorReset());
+    if(RobotContainer.s_Climb.getState() == states.INTIALIZING && 
+    RobotContainer.s_Grabber.getState() == States.INITIALIZING &&
+    RobotContainer.s_Elevator.getState() == stateReset.INITIALIZING){
+    CommandScheduler.getInstance().schedule(new ResetAll());
     }
 
     if (m_autonomousCommand != null) {
@@ -124,14 +125,14 @@ public class Robot extends TimedRobot {
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
     // this line or comment it out.
+    RobotContainer.s_Swerve.resetModulesToAbsolute();
     curPlaceGrab = RobotContainer.s_Grabber.getPlacement();
     curPlaceElevator = RobotContainer.s_Elevator.getLevel();
-    if (RobotContainer.s_Grabber.getState() == States.INITIALIZING) {
-      CommandScheduler.getInstance().schedule(new GrabberReset());
-    }
-    if (RobotContainer.s_Elevator.getState() == stateReset.INITIALIZING) {
 
-      CommandScheduler.getInstance().schedule(new ElevatorReset());
+    if(RobotContainer.s_Climb.getState() == states.INTIALIZING && 
+    RobotContainer.s_Grabber.getState() == States.INITIALIZING &&
+    RobotContainer.s_Elevator.getState() == stateReset.INITIALIZING){
+    CommandScheduler.getInstance().schedule(new ResetAll());
     }
 
     if (m_autonomousCommand != null) {
