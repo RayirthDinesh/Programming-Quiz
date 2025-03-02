@@ -38,6 +38,7 @@ public class Climb extends SubsystemBase {
   GenericEntry climbCurrentPosEntry = Shuffleboard.getTab("Climb").add("Climb Current Positon", 0).getEntry();
   GenericEntry climbCurrentStateEntry = Shuffleboard.getTab("Climb").add("Climb Current State", current_state.toString()).getEntry();
   GenericEntry climbTargetPosEntry = Shuffleboard.getTab("Climb").add("Climb Target Position", 0).getEntry();
+  GenericEntry climbOutputCurrent = Shuffleboard.getTab("Climb").add("Climb Output Current", 0).getEntry();
 
   double targetPos = 0;
   public Climb() {
@@ -45,14 +46,14 @@ public class Climb extends SubsystemBase {
 
 
     var slot0Configs = config.Slot0; 
-    slot0Configs.kP = 25;
+    slot0Configs.kP = 25; 
     slot0Configs.kI = 0;
     slot0Configs.kD = 0;
     //slot0Configs.kG = -1.152;
 
     config.MotionMagic.MotionMagicAcceleration = 15;
     config.MotionMagic.MotionMagicCruiseVelocity = 15;
-    config.CurrentLimits.SupplyCurrentLimit = 2;
+    config.CurrentLimits.SupplyCurrentLimit = 17;
     
 
     motor.getConfigurator().apply(config);
@@ -114,6 +115,7 @@ public class Climb extends SubsystemBase {
     climbCurrentPosEntry.setDouble(get_pos());
     climbCurrentStateEntry.setString(current_state.toString());
     climbTargetPosEntry.setDouble(targetPos);
+    climbOutputCurrent.setDouble(get_current());
     // This method will be called once per scheduler run
     switch (current_state) {
       case NOT_INTIALIZED:

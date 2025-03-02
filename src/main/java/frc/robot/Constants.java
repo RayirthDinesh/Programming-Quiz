@@ -41,7 +41,7 @@ public final class Constants {
     public static final double TOP_HARD_LIMIT = 33;
 
     public static final double CURRENT_LIMIT = 20;
-    public static final double MOVE_TO_CAGE_POSITION = -0.18;
+    public static final double MOVE_TO_CAGE_POSITION = -0.2;
   }
 
   public final class ElevatorConstants {
