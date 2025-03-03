@@ -40,8 +40,8 @@ public final class Constants {
     public static final double TOP_SOFT_LIMIT = 30;
     public static final double TOP_HARD_LIMIT = 33;
 
-    public static final double CURRENT_LIMIT = 20;
-    public static final double MOVE_TO_CAGE_POSITION = -0.2;
+    public static final double CURRENT_LIMIT = 30;
+    public static final double MOVE_TO_CAGE_POSITION = -0.4;
   }
 
   public final class ElevatorConstants {
@@ -111,28 +111,28 @@ public final class Constants {
       public static final int DRIVE_MOTOR_ID = 1;
       public static final int ANGLE_MOTOR_ID = 3;
       public static final int CANCODER_ID = 2;
-      public static final Rotation2d ANGLE_OFFSET = Rotation2d.fromDegrees(-91.75);
+      public static final Rotation2d ANGLE_OFFSET = Rotation2d.fromDegrees(-90);
     }
     //1
     public static final class Mod2 {
       public static final int DRIVE_MOTOR_ID = 4;
       public static final int ANGLE_MOTOR_ID = 6;
       public static final int CANCODER_ID = 5;
-      public static final Rotation2d ANGLE_OFFSET = Rotation2d.fromDegrees(180+105.29+45);
+      public static final Rotation2d ANGLE_OFFSET = Rotation2d.fromDegrees(-90);
     }
     //2
     public static final class Mod3 {
       public static final int DRIVE_MOTOR_ID = 8;
       public static final int ANGLE_MOTOR_ID = 10;
       public static final int CANCODER_ID = 9;
-      public static final Rotation2d ANGLE_OFFSET = Rotation2d.fromDegrees(180-24.433-45);
+      public static final Rotation2d ANGLE_OFFSET = Rotation2d.fromDegrees(-90);
     }
     //3
     public static final class Mod1 {
       public static final int DRIVE_MOTOR_ID = 11;
       public static final int ANGLE_MOTOR_ID = 13;
       public static final int CANCODER_ID = 12;
-      public static final Rotation2d ANGLE_OFFSET = Rotation2d.fromDegrees(0.07);
+      public static final Rotation2d ANGLE_OFFSET = Rotation2d.fromDegrees(-90);
     }
 
     public static final double MAX_RADIANS_PER_SECOND = 12.773732;
@@ -182,13 +182,13 @@ public final class Constants {
     public static final double ANGLE_KI = CHOSEN_MODULE.angleKI;
     public static final double ANGLE_KD = CHOSEN_MODULE.angleKD;
 
-    public static final double DRIVE_KP = 0.06;
+    public static final double DRIVE_KP = 0.46;
     public static final double DRIVE_KI = 0.0;
     public static final double DRIVE_KD = 0.0;
     public static final double DRIVE_KF = 0.0;
 
     /* Drive Motor Characterization */
-    public static final double DRIVE_KS = 0.32;
+    public static final double DRIVE_KS = -1.42;
     public static final double DRIVE_KV = 1.51;
     public static final double DRIVE_KA = 0.21;
 

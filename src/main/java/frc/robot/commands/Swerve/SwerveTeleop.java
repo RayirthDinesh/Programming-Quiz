@@ -53,7 +53,7 @@ public class SwerveTeleop extends Command {
   }
 
   public static double getJoystickAngle(double x, double y) {
-    double deadzone = 0.4;
+    double deadzone = 0.2;
     if ((x <= deadzone && x >= -deadzone) && (y <= deadzone && y >= -deadzone))
       return save;
 
@@ -77,7 +77,7 @@ public class SwerveTeleop extends Command {
     translationSup = () -> RobotContainer.driverJoystick.getRawAxis(1);
     strafeSup = () -> RobotContainer.driverJoystick.getRawAxis(0);
   
-      rotationSup = () -> -RobotContainer.driverJoystick.getRawAxis(2);
+      rotationSup = () -> RobotContainer.driverJoystick.getRawAxis(2);
     
     // robotCentricSup = () -> RobotContainer.robotCentric.getAsBoolean(); (work on
     // it if u need to)
@@ -99,8 +99,8 @@ public class SwerveTeleop extends Command {
       translationVal = RobotContainer.s_Vision.autotrans()*Constants.SwerveConstants.MAX_ANGULAR_VELOCITY_RADIANS_PER_SECOND;
       
     } else {
-      translationVal = squareAxis(logAxis(translationSup.getAsDouble()), Constants.SwerveConstants.STICK_DEADBAND + 0.3);
-      strafeVal = squareAxis(logAxis(strafeSup.getAsDouble()), Constants.SwerveConstants.STICK_DEADBAND + 0.3);
+      translationVal = squareAxis(logAxis(translationSup.getAsDouble()), Constants.SwerveConstants.STICK_DEADBAND );
+      strafeVal = squareAxis(logAxis(strafeSup.getAsDouble()), Constants.SwerveConstants.STICK_DEADBAND );
         rotationval = squareAxis(logAxis(rawRotation), Constants.SwerveConstants.STICK_ROTATION_DEADBAND)
              * Constants.SwerveConstants.MAX_ANGULAR_VELOCITY_RADIANS_PER_SECOND  / 6;
       }

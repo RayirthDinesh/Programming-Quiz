@@ -202,6 +202,7 @@ public class Grabber extends SubsystemBase {
     return turning.getPosition().getValueAsDouble() / Constants.GrabberConstants.GEAR_RATIO;
   }
 
+  
   public GrabberPlacement getPlacement() {
     return curPlacement;
   }

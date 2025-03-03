@@ -46,7 +46,7 @@ public class SwerveModules extends SubsystemBase {
     this.turnmotor.getConfigurator().setPosition(0);
 
     this.cancoder.getConfigurator().apply(Robot.ctreConfigs.swerveCANcoderConfig);
-    // this.cancoder.getConfigurator().setPosition(0);
+    //this.cancoder.getConfigurator().setPosition(0);
     resetToAbsolute();
   }
 

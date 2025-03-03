@@ -53,7 +53,7 @@ public class RobotContainer {
   public static JoystickButton RightAim = new JoystickButton(driverJoystick, 3);
 
 
-  public static JoystickButton Recalibrate = new JoystickButton(driverJoystick, 9);
+  //public static JoystickButton Recalibrate = new JoystickButton(driverJoystick, 9);
 
 
   private final SendableChooser<Command> autoChooser = new SendableChooser<>();
@@ -162,7 +162,7 @@ public class RobotContainer {
       CenterAim.onFalse(new InstantCommand(() -> s_Vision.setAutoAim(Vision.autoAim.NONE)));
 
       Scram.onTrue(new ElevatorAndGrabberScram());
-      Recalibrate.onTrue(new ElevatorAndGrabberRecalibrate());
+      //Recalibrate.onTrue(new ElevatorAndGrabberRecalibrate());
   
   
     // }
