@@ -105,13 +105,13 @@ public class Grabber extends SubsystemBase {
     turning.setNeutralMode(NeutralModeValue.Brake);
 
     config
-        .follow(11, true)
+        .follow(Constants.GrabberConstants.LEADER_NEOMOTOR_PORT, true)
         .inverted(false)
         .idleMode(IdleMode.kBrake)
-        .smartCurrentLimit(15);
+        .smartCurrentLimit(40);
     leaderConfig
         .idleMode(IdleMode.kBrake)
-        .smartCurrentLimit(15);
+        .smartCurrentLimit(40);
 
     maxLeader.configure(leaderConfig, null, null);
     max.configure(config, null, null);
@@ -229,7 +229,7 @@ public class Grabber extends SubsystemBase {
     jointInitStateEntry.setString(curStates.toString());
     jointLevelStateEntry.setString(curPlacement.toString());
     grabberIntakeOuttakeEntry.setString(intakeOuttake.toString());
-
+    SmartDashboard.putNumber("Output",getOutputCurrent() );
 
     switch (curStates) {
       case NOT_INITIALIZED:
@@ -243,12 +243,12 @@ public class Grabber extends SubsystemBase {
           case NOTHING -> {
             maxLeader.set(0);}
           case INTAKE -> {
-              maxLeader.set(-0.6);
+              maxLeader.set(-0.4);
               if (getOutputCurrent() >= Constants.GrabberConstants.CURRENT_LIMIT) {
                   
                   // System.out.println("here" + getOutputCurrent());
                   Ticker(0.5, false);
-                  maxLeader.set(-0.4);
+                  maxLeader.set(-0.3);
               }
             }
 

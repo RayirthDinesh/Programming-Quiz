@@ -47,9 +47,9 @@ public class ElevatorReset extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    if (RobotContainer.s_Elevator.getState() == stateReset.INITIALIZED){
-      RobotContainer.s_Elevator.movePosition(-2 / Constants.ElevatorConstants.GEAR_RATIO);
-    }
+    // if (RobotContainer.s_Elevator.getState() == stateReset.INITIALIZED){
+    //   RobotContainer.s_Elevator.movePosition(-2 / Constants.ElevatorConstants.GEAR_RATIO);
+    // }
 
   }
 

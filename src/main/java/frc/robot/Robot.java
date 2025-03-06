@@ -8,7 +8,6 @@ import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frc.robot.commands.Climb.ClimbReset;
 import frc.robot.commands.Elevator.ElevatorReset;
 import frc.robot.commands.Grabber.GrabberReset;
 import frc.robot.commands.ParallelCommands.ElevatorAndGrabberButtonStates;

@@ -5,7 +5,7 @@
 package frc.robot.commands.ParallelCommands;
 
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
-import frc.robot.commands.Climb.ClimbReset;
+
 import frc.robot.commands.Elevator.ElevatorReset;
 import frc.robot.commands.Grabber.GrabberReset;
 
@@ -19,6 +19,6 @@ public class ResetAll extends ParallelCommandGroup {
   public ResetAll() {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(new ClimbReset(), new ElevatorReset(), new GrabberReset());
+    addCommands(new ElevatorReset(), new GrabberReset());
   }
 }

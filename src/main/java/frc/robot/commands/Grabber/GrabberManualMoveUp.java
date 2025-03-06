@@ -33,7 +33,7 @@ public class GrabberManualMoveUp extends Command {
   @Override
   public void end(boolean interrupted) {
     SmartDashboard.putBoolean("key", true);
-    RobotContainer.s_Grabber.moveTurningMotor(RobotContainer.s_Grabber.getPos() + 0.03);
+    RobotContainer.s_Grabber.moveTurningMotor(RobotContainer.s_Grabber.getPos() + 0.006);
   }
 
   // Returns true when the command should end.

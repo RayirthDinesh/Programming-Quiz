@@ -28,7 +28,7 @@ public class ElevatorManualMoveDown extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    RobotContainer.s_Elevator.movePosition(RobotContainer.s_Elevator.getPosition()-50);
+    RobotContainer.s_Elevator.movePosition(RobotContainer.s_Elevator.getPosition()-0.006);
   }
 
   // Returns true when the command should end.

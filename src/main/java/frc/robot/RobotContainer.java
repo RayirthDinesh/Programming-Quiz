@@ -13,8 +13,11 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
-import frc.robot.commands.Climb.ClimbMove;
+import frc.robot.commands.Elevator.ElevatorManualMoveDown;
+import frc.robot.commands.Elevator.ElevatorManualMoveUp;
 import frc.robot.commands.Grabber.GrabberIntake;
+import frc.robot.commands.Grabber.GrabberManualMoveDown;
+import frc.robot.commands.Grabber.GrabberManualMoveUp;
 import frc.robot.commands.Grabber.GrabberOutake;
 import frc.robot.commands.ParallelCommands.ElevatorAndGrabberBumperDown;
 import frc.robot.commands.ParallelCommands.ElevatorAndGrabberButtonStates;
@@ -32,7 +35,6 @@ import frc.robot.subsystems.Grabber.States;
 import frc.robot.subsystems.Swerve;
 import frc.robot.subsystems.Vision;
 
-
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   public static Climb s_Climb = new Climb();
@@ -47,29 +49,25 @@ public class RobotContainer {
   public static JoystickButton m_IntakeButton = new JoystickButton(driverJoystick, 5);
   public static JoystickButton m_OuttakeButton = new JoystickButton(driverJoystick, 6);
   public static JoystickButton zeroGyro = new JoystickButton(driverJoystick, 10);
- 
+
   public static JoystickButton CenterAim = new JoystickButton(driverJoystick, 4);
   public static JoystickButton LeftAim = new JoystickButton(driverJoystick, 1);
   public static JoystickButton RightAim = new JoystickButton(driverJoystick, 3);
 
-
-  //public static JoystickButton Recalibrate = new JoystickButton(driverJoystick, 9);
-
+  // public static JoystickButton Recalibrate = new JoystickButton(driverJoystick,
+  // 9);
 
   private final SendableChooser<Command> autoChooser = new SendableChooser<>();
   ComplexWidget ShuffleBoardAutonomousRoutines = Shuffleboard.getTab("Driver")
       .add("Autonomous Routines Selector", autoChooser).withWidget(BuiltInWidgets.kComboBoxChooser).withSize(2, 2)
       .withPosition(0, 2);
-  // public static JoystickButton ElevatorUp = new
-  // JoystickButton(operatorJoystick, 8);
-  // public static JoystickButton ElevatorDown = new
-  // JoystickButton(operatorJoystick, 9);
-  // public static final JoystickButton wristUp = new
-  // JoystickButton(operatorJoystick, 8);
-  // public static final JoystickButton wristDown = new
-  // JoystickButton(operatorJoystick, 9);
+  public static JoystickButton ElevatorUp = new JoystickButton(operatorJoystick, 8);
+  public static JoystickButton ElevatorDown = new JoystickButton(operatorJoystick, 7);
+  public static JoystickButton wristUp = new JoystickButton(driverJoystick, 8);
+  public static JoystickButton wristDown = new JoystickButton(driverJoystick, 7);
+
   public static JoystickButton Next = new JoystickButton(operatorJoystick, 6);
-  public static JoystickButton Previous = new JoystickButton(operatorJoystick, 8);
+  public static JoystickButton Previous = new JoystickButton(operatorJoystick, 5);
   public static JoystickButton Feeder = new JoystickButton(operatorJoystick, 3);
   public static JoystickButton Ground = new JoystickButton(operatorJoystick, 4);
   public static JoystickButton moveClimb = new JoystickButton(operatorJoystick, 10);
@@ -79,14 +77,12 @@ public class RobotContainer {
   public static JoystickButton Processor = new JoystickButton(operatorJoystick, 1);
   public static JoystickButton Scram = new JoystickButton(operatorJoystick, 5);
 
-
   // Replace with CommandPS4Controller or CommandJoystick if needed
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
 
-  
   public RobotContainer() {
     NamedCommands.registerCommand("Rest", new ElevatorAndGrabberMovePos(GrabberPlacement.REST, stateLevel.REST));
     NamedCommands.registerCommand("L1", new ElevatorAndGrabberMovePos(GrabberPlacement.L1, stateLevel.L1));
@@ -94,21 +90,24 @@ public class RobotContainer {
     NamedCommands.registerCommand("L3", new ElevatorAndGrabberMovePos(GrabberPlacement.L4, stateLevel.L3));
     NamedCommands.registerCommand("L4", new ElevatorAndGrabberMovePos(GrabberPlacement.L4, stateLevel.L4));
     NamedCommands.registerCommand("Barge", new ElevatorAndGrabberMovePos(GrabberPlacement.BARGE, stateLevel.BARGE));
-    NamedCommands.registerCommand("Processor", new ElevatorAndGrabberMovePos(GrabberPlacement.PROCESSOR, stateLevel.PROCESSOR));
+    NamedCommands.registerCommand("Processor",
+        new ElevatorAndGrabberMovePos(GrabberPlacement.PROCESSOR, stateLevel.PROCESSOR));
     NamedCommands.registerCommand("Feeder", new ElevatorAndGrabberMovePos(GrabberPlacement.FEEDER, stateLevel.FEEDER));
     NamedCommands.registerCommand("Ground", new ElevatorAndGrabberMovePos(GrabberPlacement.GROUND, stateLevel.GROUND));
-    NamedCommands.registerCommand("High Algae", new ElevatorAndGrabberMovePos(GrabberPlacement.HIGHALGAE, stateLevel.HIGHALGAE));
-    NamedCommands.registerCommand("Low Algae", new ElevatorAndGrabberMovePos(GrabberPlacement.LOWALGAE, stateLevel.LOWALGAE));
+    NamedCommands.registerCommand("High Algae",
+        new ElevatorAndGrabberMovePos(GrabberPlacement.HIGHALGAE, stateLevel.HIGHALGAE));
+    NamedCommands.registerCommand("Low Algae",
+        new ElevatorAndGrabberMovePos(GrabberPlacement.LOWALGAE, stateLevel.LOWALGAE));
     NamedCommands.registerCommand("Intake", new GrabberIntake());
     NamedCommands.registerCommand("Outtake", new GrabberOutake());
-    NamedCommands.registerCommand("AutoAimOn", new InstantCommand(() -> s_Swerve.autoaimstate=true));
-    NamedCommands.registerCommand("AutoAimOff", new InstantCommand(() -> s_Swerve.autoaimstate=false));
+    NamedCommands.registerCommand("AutoAimOn", new InstantCommand(() -> s_Swerve.autoaimstate = true));
+    NamedCommands.registerCommand("AutoAimOff", new InstantCommand(() -> s_Swerve.autoaimstate = false));
     NamedCommands.registerCommand("AutoAimRight", new InstantCommand(() -> s_Vision.setAutoAim(Vision.autoAim.RIGHT)));
     NamedCommands.registerCommand("AutoAimMid", new InstantCommand(() -> s_Vision.setAutoAim(Vision.autoAim.MIDDLE)));
     NamedCommands.registerCommand("AutoAimLeft", new InstantCommand(() -> s_Vision.setAutoAim(Vision.autoAim.LEFT)));
     // Configure the trigger bindings
     configureBindings();
-    //autoChooser.setDefaultOption("SPEAKER Routine", new SpeakerRoutine());
+    // autoChooser.setDefaultOption("SPEAKER Routine", new SpeakerRoutine());
     autoChooser.addOption("SidePathAway", new PathPlannerAuto("side"));
 
   }
@@ -128,45 +127,48 @@ public class RobotContainer {
    * joysticks}.
    */
   private void configureBindings() {
-      m_IntakeButton.onTrue(new GrabberIntake());
-      m_OuttakeButton.onTrue(new GrabberOutake());
-  
-      // wristDown.onTrue(new GrabberManualMoveDown());
-      // wristUp.onTrue(new GrabberManualMoveUp());
-  
-      // ElevatorUp.onTrue(new ElevatorManualMoveUp());
-      // ElevatorDown.onTrue(new ElevatorManualMoveDown());
-  
-      zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading()));
-      moveClimb.onTrue(new ClimbMove());
-  
-      // LowAlgae.onTrue(new ElevatorAndGrabberButtonStates(stateLevel.LOWALGAE, GrabberPlacement.LOWALGAE));
-      // HighAlgae.onTrue(new ElevatorAndGrabberButtonStates(stateLevel.HIGHALGAE, GrabberPlacement.HIGHALGAE));
-      // Barge.onTrue(new ElevatorAndGrabberButtonStates(stateLevel.BARGE, GrabberPlacement.BARGE));
-      // Processor.onTrue(new ElevatorAndGrabberButtonStates(stateLevel.PROCESSOR, GrabberPlacement.PROCESSOR));
-      
-      Feeder.onTrue(new ElevatorAndGrabberButtonStates(stateLevel.FEEDER, GrabberPlacement.FEEDER));
-      HighAlgae.onTrue(new ElevatorAndGrabberButtonStates(stateLevel.HIGHALGAE, GrabberPlacement.HIGHALGAE));
-      LowAlgae.onTrue(new ElevatorAndGrabberButtonStates(stateLevel.LOWALGAE, GrabberPlacement.LOWALGAE));
-      Processor.onTrue(new ElevatorAndGrabberButtonStates(stateLevel.PROCESSOR, GrabberPlacement.PROCESSOR));
-  
-      Next.onTrue(new ElevatorandGrabberBumperUp());
-      Previous.onTrue(new ElevatorAndGrabberBumperDown());
-  
-      RightAim.onTrue(new InstantCommand(() -> s_Vision.setAutoAim(Vision.autoAim.RIGHT)));
-      LeftAim.onTrue(new InstantCommand(() -> s_Vision.setAutoAim(Vision.autoAim.LEFT)));
-      CenterAim.onTrue(new InstantCommand(() -> s_Vision.setAutoAim(Vision.autoAim.MIDDLE)));
-  
-      RightAim.onFalse(new InstantCommand(() -> s_Vision.setAutoAim(Vision.autoAim.NONE)));
-      LeftAim.onFalse(new InstantCommand(() -> s_Vision.setAutoAim(Vision.autoAim.NONE)));
-      CenterAim.onFalse(new InstantCommand(() -> s_Vision.setAutoAim(Vision.autoAim.NONE)));
+    m_IntakeButton.onTrue(new GrabberIntake());
+    m_OuttakeButton.onTrue(new GrabberOutake());
 
-      Scram.onTrue(new ElevatorAndGrabberScram());
-      //Recalibrate.onTrue(new ElevatorAndGrabberRecalibrate());
-  
-  
+    wristDown.onTrue(new GrabberManualMoveDown());
+    wristUp.onTrue(new GrabberManualMoveUp());
+
+    ElevatorUp.onTrue(new ElevatorManualMoveUp());
+    ElevatorDown.onTrue(new ElevatorManualMoveDown());
+
+    zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading()));
+// 
+
+    // LowAlgae.onTrue(new ElevatorAndGrabberButtonStates(stateLevel.LOWALGAE,
+    // GrabberPlacement.LOWALGAE));
+    // HighAlgae.onTrue(new ElevatorAndGrabberButtonStates(stateLevel.HIGHALGAE,
+    // GrabberPlacement.HIGHALGAE));
+    // Barge.onTrue(new ElevatorAndGrabberButtonStates(stateLevel.BARGE,
+    // GrabberPlacement.BARGE));
+    // Processor.onTrue(new ElevatorAndGrabberButtonStates(stateLevel.PROCESSOR,
+    // GrabberPlacement.PROCESSOR));
+
+    Feeder.onTrue(new ElevatorAndGrabberButtonStates(stateLevel.FEEDER, GrabberPlacement.FEEDER));
+    HighAlgae.onTrue(new ElevatorAndGrabberButtonStates(stateLevel.HIGHALGAE, GrabberPlacement.HIGHALGAE));
+    LowAlgae.onTrue(new ElevatorAndGrabberButtonStates(stateLevel.LOWALGAE, GrabberPlacement.LOWALGAE));
+    Processor.onTrue(new ElevatorAndGrabberButtonStates(stateLevel.PROCESSOR, GrabberPlacement.PROCESSOR));
+
+    Next.onTrue(new ElevatorandGrabberBumperUp());
+    Previous.onTrue(new ElevatorAndGrabberBumperDown());
+
+    RightAim.onTrue(new InstantCommand(() -> s_Vision.setAutoAim(Vision.autoAim.RIGHT)));
+    LeftAim.onTrue(new InstantCommand(() -> s_Vision.setAutoAim(Vision.autoAim.LEFT)));
+    CenterAim.onTrue(new InstantCommand(() -> s_Vision.setAutoAim(Vision.autoAim.MIDDLE)));
+
+    RightAim.onFalse(new InstantCommand(() -> s_Vision.setAutoAim(Vision.autoAim.NONE)));
+    LeftAim.onFalse(new InstantCommand(() -> s_Vision.setAutoAim(Vision.autoAim.NONE)));
+    CenterAim.onFalse(new InstantCommand(() -> s_Vision.setAutoAim(Vision.autoAim.NONE)));
+
+    Scram.onTrue(new ElevatorAndGrabberScram());
+    // Recalibrate.onTrue(new ElevatorAndGrabberRecalibrate());
+
     // }
-    
+
   }
 
   /**
