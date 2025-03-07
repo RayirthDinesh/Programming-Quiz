@@ -85,7 +85,7 @@ public class Vision extends SubsystemBase {
     autoAnglePID.setI(autoanglei.getDouble(0.0));
     autoAnglePID.setD(autoangled.getDouble(0.000001));
 
-    NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight-smokey");
+    NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
     NetworkTableEntry targetpose_cameraspace = table.getEntry("targetpose_cameraspace");
     double[] targetpose_cameraspaceArray = targetpose_cameraspace.getDoubleArray(new double[5]);
     
@@ -110,6 +110,7 @@ public class Vision extends SubsystemBase {
     SmartDashboard.putNumber("X", x);
     SmartDashboard.putNumber("Y", y);
     SmartDashboard.putNumber("area", area);
+    SmartDashboard.putNumber("targetX", targetX);
     // double area = ta.getDouble(0.0);
 
     // post to smart dashboard periodically
@@ -143,24 +144,35 @@ public class Vision extends SubsystemBase {
     if (currentAutoAim == autoAim.LEFT || currentAutoAim == autoAim.RIGHT) {
       if (currentAutoAim == autoAim.LEFT) {
         if (checker) {
-          targetX = x + 34.8;
+          targetX += 22.35+16.23;
         }
         else {
-          targetX = x + 17.4;
+          targetX += 16.23;
         }
         checker = true;
       } else {
         if (checker) {
-          targetX = x - 34.8;
+          targetX -= 22.35+16.23;
+          
         }
         else {
-          targetX = x - 17.4;
+          targetX -=  22.35;
         }
         checker = true;
       }
     } 
     else {
-      targetX = x+6;
+      // if(getAutoAim().toString().equals( "LEFT")){
+      //   targetX = x- 16.23;
+      // }
+      
+      // else if(getAutoAim().toString().equals( "RIGHT")){
+      //   targetX = x+ 22.35;
+
+      // }
+      
+      targetX = x+12.34;
+    
       checker = false;
     }
     
@@ -177,13 +189,13 @@ public class Vision extends SubsystemBase {
     targetZ = rz;
     if (targetZ < 1 && targetZ > -1)
       targetZ = 0;
-    return autoAnglePID.calculate(targetZ);
+    return -autoAnglePID.calculate(targetZ+10.3);
 
   }
 
   public double autotrans() {
     targetarea= area;
-    return -autoAnglePID.calculate(targetarea,5.39);
+    return -autoAnglePID.calculate(targetarea,11.585);
   }
   // else
   // //turnEntry.setDouble(autoAnglePID.calculate(targetX + 2));

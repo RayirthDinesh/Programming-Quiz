@@ -57,9 +57,9 @@ public final class Constants {
     // public static 
 
     public static final double LEVEL_1 = 0;
-    public static final double LEVEL_2 = 0.3070654296875;
+    public static final double LEVEL_2 = 0.3070654296875-(4*0.006);
     public static final double LEVEL_3 = 0.5698974609375;
-    public static final double LEVEL_4 = 0.91419921875;
+    public static final double LEVEL_4 = 0.9066;
     public static final double GROUND_POSITION = 0;
     public static final double FEEDER_POSITION = 0;
     public static final double BARGE_POSITION = -0.5;
@@ -82,7 +82,7 @@ public final class Constants {
     public static final int BOTTOM_SOFT_LIMIT = -3000;
     public static final int TOP_SOFT_LIMIT = 2000;
 
-    public static final double LEVEL_4 = -0.129873046875;
+    public static final double LEVEL_4 = -0.098173046875;
     public static final double GROUND_POSITION = -60.0 / 360;
     public static final double FEEDER_POSITION = -0.28;
     public static final double BARGE_POSITION = -125.0 / 360;
@@ -112,28 +112,28 @@ public final class Constants {
       public static final int DRIVE_MOTOR_ID = 1;
       public static final int ANGLE_MOTOR_ID = 3;
       public static final int CANCODER_ID = 2;
-      public static final Rotation2d ANGLE_OFFSET = Rotation2d.fromDegrees(-179.56+90);
+      public static final Rotation2d ANGLE_OFFSET = Rotation2d.fromDegrees(-175.166+90);
     }
     //1
     public static final class Mod2 {
       public static final int DRIVE_MOTOR_ID = 4;
       public static final int ANGLE_MOTOR_ID = 6;
       public static final int CANCODER_ID = 5;
-      public static final Rotation2d ANGLE_OFFSET = Rotation2d.fromDegrees(-114.1699+90);
+      public static final Rotation2d ANGLE_OFFSET = Rotation2d.fromDegrees(-107.22+90);
     }
     //2
     public static final class Mod3 {
       public static final int DRIVE_MOTOR_ID = 8;
       public static final int ANGLE_MOTOR_ID = 10;
       public static final int CANCODER_ID = 9;
-      public static final Rotation2d ANGLE_OFFSET = Rotation2d.fromDegrees(20.215+90);
+      public static final Rotation2d ANGLE_OFFSET = Rotation2d.fromDegrees(16.69+90);
     }
     //3
     public static final class Mod1 {
       public static final int DRIVE_MOTOR_ID = 11;
       public static final int ANGLE_MOTOR_ID = 13;
       public static final int CANCODER_ID = 12;
-      public static final Rotation2d ANGLE_OFFSET = Rotation2d.fromDegrees(-86.309+90);
+      public static final Rotation2d ANGLE_OFFSET = Rotation2d.fromDegrees(-89.648+90);
     }
 
     public static final double MAX_RADIANS_PER_SECOND = 12.773732;

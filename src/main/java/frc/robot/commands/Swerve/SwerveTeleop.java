@@ -91,8 +91,11 @@ public class SwerveTeleop extends Command {
     
 
     // translationVal = squareAxis(logAxis(translationSup.getAsDouble()), Constants.stickDeadband + 0.3);
-    if (RobotContainer.operatorJoystick.isConnected() && RobotContainer.s_Vision.getAutoAim() != autoAim.NONE
-        && RobotContainer.s_Vision.isApriltag()) {
+    if(RobotContainer.s_Vision.isApriltag()){
+      System.out.println("OK");
+    }
+    if (RobotContainer.s_Vision.getAutoAim() != autoAim.NONE && RobotContainer.s_Vision.isApriltag()) {
+      System.out.print("AAAAAA");
       strafeVal = RobotContainer.s_Vision.autostrafe()*Constants.SwerveConstants.MAX_ANGULAR_VELOCITY_RADIANS_PER_SECOND;
       rotationval = RobotContainer.s_Vision.autoAngle()* Constants.SwerveConstants.MAX_ANGULAR_VELOCITY_RADIANS_PER_SECOND;
       translationVal = RobotContainer.s_Vision.autotrans()*Constants.SwerveConstants.MAX_ANGULAR_VELOCITY_RADIANS_PER_SECOND;

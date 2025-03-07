@@ -171,19 +171,19 @@ public class Grabber extends SubsystemBase {
   public void moveTurningMotor(double pos) {
     target=pos;
     System.out.println(pos);
-    if (curStates == States.ENCODER) {
+    // if (curStates == States.ENCODER) {
 
-      if (getPos() < Constants.GrabberConstants.BOTTOM_HARD_LIMIT || getPos() > Constants.GrabberConstants.TOP_HARD_LIMIT) {
-        turning.disable();
-        target = 0;
-      }
-      if (getPos() < Constants.GrabberConstants.BOTTOM_SOFT_LIMIT) {
-        target = Constants.GrabberConstants.BOTTOM_SOFT_LIMIT + 1;
-      }
-      if (getPos() > Constants.GrabberConstants.TOP_SOFT_LIMIT) {
-        target = Constants.GrabberConstants.TOP_SOFT_LIMIT - 1;
-      }
-    }
+    //   if (getPos() < Constants.GrabberConstants.BOTTOM_HARD_LIMIT || getPos() > Constants.GrabberConstants.TOP_HARD_LIMIT) {
+    //     turning.disable();
+    //     target = 0;
+    //   }
+    //   if (getPos() < Constants.GrabberConstants.BOTTOM_SOFT_LIMIT) {
+    //     target = Constants.GrabberConstants.BOTTOM_SOFT_LIMIT + 1;
+    //   }
+    //   if (getPos() > Constants.GrabberConstants.TOP_SOFT_LIMIT) {
+    //     target = Constants.GrabberConstants.TOP_SOFT_LIMIT - 1;
+    //   }
+    // }
     
     turning.setControl(motion.withPosition(target * Constants.GrabberConstants.GEAR_RATIO));
   }
@@ -253,7 +253,7 @@ public class Grabber extends SubsystemBase {
             }
 
           case OUTTAKE -> {
-              maxLeader.set(0.1);
+              maxLeader.set(0.2);
               Ticker(1, true);
                 // maxLeader.set(0.2);
             }
