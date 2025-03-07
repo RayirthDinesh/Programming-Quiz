@@ -58,7 +58,7 @@ public final class Constants {
 
     public static final double LEVEL_1 = 0;
     public static final double LEVEL_2 = 0.3070654296875-(4*0.006);
-    public static final double LEVEL_3 = 0.5698974609375;
+    public static final double LEVEL_3 = 0.5698974609375+0.006;
     public static final double LEVEL_4 = 0.9066;
     public static final double GROUND_POSITION = 0;
     public static final double FEEDER_POSITION = 0;

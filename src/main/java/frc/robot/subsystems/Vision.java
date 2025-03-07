@@ -143,25 +143,19 @@ public class Vision extends SubsystemBase {
     checker = false;
     if (currentAutoAim == autoAim.LEFT || currentAutoAim == autoAim.RIGHT) {
       if (currentAutoAim == autoAim.LEFT) {
-        if (checker) {
-          targetX += 22.35+16.23;
-        }
-        else {
-          targetX += 16.23;
-        }
+
+        targetX = 13.23;
+
         checker = true;
       } else {
-        if (checker) {
-          targetX -= 22.35+16.23;
-          
+
+        targetX = -8.35;
         }
-        else {
-          targetX -=  22.35;
-        }
+
         checker = true;
-      }
     } 
     else {
+
       // if(getAutoAim().toString().equals( "LEFT")){
       //   targetX = x- 16.23;
       // }
@@ -171,7 +165,7 @@ public class Vision extends SubsystemBase {
 
       // }
       
-      targetX = x+12.34;
+      targetX = x + 12.34;
     
       checker = false;
     }
