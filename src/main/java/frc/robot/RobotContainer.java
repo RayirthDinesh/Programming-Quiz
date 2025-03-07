@@ -22,16 +22,12 @@ import frc.robot.commands.Grabber.GrabberOutake;
 import frc.robot.commands.ParallelCommands.ElevatorAndGrabberBumperDown;
 import frc.robot.commands.ParallelCommands.ElevatorAndGrabberButtonStates;
 import frc.robot.commands.ParallelCommands.ElevatorAndGrabberMovePos;
-import frc.robot.commands.ParallelCommands.ElevatorAndGrabberRecalibrate;
-import frc.robot.commands.ParallelCommands.ElevatorAndGrabberScram;
 import frc.robot.commands.ParallelCommands.ElevatorandGrabberBumperUp;
 import frc.robot.subsystems.Climb;
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.Elevator.stateLevel;
-import frc.robot.subsystems.Elevator.stateReset;
 import frc.robot.subsystems.Grabber;
 import frc.robot.subsystems.Grabber.GrabberPlacement;
-import frc.robot.subsystems.Grabber.States;
 import frc.robot.subsystems.Swerve;
 import frc.robot.subsystems.Vision;
 
@@ -61,13 +57,13 @@ public class RobotContainer {
   ComplexWidget ShuffleBoardAutonomousRoutines = Shuffleboard.getTab("Driver")
       .add("Autonomous Routines Selector", autoChooser).withWidget(BuiltInWidgets.kComboBoxChooser).withSize(2, 2)
       .withPosition(0, 2);
-  public static JoystickButton ElevatorUp = new JoystickButton(operatorJoystick, 8);
-  public static JoystickButton ElevatorDown = new JoystickButton(operatorJoystick, 7);
+   public static JoystickButton ElevatorUp = new JoystickButton(operatorJoystick, 10);
+  public static JoystickButton ElevatorDown = new JoystickButton(operatorJoystick, 9);
   public static JoystickButton wristUp = new JoystickButton(driverJoystick, 8);
   public static JoystickButton wristDown = new JoystickButton(driverJoystick, 7);
 
   public static JoystickButton Next = new JoystickButton(operatorJoystick, 6);
-  public static JoystickButton Previous = new JoystickButton(operatorJoystick, 5);
+  public static JoystickButton Previous = new JoystickButton(operatorJoystick, 8);
   public static JoystickButton Feeder = new JoystickButton(operatorJoystick, 3);
   public static JoystickButton Ground = new JoystickButton(operatorJoystick, 4);
   public static JoystickButton moveClimb = new JoystickButton(operatorJoystick, 10);
@@ -75,7 +71,7 @@ public class RobotContainer {
   public static JoystickButton HighAlgae = new JoystickButton(operatorJoystick, 4);
   public static JoystickButton LowAlgae = new JoystickButton(operatorJoystick, 2);
   public static JoystickButton Processor = new JoystickButton(operatorJoystick, 1);
-  public static JoystickButton Scram = new JoystickButton(operatorJoystick, 5);
+  // public static JoystickButton Scram = new JoystickButton(operatorJoystick, 5);
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
 
@@ -164,7 +160,7 @@ public class RobotContainer {
     LeftAim.onFalse(new InstantCommand(() -> s_Vision.setAutoAim(Vision.autoAim.NONE)));
     CenterAim.onFalse(new InstantCommand(() -> s_Vision.setAutoAim(Vision.autoAim.NONE)));
 
-    Scram.onTrue(new ElevatorAndGrabberScram());
+    // Scram.onTrue(new ElevatorAndGrabberScram());
     // Recalibrate.onTrue(new ElevatorAndGrabberRecalibrate());
 
     // }

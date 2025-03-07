@@ -36,7 +36,7 @@ public class GrabberMovePos extends Command {
   @Override
   public void end(boolean interrupted) {
     switch (place) {
-          case L1 -> RobotContainer.s_Grabber.moveTurningMotor(Constants.GrabberConstants.LEVEL_1_TO_3);
+          case L1 -> RobotContainer.s_Grabber.moveTurningMotor(Constants.GrabberConstants.LEVEL_1);
           case L2 -> RobotContainer.s_Grabber.moveTurningMotor(Constants.GrabberConstants.LEVEL_1_TO_3);
           case L3 -> RobotContainer.s_Grabber.moveTurningMotor(Constants.GrabberConstants.LEVEL_1_TO_3);
           case L4 -> RobotContainer.s_Grabber.moveTurningMotor(Constants.GrabberConstants.LEVEL_4);

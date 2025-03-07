@@ -102,7 +102,7 @@ public class Grabber extends SubsystemBase {
     magicmotionconfig.MotionMagicCruiseVelocity = 15;
 
     turning.getConfigurator().apply(talonConfig);
-    turning.setNeutralMode(NeutralModeValue.Brake);
+    turning.setNeutralMode(NeutralModeValue.Coast);
 
     config
         .follow(Constants.GrabberConstants.LEADER_NEOMOTOR_PORT, true)
@@ -253,7 +253,7 @@ public class Grabber extends SubsystemBase {
             }
 
           case OUTTAKE -> {
-              maxLeader.set(0.3);
+              maxLeader.set(0.1);
               Ticker(1, true);
                 // maxLeader.set(0.2);
             }

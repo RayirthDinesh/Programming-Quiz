@@ -56,11 +56,11 @@ public final class Constants {
 
     // public static 
 
-    public static final double LEVEL_1 = 1;
-    public static final double LEVEL_2 = 2;
-    public static final double LEVEL_3 = 3;
-    public static final double LEVEL_4 = 4;
-    public static final double GROUND_POSITION = 5;
+    public static final double LEVEL_1 = 0;
+    public static final double LEVEL_2 = 0.3070654296875;
+    public static final double LEVEL_3 = 0.5698974609375;
+    public static final double LEVEL_4 = 0.91419921875;
+    public static final double GROUND_POSITION = 0;
     public static final double FEEDER_POSITION = 0;
     public static final double BARGE_POSITION = -0.5;
     public static final double REST_POSITION = 0;
@@ -82,7 +82,7 @@ public final class Constants {
     public static final int BOTTOM_SOFT_LIMIT = -3000;
     public static final int TOP_SOFT_LIMIT = 2000;
 
-    public static final double LEVEL_4 = -60.0 / 360;
+    public static final double LEVEL_4 = -0.129873046875;
     public static final double GROUND_POSITION = -60.0 / 360;
     public static final double FEEDER_POSITION = -0.28;
     public static final double BARGE_POSITION = -125.0 / 360;
@@ -91,14 +91,15 @@ public final class Constants {
     public static final double HIGH_ALGAE_POSITION = -55.0 / 360;
     public static final double PROCESSOR_POSITION = -60.0 / 360;
 
-    public static final double LEVEL_1_TO_3 = -55.0/ 360;
+    public static final double LEVEL_1_TO_3 = -0.1220068359375;
+    public static final double LEVEL_1 = 0;
 
     public static final double GEAR_RATIO = 100;
     public static final double CURRENT_LIMIT = 12;
   }
 
   public final class SwerveConstants {
-    public static final double STICK_ROTATION_DEADBAND = 0.3;
+    public static final double STICK_ROTATION_DEADBAND = 0.05;
     public static final double STICK_DEADBAND = 0.05;
     public static final int X_AXIS_PORT = 0;
     public static final int Y_AXIS_PORT = 1;

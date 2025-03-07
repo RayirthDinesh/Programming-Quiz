@@ -7,7 +7,6 @@ import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
@@ -53,7 +52,7 @@ public class SwerveTeleop extends Command {
   }
 
   public static double getJoystickAngle(double x, double y) {
-    double deadzone = 0.2;
+    double deadzone = 0.05;
     if ((x <= deadzone && x >= -deadzone) && (y <= deadzone && y >= -deadzone))
       return save;
 

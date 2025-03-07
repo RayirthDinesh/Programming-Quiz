@@ -7,7 +7,6 @@ package frc.robot.subsystems;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.filter.LinearFilter;
 import edu.wpi.first.math.filter.MedianFilter;
-import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.networktables.GenericEntry;
 import edu.wpi.first.networktables.NetworkTable;
@@ -144,18 +143,18 @@ public class Vision extends SubsystemBase {
     if (currentAutoAim == autoAim.LEFT || currentAutoAim == autoAim.RIGHT) {
       if (currentAutoAim == autoAim.LEFT) {
         if (checker) {
-          targetX = x + 26;
+          targetX = x + 34.8;
         }
         else {
-          targetX = x + 16;
+          targetX = x + 17.4;
         }
         checker = true;
       } else {
         if (checker) {
-          targetX = x - 21;
+          targetX = x - 34.8;
         }
         else {
-          targetX = x - 11;
+          targetX = x - 17.4;
         }
         checker = true;
       }
