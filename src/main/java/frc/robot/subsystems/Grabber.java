@@ -22,6 +22,7 @@ import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.RobotContainer;
 
 
 
@@ -98,8 +99,8 @@ public class Grabber extends SubsystemBase {
     slot0config.kI = 0;
     slot0config.kD = 0;
 
-    magicmotionconfig.MotionMagicAcceleration = 15;
-    magicmotionconfig.MotionMagicCruiseVelocity = 15;
+    magicmotionconfig.MotionMagicAcceleration = 30;
+    magicmotionconfig.MotionMagicCruiseVelocity = 30;
 
     turning.getConfigurator().apply(talonConfig);
     turning.setNeutralMode(NeutralModeValue.Coast);
@@ -171,19 +172,19 @@ public class Grabber extends SubsystemBase {
   public void moveTurningMotor(double pos) {
     target=pos;
     System.out.println(pos);
-    // if (curStates == States.ENCODER) {
+    if (curStates == States.ENCODER) {
 
-    //   if (getPos() < Constants.GrabberConstants.BOTTOM_HARD_LIMIT || getPos() > Constants.GrabberConstants.TOP_HARD_LIMIT) {
-    //     turning.disable();
-    //     target = 0;
-    //   }
-    //   if (getPos() < Constants.GrabberConstants.BOTTOM_SOFT_LIMIT) {
-    //     target = Constants.GrabberConstants.BOTTOM_SOFT_LIMIT + 1;
-    //   }
-    //   if (getPos() > Constants.GrabberConstants.TOP_SOFT_LIMIT) {
-    //     target = Constants.GrabberConstants.TOP_SOFT_LIMIT - 1;
-    //   }
-    // }
+      if (getPos() > Constants.GrabberConstants.BOTTOM_HARD_LIMIT || getPos() < Constants.GrabberConstants.TOP_HARD_LIMIT) {
+        turning.disable();
+        target = 0;
+      }
+      if (getPos() > Constants.GrabberConstants.BOTTOM_SOFT_LIMIT) {
+        target = Constants.GrabberConstants.REST_POSITION;
+      }
+      if (getPos() < Constants.GrabberConstants.TOP_SOFT_LIMIT) {
+        target = Constants.GrabberConstants.BARGE_POSITION;
+      }
+    }
     
     turning.setControl(motion.withPosition(target * Constants.GrabberConstants.GEAR_RATIO));
   }
@@ -253,8 +254,15 @@ public class Grabber extends SubsystemBase {
             }
 
           case OUTTAKE -> {
-              maxLeader.set(0.2);
+            if(curPlacement==GrabberPlacement.L1){
+              maxLeader.set(0.3);
               Ticker(1, true);
+            }
+            else{
+              maxLeader.set(0.3);
+              Ticker(1, true);
+            }
+              
                 // maxLeader.set(0.2);
             }
 

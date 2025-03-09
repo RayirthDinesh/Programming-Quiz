@@ -76,7 +76,7 @@ public class Climb extends SubsystemBase {
       }
       
     }
-    System.out.println(String.valueOf(pos));
+    //System.out.println(String.valueOf(pos));
     motor.setControl(new MotionMagicVoltage(pos*Constants.ClimbConstants.GEAR_RATIO));
   }
 

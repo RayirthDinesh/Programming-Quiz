@@ -142,26 +142,27 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during operator control. */
   @Override
   public void teleopPeriodic() {
+
     CommandScheduler.getInstance().setDefaultCommand(RobotContainer.s_Swerve, new SwerveTeleop());
-
     if (curPlaceGrab != RobotContainer.s_Grabber.getPlacement()
-        && RobotContainer.s_Grabber.getState() == States.ENCODER) {
-
+        && RobotContainer.s_Grabber.getState() != States.NOT_INITIALIZED) {
+          System.out.println(RobotContainer.operatorJoystick.getPOV());
       if (curPlaceElevator != RobotContainer.s_Elevator.getLevel()
-          && RobotContainer.s_Elevator.getState() == stateReset.INITIALIZED) {
+          && RobotContainer.s_Elevator.getState() != stateReset.NOT_INITIALIZED) {
+            //System.out.println(RobotContainer.operatorJoystick.getPOV());
         if (RobotContainer.operatorJoystick.getPOV() == 270) {
-          new ElevatorAndGrabberButtonStates(stateLevel.BARGE, GrabberPlacement.BARGE).schedule();
+          CommandScheduler.getInstance().schedule(new ElevatorAndGrabberButtonStates(stateLevel.BARGE, GrabberPlacement.BARGE));
 
         }
-
         if (RobotContainer.operatorJoystick.getPOV() == 90) {
-          new ElevatorAndGrabberButtonStates(stateLevel.GROUND, GrabberPlacement.GROUND).schedule();
+          CommandScheduler.getInstance().schedule(new ElevatorAndGrabberButtonStates(stateLevel.GROUND, GrabberPlacement.GROUND));
         }
         curPlaceGrab = RobotContainer.s_Grabber.getPlacement();
         curPlaceElevator = RobotContainer.s_Elevator.getLevel();
         CommandScheduler.getInstance().schedule(new ElevatorAndGrabberMovePos(curPlaceGrab, curPlaceElevator));
       }
     }
+
     if (RobotContainer.driverJoystick.getPOV(0) == 0) {
       new SwerveEncoderJoymode(true).schedule();
     }

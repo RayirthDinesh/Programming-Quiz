@@ -13,7 +13,6 @@ import com.ctre.phoenix6.signals.NeutralModeValue;
 import edu.wpi.first.networktables.GenericEntry;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -71,8 +70,8 @@ public class Elevator extends SubsystemBase {
     var velocity = masterMotor.getVelocity();
     
     //set motor acceleration for motion magic
-    configs.MotionMagic.MotionMagicAcceleration = 5;
-    configs.MotionMagic.MotionMagicCruiseVelocity = 5;
+    configs.MotionMagic.MotionMagicAcceleration = 30;
+    configs.MotionMagic.MotionMagicCruiseVelocity = 30;
 
     // Write these configs to the TalonFX
     masterMotor.getConfigurator().apply(configs);
@@ -97,9 +96,9 @@ public class Elevator extends SubsystemBase {
     if (getPosition() <= Constants.ElevatorConstants.BOTTOM_HARD_LIMIT || getPosition() >= Constants.ElevatorConstants.TOP_HARD_LIMIT) {
       masterMotor.disable();
     } else if (getPosition() < Constants.ElevatorConstants.BOTTOM_SOFT_LIMIT) {
-      currentPos = Constants.ElevatorConstants.BOTTOM_SOFT_LIMIT+10;
+      currentPos = Constants.ElevatorConstants.FEEDER_POSITION;
     } else if (getPosition() > Constants.ElevatorConstants.TOP_SOFT_LIMIT) {
-      currentPos = Constants.ElevatorConstants.TOP_SOFT_LIMIT-10;    
+      currentPos = Constants.ElevatorConstants.LEVEL_4;    
     } 
     masterMotor.setControl(new MotionMagicVoltage(currentPos * Constants.ElevatorConstants.GEAR_RATIO));
   }
