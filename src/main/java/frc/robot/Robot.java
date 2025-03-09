@@ -118,6 +118,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
+    
     // This makes sure that the autonomous stops running when
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
@@ -144,19 +145,20 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
 
     CommandScheduler.getInstance().setDefaultCommand(RobotContainer.s_Swerve, new SwerveTeleop());
+    if (RobotContainer.operatorJoystick.getPOV() == 270) {
+      CommandScheduler.getInstance().schedule(new ElevatorAndGrabberButtonStates(stateLevel.BARGE, GrabberPlacement.BARGE));
+
+    }
+    if (RobotContainer.operatorJoystick.getPOV() == 90) {
+      CommandScheduler.getInstance().schedule(new ElevatorAndGrabberButtonStates(stateLevel.GROUND, GrabberPlacement.GROUND));
+    }
     if (curPlaceGrab != RobotContainer.s_Grabber.getPlacement()
-        && RobotContainer.s_Grabber.getState() != States.NOT_INITIALIZED) {
+        && RobotContainer.s_Grabber.getState() == States.ENCODER) {
           System.out.println(RobotContainer.operatorJoystick.getPOV());
       if (curPlaceElevator != RobotContainer.s_Elevator.getLevel()
-          && RobotContainer.s_Elevator.getState() != stateReset.NOT_INITIALIZED) {
+          && RobotContainer.s_Elevator.getState() == stateReset.INITIALIZED) {
             //System.out.println(RobotContainer.operatorJoystick.getPOV());
-        if (RobotContainer.operatorJoystick.getPOV() == 270) {
-          CommandScheduler.getInstance().schedule(new ElevatorAndGrabberButtonStates(stateLevel.BARGE, GrabberPlacement.BARGE));
-
-        }
-        if (RobotContainer.operatorJoystick.getPOV() == 90) {
-          CommandScheduler.getInstance().schedule(new ElevatorAndGrabberButtonStates(stateLevel.GROUND, GrabberPlacement.GROUND));
-        }
+        
         curPlaceGrab = RobotContainer.s_Grabber.getPlacement();
         curPlaceElevator = RobotContainer.s_Elevator.getLevel();
         CommandScheduler.getInstance().schedule(new ElevatorAndGrabberMovePos(curPlaceGrab, curPlaceElevator));

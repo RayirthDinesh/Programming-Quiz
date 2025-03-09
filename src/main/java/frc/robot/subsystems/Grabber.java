@@ -245,6 +245,7 @@ public class Grabber extends SubsystemBase {
             maxLeader.set(0);}
           case INTAKE -> {
               maxLeader.set(-0.4);
+  
               if (getOutputCurrent() >= Constants.GrabberConstants.CURRENT_LIMIT) {
                   
                   // System.out.println("here" + getOutputCurrent());
@@ -255,6 +256,10 @@ public class Grabber extends SubsystemBase {
 
           case OUTTAKE -> {
             if(curPlacement==GrabberPlacement.L1){
+              maxLeader.set(0.3);
+              Ticker(1, true);
+            }
+            else if(curPlacement==GrabberPlacement.L4){
               maxLeader.set(0.3);
               Ticker(1, true);
             }

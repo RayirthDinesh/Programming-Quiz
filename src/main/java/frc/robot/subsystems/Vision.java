@@ -14,6 +14,7 @@ import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.subsystems.Vision.autoAim;
 
 public class Vision extends SubsystemBase {
 
@@ -65,14 +66,15 @@ public class Vision extends SubsystemBase {
     LinearFilter autoAimFilter = LinearFilter.movingAverage(10);
     MedianFilter outlierFilter = new MedianFilter(7);
 
-    PIDController autoAnglePID = new PIDController(0.0035, 0, 0.000001);
+    PIDController autoAnglePID = new PIDController(0.0085, 0, 0.000001);
     PIDController angularLockPID = new PIDController(0.05, 0.0005, 0.04);
 
-    GenericEntry autoanglep = Shuffleboard.getTab("autoPID").add("kp", 0.0015).getEntry();
-    GenericEntry autoanglei = Shuffleboard.getTab("autoPID").add("ki", 0.0).getEntry();
-    GenericEntry autoangled = Shuffleboard.getTab("autoPID").add("kd", 0.000001).getEntry();
+    // GenericEntry autoanglep = Shuffleboard.getTab("autoPID").add("kp", 0.0015).getEntry();
+    // GenericEntry autoanglei = Shuffleboard.getTab("autoPID").add("ki", 0.0).getEntry();
+    // GenericEntry autoangled = Shuffleboard.getTab("autoPID").add("kd", 0.000001).getEntry();
 
     /**
+     * 
      * Creates a new Vision.
      */
     public Vision() {
@@ -81,9 +83,9 @@ public class Vision extends SubsystemBase {
     @Override
     public void periodic() {
         // offset = Units.degreesToRadians(angleOffset.getDouble(100));
-        autoAnglePID.setP(autoanglep.getDouble(0.0015));
-        autoAnglePID.setI(autoanglei.getDouble(0.0));
-        autoAnglePID.setD(autoangled.getDouble(0.000001));
+        // autoAnglePID.setP(autoanglep.getDouble(0.0015));
+        // autoAnglePID.setI(autoanglei.getDouble(0.0));
+        // autoAnglePID.setD(autoangled.getDouble(0.000001));
 
         NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
         NetworkTableEntry targetpose_cameraspace = table.getEntry("targetpose_cameraspace");
@@ -140,32 +142,55 @@ public class Vision extends SubsystemBase {
 
     public double autostrafe() {
       
-      double targetX = x+2;
+      double targetX = x;
   
       if (currentAutoAim == autoAim.LEFT) {
-          targetX = 12;
+          targetX = 13;
       } else if (currentAutoAim == autoAim.RIGHT) {
-          targetX = -17;
+          targetX = -23;
+          //-19.48
       } else if (currentAutoAim == autoAim.MIDDLE) {
+          targetX = -2;
+      }
+      targetX+=2;
+      if (targetX < 1 && targetX > -1) {
           targetX = 0;
       }
-      
       return -autoAnglePID.calculate(x, targetX);
   }
+
+
+
 
     public double autoAngle() {
         targetZ = rz;
         if (targetZ < 1 && targetZ > -1) {
             targetZ = 0;
         }
-        return -autoAnglePID.calculate(rz, targetZ);
+        if(currentAutoAim ==autoAim.RIGHT)
+            return -autoAnglePID.calculate(targetZ-16);
+        else if(currentAutoAim == autoAim.LEFT){
+            return -autoAnglePID.calculate(targetZ+16);
+        }
+        else{
+            return -autoAnglePID.calculate(targetZ+2);
+        }
+           
+
 
     }
 
     public double autotrans() {
         targetarea = area;
-        return -autoAnglePID.calculate(targetarea, 11.585-2.13);
+        if(currentAutoAim!=autoAim.MIDDLE){
+            return -autoAnglePID.calculate(targetarea, 11.585-2.13);
+        }
+        else{
+            return -autoAnglePID.calculate(targetarea, 14);
+        }
+      
     }
+
     // else
     // //turnEntry.setDouble(autoAnglePID.calculate(targetX + 2));
     // return autoAnglePID.calculate(targetX + 0.2);

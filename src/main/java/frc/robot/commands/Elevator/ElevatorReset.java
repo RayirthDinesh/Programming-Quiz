@@ -25,7 +25,7 @@ public class ElevatorReset extends Command {
     if (!RobotContainer.s_Elevator.getLimitSwitch()) {
       RobotContainer.s_Elevator.disable();
       RobotContainer.s_Elevator.changeState(stateReset.NOT_INITIALIZED);
-      finish=true;
+      // finish=true;
     }
 
   }
@@ -35,12 +35,14 @@ public class ElevatorReset extends Command {
   public void execute() {
     // System.out.println(finish);
     if (RobotContainer.s_Elevator.getLimitSwitch()) {
-        RobotContainer.s_Elevator.movePosition(RobotContainer.s_Elevator.getPosition()+0.3);
-    } else if(!finish){  
-      RobotContainer.s_Elevator.changeState(stateReset.INITIALIZED);
-      RobotContainer.s_Elevator.setPosition(0);
-      RobotContainer.s_Elevator.movePosition(0);
+        RobotContainer.s_Elevator.movePosition(RobotContainer.s_Elevator.getPosition()+0.03);
+        RobotContainer.s_Elevator.changeState(stateReset.INITIALIZED);
+    } 
+    if(!RobotContainer.s_Elevator.getLimitSwitch() && RobotContainer.s_Elevator.getState() != stateReset.NOT_INITIALIZED){
       finish = true;
+    }
+    if(RobotContainer.s_Elevator.getState() == stateReset.NOT_INITIALIZED && !RobotContainer.s_Elevator.getLimitSwitch() ){
+      RobotContainer.s_Elevator.movePosition(RobotContainer.s_Elevator.getPosition()-0.03);
     }
   }
 
@@ -50,7 +52,8 @@ public class ElevatorReset extends Command {
     // if (RobotContainer.s_Elevator.getState() == stateReset.INITIALIZED){
     //   RobotContainer.s_Elevator.movePosition(-2 / Constants.ElevatorConstants.GEAR_RATIO);
     // }
-
+    RobotContainer.s_Elevator.setPosition(0);
+    RobotContainer.s_Elevator.movePosition(0);
   }
 
   // Returns true when the command should end.

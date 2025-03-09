@@ -57,12 +57,12 @@ public final class Constants {
     // public static 
 
     public static final double LEVEL_1 = 0;
-    public static final double LEVEL_2 = 0.307-(4*0.006);
-    public static final double LEVEL_3 = 0.5698974609375+0.006;
-    public static final double LEVEL_4 = 0.9066;
-    public static final double GROUND_POSITION = 0;
+    public static final double LEVEL_2 = 0.3812197265625;
+    public static final double LEVEL_3 = 0.6754306640625;
+    public static final double LEVEL_4 = 0.9124;
+    public static final double GROUND_POSITION = -0.029867187500000003;
     public static final double FEEDER_POSITION = -0.030;
-    public static final double BARGE_POSITION = 0;
+    public static final double BARGE_POSITION = 0.9124;
     public static final double REST_POSITION = 0;
     public static final double LOW_ALGAE_POSITION = 0;
     public static final double HIGH_ALGAE_POSITION = 0;
@@ -82,16 +82,17 @@ public final class Constants {
     public static final double BOTTOM_SOFT_LIMIT = 0.05;
     public static final double TOP_SOFT_LIMIT = -0.38;
 
-    public static final double LEVEL_4 = -0.166721;
-    public static final double GROUND_POSITION = -0.16;
+    public static final double LEVEL_4 = -0.1599;
+    public static final double GROUND_POSITION = -0.039;
+    ;
     public static final double FEEDER_POSITION = -0.3036318359375;
     public static final double BARGE_POSITION = -0.3472;
     public static final double REST_POSITION = 0.0;
     public static final double LOW_ALGAE_POSITION = -0.1527;
     public static final double HIGH_ALGAE_POSITION = -0.1527;
-    public static final double PROCESSOR_POSITION = -0.16;
+    public static final double PROCESSOR_POSITION = -0.12;
 
-    public static final double LEVEL_1_TO_3 = -0.1220068359375;
+    public static final double LEVEL_1_TO_3 = -0.0971328125;
     public static final double LEVEL_1 = -0.19100097;
 
     public static final double GEAR_RATIO = 100;

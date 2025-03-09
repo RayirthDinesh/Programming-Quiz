@@ -70,8 +70,8 @@ public class Elevator extends SubsystemBase {
     var velocity = masterMotor.getVelocity();
     
     //set motor acceleration for motion magic
-    configs.MotionMagic.MotionMagicAcceleration = 30;
-    configs.MotionMagic.MotionMagicCruiseVelocity = 30;
+    configs.MotionMagic.MotionMagicAcceleration = 60;
+    configs.MotionMagic.MotionMagicCruiseVelocity = 60;
 
     // Write these configs to the TalonFX
     masterMotor.getConfigurator().apply(configs);
