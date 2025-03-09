@@ -44,8 +44,6 @@ public class GrabberMovePos extends Command {
           case FEEDER -> RobotContainer.s_Grabber.moveTurningMotor(Constants.GrabberConstants.FEEDER_POSITION);
           case BARGE -> RobotContainer.s_Grabber.moveTurningMotor(Constants.GrabberConstants.BARGE_POSITION);
           case REST -> RobotContainer.s_Grabber.moveTurningMotor(Constants.GrabberConstants.REST_POSITION);
-          case LOWALGAE -> RobotContainer.s_Grabber.moveTurningMotor(Constants.GrabberConstants.LOW_ALGAE_POSITION);
-          case HIGHALGAE -> RobotContainer.s_Grabber.moveTurningMotor(Constants.GrabberConstants.HIGH_ALGAE_POSITION);
           case PROCESSOR -> RobotContainer.s_Grabber.moveTurningMotor(Constants.GrabberConstants.PROCESSOR_POSITION);
           default -> {
         }

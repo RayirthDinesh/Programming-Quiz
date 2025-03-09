@@ -88,8 +88,6 @@ public final class Constants {
     public static final double FEEDER_POSITION = -0.3036318359375;
     public static final double BARGE_POSITION = -0.3472;
     public static final double REST_POSITION = 0.0;
-    public static final double LOW_ALGAE_POSITION = -0.1527;
-    public static final double HIGH_ALGAE_POSITION = -0.1527;
     public static final double PROCESSOR_POSITION = -0.12;
 
     public static final double LEVEL_1_TO_3 = -0.0971328125;

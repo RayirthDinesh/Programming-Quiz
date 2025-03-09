@@ -69,8 +69,6 @@ public class RobotContainer {
   public static JoystickButton Ground = new JoystickButton(operatorJoystick, 4);
   public static JoystickButton moveClimb = new JoystickButton(operatorJoystick, 10);
 
-  public static JoystickButton HighAlgae = new JoystickButton(operatorJoystick, 4);
-  public static JoystickButton LowAlgae = new JoystickButton(operatorJoystick, 2);
   public static JoystickButton Processor = new JoystickButton(operatorJoystick, 1);
   public static JoystickButton Scram = new JoystickButton(operatorJoystick, 5);
 
@@ -146,8 +144,6 @@ public class RobotContainer {
     // GrabberPlacement.PROCESSOR));
 
     Feeder.onTrue(new ElevatorAndGrabberButtonStates(stateLevel.FEEDER, GrabberPlacement.FEEDER));
-    HighAlgae.onTrue(new ElevatorAndGrabberButtonStates(stateLevel.HIGHALGAE, GrabberPlacement.HIGHALGAE));
-    LowAlgae.onTrue(new ElevatorAndGrabberButtonStates(stateLevel.LOWALGAE, GrabberPlacement.LOWALGAE));
     Processor.onTrue(new ElevatorAndGrabberButtonStates(stateLevel.PROCESSOR, GrabberPlacement.PROCESSOR));
 
     Next.onTrue(new ElevatorandGrabberBumperUp());
