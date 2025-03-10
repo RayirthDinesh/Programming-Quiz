@@ -103,8 +103,10 @@ public class RobotContainer {
     // Configure the trigger bindings
     configureBindings();
     // autoChooser.setDefaultOption("SPEAKER Routine", new SpeakerRoutine());
-    autoChooser.addOption("SidePathAway", new PathPlannerAuto("side"));
-
+    autoChooser.addOption("S1-Forward", new PathPlannerAuto("S1-Forward"));
+    autoChooser.addOption("S2-Forward", new PathPlannerAuto("S2-Forward"));
+    autoChooser.addOption("S3-Forward", new PathPlannerAuto("S3-Forward"));
+    autoChooser.addOption("null", new PathPlannerAuto("null"));
   }
 
   /**
@@ -160,6 +162,7 @@ public class RobotContainer {
     Scram.onTrue(new ElevatorAndGrabberScram());
     // Recalibrate.onTrue(new ElevatorAndGrabberRecalibrate());
 
+
     // }
 
   }
@@ -170,8 +173,9 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
+
     // An example command will be run in autonomous
-    return null;
+    return autoChooser.getSelected();
   }
 }
 // Copyright (c) FIRST and other WPILib contributors.

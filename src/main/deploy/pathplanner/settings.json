@@ -3,24 +3,10 @@
   "robotLength": 0.9,
   "holonomicMode": true,
   "pathFolders": [
-    "Algae to Processor - Finished",
-    "Feeder to Reef - Finished",
-    "Reef to Algae - Finished",
-    "Reef to Feeder - Finished",
-    "Reef to Processor - Finished",
-    "Start to Algae - Finished",
-    "Start to Processor - Finished",
-    "Start to Reef 2 - Finished",
-    "Start to Reef 3 - Finished",
-    "Start to Reef 1 - Finished"
+    "Fin"
   ],
   "autoFolders": [
-    "Start, Reef, Algae B, Processor",
-    "Start, Reef, Algae M, Processor",
-    "Start, Reef, Algae T, Processor",
-    "Start, Reef, Processor 1",
-    "Start, Reef, Processor 2",
-    "Start, Reef, Processor 3"
+    "Fin"
   ],
   "defaultMaxVel": 3.0,
   "defaultMaxAccel": 3.0,

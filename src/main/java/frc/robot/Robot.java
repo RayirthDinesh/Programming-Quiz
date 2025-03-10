@@ -32,6 +32,7 @@ public class Robot extends TimedRobot {
 
   private final RobotContainer m_robotContainer;
   public static final CTREConfigs ctreConfigs = new CTREConfigs();
+  
   public GrabberPlacement curPlaceGrab;
   public stateLevel curPlaceElevator;
 
