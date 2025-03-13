@@ -57,16 +57,15 @@ public final class Constants {
     // public static 
 
     public static final double LEVEL_1 = 0;
-    public static final double LEVEL_2 = 0.3812197265625;
-    public static final double LEVEL_3 = 0.6754306640625;
-    public static final double LEVEL_4 = 0.9124;
-    public static final double GROUND_POSITION = -0.029867187500000003;
+    public static final double LEVEL_2 = 0.296+0.06;
+    public static final double LEVEL_3 = 0.614;
+    public static final double LEVEL_4 = 0.92;
+    public static final double GROUND_POSITION = -0.02986;
     public static final double FEEDER_POSITION = -0.030;
     public static final double BARGE_POSITION = 0.9124;
     public static final double REST_POSITION = 0;
-    public static final double LOW_ALGAE_POSITION = 0;
-    public static final double HIGH_ALGAE_POSITION = 0;
     public static final double PROCESSOR_POSITION = 0;
+    public static final double ALGAE_ON_TOP = -0.029;
 
     public static final double GEAR_RATIO = 100;
   }
@@ -82,15 +81,15 @@ public final class Constants {
     public static final double BOTTOM_SOFT_LIMIT = 0.05;
     public static final double TOP_SOFT_LIMIT = -0.38;
 
-    public static final double LEVEL_4 = -0.1599;
-    public static final double GROUND_POSITION = -0.039;
-    ;
-    public static final double FEEDER_POSITION = -0.3036318359375;
+    public static final double LEVEL_4 = -0.1596;
+    public static final double GROUND_POSITION = -0.039;;
+    public static final double FEEDER_POSITION = -0.3036;
     public static final double BARGE_POSITION = -0.3472;
     public static final double REST_POSITION = 0.0;
     public static final double PROCESSOR_POSITION = -0.12;
+    public static final double ALGAE_ON_TOP = -0.154;
 
-    public static final double LEVEL_1_TO_3 = -0.0971328125;
+    public static final double LEVEL_1_TO_3 = -0.1205;
     public static final double LEVEL_1 = -0.19100097;
 
     public static final double GEAR_RATIO = 100;
@@ -107,32 +106,32 @@ public final class Constants {
     public static final boolean FIELD_RELATIVE_MODE = true;
 
     //0
-    public static final class Mod0 {
+    public static final class Mod2 {
       public static final int DRIVE_MOTOR_ID = 1;
       public static final int ANGLE_MOTOR_ID = 3;
       public static final int CANCODER_ID = 2;
-      public static final Rotation2d ANGLE_OFFSET = Rotation2d.fromDegrees(-175.166+90);
+      public static final Rotation2d ANGLE_OFFSET = Rotation2d.fromDegrees(-175.166+90+90);
     }
     //1
-    public static final class Mod2 {
+    public static final class Mod3 {
       public static final int DRIVE_MOTOR_ID = 4;
       public static final int ANGLE_MOTOR_ID = 6;
       public static final int CANCODER_ID = 5;
-      public static final Rotation2d ANGLE_OFFSET = Rotation2d.fromDegrees(-107.22+90);
+      public static final Rotation2d ANGLE_OFFSET = Rotation2d.fromDegrees(-107.22+90+90);
     }
     //2
-    public static final class Mod3 {
+    public static final class Mod1 {
       public static final int DRIVE_MOTOR_ID = 8;
       public static final int ANGLE_MOTOR_ID = 10;
       public static final int CANCODER_ID = 9;
-      public static final Rotation2d ANGLE_OFFSET = Rotation2d.fromDegrees(16.69+90);
+      public static final Rotation2d ANGLE_OFFSET = Rotation2d.fromDegrees(16.69+90+90);
     }
     //3
-    public static final class Mod1 {
+    public static final class Mod0 {
       public static final int DRIVE_MOTOR_ID = 11;
       public static final int ANGLE_MOTOR_ID = 13;
       public static final int CANCODER_ID = 12;
-      public static final Rotation2d ANGLE_OFFSET = Rotation2d.fromDegrees(-89.648+90);
+      public static final Rotation2d ANGLE_OFFSET = Rotation2d.fromDegrees(-89.648+90+90);
     }
 
     public static final double MAX_RADIANS_PER_SECOND = 12.773732;

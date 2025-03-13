@@ -71,6 +71,7 @@ public class RobotContainer {
 
   public static JoystickButton Processor = new JoystickButton(operatorJoystick, 1);
   public static JoystickButton Scram = new JoystickButton(operatorJoystick, 5);
+  public static JoystickButton Algae_on_top = new JoystickButton(operatorJoystick, 2);
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
 
@@ -89,10 +90,11 @@ public class RobotContainer {
         new ElevatorAndGrabberMovePos(GrabberPlacement.PROCESSOR, stateLevel.PROCESSOR));
     NamedCommands.registerCommand("Feeder", new ElevatorAndGrabberMovePos(GrabberPlacement.FEEDER, stateLevel.FEEDER));
     NamedCommands.registerCommand("Ground", new ElevatorAndGrabberMovePos(GrabberPlacement.GROUND, stateLevel.GROUND));
-    NamedCommands.registerCommand("High Algae",
-        new ElevatorAndGrabberMovePos(GrabberPlacement.HIGHALGAE, stateLevel.HIGHALGAE));
-    NamedCommands.registerCommand("Low Algae",
-        new ElevatorAndGrabberMovePos(GrabberPlacement.LOWALGAE, stateLevel.LOWALGAE));
+    // NamedCommands.registerCommand("High Algae",
+    //     new ElevatorAndGrabberMovePos(GrabberPlacement.HIGHALGAE, stateLevel.HIGHALGAE));
+    // NamedCommands.registerCommand("Low Algae",
+    //     new ElevatorAndGrabberMovePos(GrabberPlacement.LOWALGAE, stateLevel.LOWALGAE));
+    NamedCommands.registerCommand("Algae on top", new ElevatorAndGrabberMovePos(GrabberPlacement.ALGAE_ON_TOP, stateLevel.ALGAE_ON_TOP));
     NamedCommands.registerCommand("Intake", new GrabberIntake());
     NamedCommands.registerCommand("Outtake", new GrabberOutake());
     NamedCommands.registerCommand("AutoAimOn", new InstantCommand(() -> s_Swerve.autoaimstate = true));
@@ -147,6 +149,7 @@ public class RobotContainer {
 
     Feeder.onTrue(new ElevatorAndGrabberButtonStates(stateLevel.FEEDER, GrabberPlacement.FEEDER));
     Processor.onTrue(new ElevatorAndGrabberButtonStates(stateLevel.PROCESSOR, GrabberPlacement.PROCESSOR));
+    Algae_on_top.onTrue(new ElevatorAndGrabberButtonStates(stateLevel.ALGAE_ON_TOP, GrabberPlacement.ALGAE_ON_TOP));
 
     Next.onTrue(new ElevatorandGrabberBumperUp());
     Previous.onTrue(new ElevatorAndGrabberBumperDown());

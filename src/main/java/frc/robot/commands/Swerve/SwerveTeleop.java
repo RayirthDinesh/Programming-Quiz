@@ -24,13 +24,14 @@ public class SwerveTeleop extends Command {
   static double rotationval;
   static double strafeVal;
   static double translationVal;
+  static boolean fieldRelative;
 
   // static BooleanSupplier robotCentricSup;
   static double encoderkP = 0.38;
   static double encoderkI = 0.025;
   static double encoderkD = 0.002;
   static double ff = 0.09;
-  
+
   Timer timer = new Timer();
   TrapezoidProfile.Constraints constraints = new TrapezoidProfile.Constraints(10000, 1000);
   ProfiledPIDController rotPid = new ProfiledPIDController(encoderkP, encoderkI, encoderkD, constraints);
@@ -75,9 +76,9 @@ public class SwerveTeleop extends Command {
   public void execute() {
     translationSup = () -> RobotContainer.driverJoystick.getRawAxis(1);
     strafeSup = () -> RobotContainer.driverJoystick.getRawAxis(0);
-  
-      rotationSup = () -> RobotContainer.driverJoystick.getRawAxis(2);
-    
+
+    rotationSup = () -> RobotContainer.driverJoystick.getRawAxis(2);
+
     // robotCentricSup = () -> RobotContainer.robotCentric.getAsBoolean(); (work on
     // it if u need to)
 
@@ -87,25 +88,26 @@ public class SwerveTeleop extends Command {
       initFlag = false;
     }
 
-      rawRotation = rotationSup.getAsDouble();
-    
+    rawRotation = rotationSup.getAsDouble();
 
-    // translationVal = squareAxis(logAxis(translationSup.getAsDouble()), Constants.stickDeadband + 0.3);
+    // translationVal = squareAxis(logAxis(translationSup.getAsDouble()),
+    // Constants.stickDeadband + 0.3);
 
     if (RobotContainer.s_Vision.getAutoAim() != autoAim.NONE && RobotContainer.s_Vision.isApriltag()) {
 
-      strafeVal = RobotContainer.s_Vision.autostrafe();
-      rotationval = RobotContainer.s_Vision.autoAngle()* Constants.SwerveConstants.MAX_ANGULAR_VELOCITY_RADIANS_PER_SECOND/3;
-      translationVal = RobotContainer.s_Vision.autotrans()*Constants.SwerveConstants.MAX_ANGULAR_VELOCITY_RADIANS_PER_SECOND/3;
+      strafeVal = -RobotContainer.s_Vision.autostrafe();
+      rotationval = -RobotContainer.s_Vision.autoAngle()
+          * Constants.SwerveConstants.MAX_ANGULAR_VELOCITY_RADIANS_PER_SECOND / 3;
+      translationVal = -RobotContainer.s_Vision.autotrans()
+          * Constants.SwerveConstants.MAX_ANGULAR_VELOCITY_RADIANS_PER_SECOND / 3;
+      fieldRelative = false;
 
     } else {
-      translationVal = squareAxis(logAxis(translationSup.getAsDouble()), Constants.SwerveConstants.STICK_DEADBAND );
-      strafeVal = squareAxis(logAxis(strafeSup.getAsDouble()), Constants.SwerveConstants.STICK_DEADBAND )/1.2;
-        rotationval = squareAxis(logAxis(rawRotation), Constants.SwerveConstants.STICK_ROTATION_DEADBAND)
-             * Constants.SwerveConstants.MAX_ANGULAR_VELOCITY_RADIANS_PER_SECOND  / 6;
-      }
-    
-    
+      translationVal = -squareAxis(logAxis(translationSup.getAsDouble()), Constants.SwerveConstants.STICK_DEADBAND);
+      strafeVal = -squareAxis(logAxis(strafeSup.getAsDouble()), Constants.SwerveConstants.STICK_DEADBAND) / 1.2;
+      rotationval = -squareAxis(logAxis(rawRotation), Constants.SwerveConstants.STICK_ROTATION_DEADBAND) * Constants.SwerveConstants.MAX_ANGULAR_VELOCITY_RADIANS_PER_SECOND;
+      fieldRelative = true;
+    }
 
     /*
      * if (RobotContainer.encoderJoymodeState &&
@@ -143,8 +145,9 @@ public class SwerveTeleop extends Command {
     // SmartDashboard.putNumber("rotationVal", rotationval);
     // RobotContainer.s_Swerve.targetrotValueEntry.setDouble(rotationval);
 
-    RobotContainer.s_Swerve.drive(new Translation2d(translationVal, strafeVal).times(Constants.SwerveConstants.MAX_SPEED_METERS_PER_SECOND),
-        rotationval, true, true);
+    RobotContainer.s_Swerve.drive(
+        new Translation2d(translationVal, strafeVal).times(Constants.SwerveConstants.MAX_SPEED_METERS_PER_SECOND),
+        rotationval, fieldRelative, true);
   }
 
   @Override

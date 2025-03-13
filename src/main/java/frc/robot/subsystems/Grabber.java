@@ -47,7 +47,8 @@ public class Grabber extends SubsystemBase {
     BARGE,
     PROCESSOR,
     HIGHALGAE,
-    LOWALGAE
+    LOWALGAE,
+    ALGAE_ON_TOP
     
   }
 
@@ -103,7 +104,7 @@ public class Grabber extends SubsystemBase {
     magicmotionconfig.MotionMagicCruiseVelocity = 30;
 
     turning.getConfigurator().apply(talonConfig);
-    turning.setNeutralMode(NeutralModeValue.Coast);
+    turning.setNeutralMode(NeutralModeValue.Brake);
 
     config
         .follow(Constants.GrabberConstants.LEADER_NEOMOTOR_PORT, true)

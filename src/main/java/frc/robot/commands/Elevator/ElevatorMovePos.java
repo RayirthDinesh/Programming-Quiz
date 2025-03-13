@@ -45,9 +45,8 @@ public class ElevatorMovePos extends Command {
       case FEEDER -> RobotContainer.s_Elevator.movePosition(Constants.ElevatorConstants.FEEDER_POSITION);
       case BARGE -> RobotContainer.s_Elevator.movePosition(Constants.ElevatorConstants.BARGE_POSITION);
       case REST -> RobotContainer.s_Elevator.movePosition(Constants.ElevatorConstants.REST_POSITION);
-      case LOWALGAE -> RobotContainer.s_Elevator.movePosition(Constants.ElevatorConstants.LOW_ALGAE_POSITION);
-      case HIGHALGAE -> RobotContainer.s_Elevator.movePosition(Constants.ElevatorConstants.HIGH_ALGAE_POSITION);
       case PROCESSOR -> RobotContainer.s_Elevator.movePosition(Constants.ElevatorConstants.PROCESSOR_POSITION);
+      case ALGAE_ON_TOP -> RobotContainer.s_Elevator.movePosition(Constants.ElevatorConstants.ALGAE_ON_TOP);
       default -> throw new AssertionError(state.name());
     }
   }

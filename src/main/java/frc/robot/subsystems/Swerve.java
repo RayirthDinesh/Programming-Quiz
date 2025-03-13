@@ -220,9 +220,10 @@ public class Swerve extends SubsystemBase {
     // for (SwerveModules mod : mSwerveMods) {
     // mod.setHeadingZero();
     // }
-    gyro.setYaw(90);
+    gyro.setYaw(0);
 
   }
+  
 
   // returns curent rotation
   public Rotation2d getGyroYaw() {

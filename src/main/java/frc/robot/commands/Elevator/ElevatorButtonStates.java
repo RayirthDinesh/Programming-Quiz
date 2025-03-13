@@ -42,6 +42,7 @@ public class ElevatorButtonStates extends Command {
       case BARGE -> RobotContainer.s_Elevator.setLevel(stateLevel.BARGE);
       case FEEDER -> RobotContainer.s_Elevator.setLevel(stateLevel.FEEDER);
       case GROUND -> RobotContainer.s_Elevator.setLevel(stateLevel.GROUND);
+      case ALGAE_ON_TOP -> RobotContainer.s_Elevator.setLevel(stateLevel.ALGAE_ON_TOP);
       default -> {
           }
     }

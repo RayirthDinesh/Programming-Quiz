@@ -66,7 +66,7 @@ public class Vision extends SubsystemBase {
     LinearFilter autoAimFilter = LinearFilter.movingAverage(10);
     MedianFilter outlierFilter = new MedianFilter(7);
 
-    PIDController autoAnglePID = new PIDController(0.0085, 0, 0.000001);
+    PIDController autoAnglePID = new PIDController(0.01, 0, 0.000001);
     PIDController angularLockPID = new PIDController(0.05, 0.0005, 0.04);
 
     // GenericEntry autoanglep = Shuffleboard.getTab("autoPID").add("kp", 0.0015).getEntry();
@@ -147,10 +147,10 @@ public class Vision extends SubsystemBase {
       if (currentAutoAim == autoAim.LEFT) {
           targetX = 13;
       } else if (currentAutoAim == autoAim.RIGHT) {
-          targetX = -23;
+          targetX = -20.7;
           //-19.48
       } else if (currentAutoAim == autoAim.MIDDLE) {
-          targetX = -2;
+          targetX = 0;
       }
       targetX+=2;
       if (targetX < 1 && targetX > -1) {

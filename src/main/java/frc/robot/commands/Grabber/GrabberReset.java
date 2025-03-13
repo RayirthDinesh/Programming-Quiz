@@ -33,13 +33,13 @@ public class GrabberReset extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (!RobotContainer.s_Grabber.getLimitSwitch() && RobotContainer.s_Grabber.getState() == States.INITIALIZING){
+    if (!RobotContainer.s_Grabber.getLimitSwitch() && RobotContainer.s_Grabber.getState() == States.INITIALIZING ){
       RobotContainer.s_Grabber.setPos(0);
       RobotContainer.s_Grabber.moveTurningMotor(0);
       RobotContainer.s_Grabber.setState(States.INITIALIZED);
       finish = true;
-    } else {
-      RobotContainer.s_Grabber.moveTurningMotor(RobotContainer.s_Grabber.getPos() - 0.03);
+    } else if(RobotContainer.s_Grabber.getLimitSwitch() && RobotContainer.s_Grabber.getState() == States.INITIALIZING ){
+      RobotContainer.s_Grabber.moveTurningMotor(RobotContainer.s_Grabber.getPos() - 0.06);
     }
   }
 

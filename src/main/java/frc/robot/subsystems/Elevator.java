@@ -35,7 +35,8 @@ public class Elevator extends SubsystemBase {
     BARGE,
     PROCESSOR,
     HIGHALGAE,
-    LOWALGAE
+    LOWALGAE,
+    ALGAE_ON_TOP
   }
   public enum stateReset {
     NOT_INITIALIZED,
@@ -75,8 +76,8 @@ public class Elevator extends SubsystemBase {
 
     // Write these configs to the TalonFX
     masterMotor.getConfigurator().apply(configs);
-    masterMotor.setNeutralMode(NeutralModeValue.Coast);
-    followerMotor.setNeutralMode(NeutralModeValue.Coast);
+    masterMotor.setNeutralMode(NeutralModeValue.Brake);
+    followerMotor.setNeutralMode(NeutralModeValue.Brake);
   }
 
   public void slowMode(){
