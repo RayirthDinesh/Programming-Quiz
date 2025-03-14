@@ -64,7 +64,7 @@ public class Elevator extends SubsystemBase {
     
     // Set the position to 0 rotations for initial use
     masterMotor.setPosition(0);
-    followerMotor.setControl(new Follower(Constants.ElevatorConstants.FOLLOWER_MOTOR_PORT, true));
+    followerMotor.setControl(new Follower(Constants.ElevatorConstants.LEADER_MOTOR_PORT, true));
     
     // Get Position and Velocity
     var position = masterMotor.getPosition();

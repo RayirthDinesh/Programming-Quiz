@@ -51,6 +51,8 @@ public class RobotContainer {
   public static JoystickButton LeftAim = new JoystickButton(driverJoystick, 1);
   public static JoystickButton RightAim = new JoystickButton(driverJoystick, 3);
 
+  public static JoystickButton wristUp = new JoystickButton(driverJoystick, 8);
+  public static JoystickButton wristDown = new JoystickButton(driverJoystick, 7);
   // public static JoystickButton Recalibrate = new JoystickButton(driverJoystick,
   // 9);
 
@@ -58,20 +60,18 @@ public class RobotContainer {
   ComplexWidget ShuffleBoardAutonomousRoutines = Shuffleboard.getTab("Driver")
       .add("Autonomous Routines Selector", autoChooser).withWidget(BuiltInWidgets.kComboBoxChooser).withSize(2, 2)
       .withPosition(0, 2);
-   public static JoystickButton ElevatorUp = new JoystickButton(operatorJoystick, 10);
-  public static JoystickButton ElevatorDown = new JoystickButton(operatorJoystick, 9);
-  public static JoystickButton wristUp = new JoystickButton(driverJoystick, 8);
-  public static JoystickButton wristDown = new JoystickButton(driverJoystick, 7);
+  public static JoystickButton ElevatorUp = new JoystickButton(operatorJoystick, 10);//Elevator Up slightly is options
+  public static JoystickButton ElevatorDown = new JoystickButton(operatorJoystick, 9); // Elevator Down Slightly is share
 
-  public static JoystickButton Next = new JoystickButton(operatorJoystick, 6);
-  public static JoystickButton Previous = new JoystickButton(operatorJoystick, 8);
-  public static JoystickButton Feeder = new JoystickButton(operatorJoystick, 3);
-  public static JoystickButton Ground = new JoystickButton(operatorJoystick, 4);
-  public static JoystickButton moveClimb = new JoystickButton(operatorJoystick, 10);
+  public static JoystickButton Next = new JoystickButton(operatorJoystick, 6);//Previous is Left Bumper
+  public static JoystickButton Previous = new JoystickButton(operatorJoystick, 8);//Next is Right Bumper (R1)
+  public static JoystickButton Feeder = new JoystickButton(operatorJoystick, 3);//Coral Feeder intake is circle
+  public static JoystickButton Ground = new JoystickButton(operatorJoystick, 4);//Ground Algae intake is triangle
+  // public static JoystickButton moveClimb = new JoystickButton(operatorJoystick, 10);
 
-  public static JoystickButton Processor = new JoystickButton(operatorJoystick, 1);
-  public static JoystickButton Scram = new JoystickButton(operatorJoystick, 5);
-  public static JoystickButton Algae_on_top = new JoystickButton(operatorJoystick, 2);
+  public static JoystickButton Processor = new JoystickButton(operatorJoystick, 1); ///Proccessor is square
+  public static JoystickButton Scram = new JoystickButton(operatorJoystick, 5); //Scram is Left Bumper (L1)
+  public static JoystickButton Algae_on_top = new JoystickButton(operatorJoystick, 2); //Algae ontop coral is x
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
 

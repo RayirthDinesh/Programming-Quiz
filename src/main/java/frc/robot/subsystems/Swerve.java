@@ -162,7 +162,7 @@ public class Swerve extends SubsystemBase {
       double rotationval = RobotContainer.s_Vision.autoAngle() * Constants.SwerveConstants.MAX_ANGULAR_VELOCITY_RADIANS_PER_SECOND;
       double translationVal = RobotContainer.s_Vision.autotrans() * Constants.SwerveConstants.MAX_ANGULAR_VELOCITY_RADIANS_PER_SECOND;
       RobotContainer.s_Swerve.drive(new Translation2d(translationVal, strafeVal).times(Constants.SwerveConstants.MAX_SPEED_METERS_PER_SECOND),
-          rotationval, true, true);
+          rotationval, false, true);
     }
   }
 

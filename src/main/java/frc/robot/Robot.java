@@ -93,7 +93,7 @@ public class Robot extends TimedRobot {
       m_autonomousCommand.schedule();
     }
     RobotContainer.s_Swerve.resetModulesToAbsolute();
-    CommandScheduler.getInstance().setDefaultCommand(RobotContainer.s_Swerve, new SwerveTeleop());
+    //CommandScheduler.getInstance().setDefaultCommand(RobotContainer.s_Swerve, new SwerveTeleop());
 
     //CommandScheduler.getInstance().schedule(new SwerveAutoAlign());
 
