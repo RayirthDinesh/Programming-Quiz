@@ -23,7 +23,7 @@ public class ElevatorReset extends Command {
   @Override
   public void initialize() {
     if (!RobotContainer.s_Elevator.getLimitSwitch()) {
-      RobotContainer.s_Elevator.disable();
+      //RobotContainer.s_Elevator.disable();
       RobotContainer.s_Elevator.changeState(stateReset.NOT_INITIALIZED);
       // finish=true;
     }

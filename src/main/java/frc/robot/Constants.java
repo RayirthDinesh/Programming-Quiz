@@ -59,7 +59,7 @@ public final class Constants {
     public static final double LEVEL_1 = 0;
     public static final double LEVEL_2 = 0.296+0.06;
     public static final double LEVEL_3 = 0.6140;
-    public static final double LEVEL_4 = 0.9369;
+    public static final double LEVEL_4 = 0.92;
     public static final double GROUND_POSITION = -0.019;
     public static final double FEEDER_POSITION = -0.019;
     public static final double BARGE_POSITION = 0.9124;
@@ -82,16 +82,16 @@ public final class Constants {
     public static final double BOTTOM_SOFT_LIMIT = 0.05;
     public static final double TOP_SOFT_LIMIT = -0.38;
 
-    public static final double LEVEL_4 = -0.1596;
-    public static final double GROUND_POSITION = -0.046;
-    public static final double FEEDER_POSITION = -0.3036;
+    public static final double LEVEL_4 = -0.2596;
+    public static final double GROUND_POSITION = -0.046-4*0.006;
+    public static final double FEEDER_POSITION = -0.3036-4*0.006;
     public static final double BARGE_POSITION = -0.3472;
     public static final double REST_POSITION = 0.0;
-    public static final double PROCESSOR_POSITION = -0.12;
+    public static final double PROCESSOR_POSITION = -0.12-2*0.006;
     public static final double ALGAE_ON_TOP = -0.154;
 
-    public static final double LEVEL_1_TO_3 = -0.1205;
-    public static final double LEVEL_1 = -0.19100097;
+    public static final double LEVEL_1_TO_3 = -0.17831;
+    public static final double LEVEL_1 = -0.19100097-2*0.006;
 
     public static final double GEAR_RATIO = 100;
     public static final double CURRENT_LIMIT = 12;
@@ -188,7 +188,7 @@ public final class Constants {
     public static final double DRIVE_KF = 0.0;
 
     /* Drive Motor Characterization */
-    public static final double DRIVE_KS = 0;
+    public static final double DRIVE_KS = 1.5;
     public static final double DRIVE_KV = 1.51;
     public static final double DRIVE_KA = 0.21;
 

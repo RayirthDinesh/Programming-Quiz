@@ -5,6 +5,8 @@
 package frc.robot.commands.Grabber;
 
 
+import java.lang.Thread.State;
+
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.Grabber.States;
@@ -23,9 +25,9 @@ public class GrabberReset extends Command {
   public void initialize() {
     if (!RobotContainer.s_Grabber.getLimitSwitch()){
 
-      RobotContainer.s_Grabber.disableMotor();
+      // RobotContainer.s_Grabber.disableMotor();
       RobotContainer.s_Grabber.setState(States.NOT_INITIALIZED);
-      finish = true;
+
     }
 
   }
@@ -33,19 +35,28 @@ public class GrabberReset extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (!RobotContainer.s_Grabber.getLimitSwitch() && RobotContainer.s_Grabber.getState() == States.INITIALIZING ){
+    if (!RobotContainer.s_Grabber.getLimitSwitch() && RobotContainer.s_Grabber.getState() == States.INITIALIZED){
       RobotContainer.s_Grabber.setPos(0);
       RobotContainer.s_Grabber.moveTurningMotor(0);
-      RobotContainer.s_Grabber.setState(States.INITIALIZED);
       finish = true;
-    } else if(RobotContainer.s_Grabber.getLimitSwitch() && RobotContainer.s_Grabber.getState() == States.INITIALIZING ){
-      RobotContainer.s_Grabber.moveTurningMotor(RobotContainer.s_Grabber.getPos() - 0.012);
+    } 
+
+    if(RobotContainer.s_Grabber.getLimitSwitch()){
+      RobotContainer.s_Grabber.moveTurningMotor(RobotContainer.s_Grabber.getPos() - 0.03);
+      RobotContainer.s_Grabber.setState(States.INITIALIZED);
+
+    }
+    if(RobotContainer.s_Grabber.getState() == States.NOT_INITIALIZED && !RobotContainer.s_Grabber.getLimitSwitch() ){
+      RobotContainer.s_Grabber.moveTurningMotor(RobotContainer.s_Grabber.getPos()+0.03);
+      //RobotContainer.s_Grabber.setState(States.INITIALIZING);
     }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    RobotContainer.s_Elevator.setPosition(0);
+    RobotContainer.s_Elevator.movePosition(0);
     // RobotContainer.s_Grabber.setPos(0);
     // RobotContainer.s_Grabber.moveTurningMotor(0);
     // RobotContainer.s_Grabber.setState(States.INITIALIZED);
