@@ -100,13 +100,13 @@ public class Robot extends TimedRobot {
 
     //CommandScheduler.getInstance().schedule(new SwerveAutoAlign());
 
-    curPlaceGrab = RobotContainer.s_Grabber.getPlacement();
-    curPlaceElevator = RobotContainer.s_Elevator.getLevel();
-    if(
-    RobotContainer.s_Grabber.getState() == States.INITIALIZING &&
-    RobotContainer.s_Elevator.getState() == stateReset.INITIALIZING){
-    CommandScheduler.getInstance().schedule(new ResetAll());
-    }
+    // curPlaceGrab = RobotContainer.s_Grabber.getPlacement();
+    // curPlaceElevator = RobotContainer.s_Elevator.getLevel();
+    // if(
+    // RobotContainer.s_Grabber.getState() == States.INITIALIZING &&
+    // RobotContainer.s_Elevator.getState() == stateReset.INITIALIZING){
+    // CommandScheduler.getInstance().schedule(new ResetAll());
+    // }
 
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();

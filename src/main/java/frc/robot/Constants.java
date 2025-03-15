@@ -83,15 +83,15 @@ public final class Constants {
     public static final double TOP_SOFT_LIMIT = -0.38;
 
     public static final double LEVEL_4 = -0.2596;
-    public static final double GROUND_POSITION = -0.046-4*0.006;
-    public static final double FEEDER_POSITION = -0.3036-4*0.006;
+    public static final double GROUND_POSITION = -0.046-6*0.006;
+    public static final double FEEDER_POSITION = -0.3036-6*0.006;
     public static final double BARGE_POSITION = -0.3472;
     public static final double REST_POSITION = 0.0;
     public static final double PROCESSOR_POSITION = -0.12-2*0.006;
     public static final double ALGAE_ON_TOP = -0.154;
 
-    public static final double LEVEL_1_TO_3 = -0.17831;
-    public static final double LEVEL_1 = -0.19100097-2*0.006;
+    public static final double LEVEL_1_TO_3 = -0.17831-2*0.006;
+    public static final double LEVEL_1 = -0.19100097-4*0.006;
 
     public static final double GEAR_RATIO = 100;
     public static final double CURRENT_LIMIT = 12;
