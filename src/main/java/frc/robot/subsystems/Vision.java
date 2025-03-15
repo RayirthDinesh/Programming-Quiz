@@ -90,6 +90,9 @@ public class Vision extends SubsystemBase {
         NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
         NetworkTableEntry targetpose_cameraspace = table.getEntry("targetpose_cameraspace");
         double[] targetpose_cameraspaceArray = targetpose_cameraspace.getDoubleArray(new double[5]);
+        if (targetpose_cameraspaceArray.length < 5) {
+            return;
+        }
 
         rz = roundAvoid(targetpose_cameraspaceArray[4], 2);
 
@@ -145,9 +148,9 @@ public class Vision extends SubsystemBase {
       double targetX = x;
   
       if (currentAutoAim == autoAim.LEFT) {
-          targetX = 13;
+          targetX = 13.5;
       } else if (currentAutoAim == autoAim.RIGHT) {
-          targetX = -20.7;
+          targetX = -22.7;
           //-19.48
       } else if (currentAutoAim == autoAim.MIDDLE) {
           targetX = 0;
@@ -168,7 +171,7 @@ public class Vision extends SubsystemBase {
             targetZ = 0;
         }
         if(currentAutoAim ==autoAim.RIGHT)
-            return -autoAnglePID.calculate(targetZ-16);
+            return -autoAnglePID.calculate(targetZ-18);
         else if(currentAutoAim == autoAim.LEFT){
             return -autoAnglePID.calculate(targetZ+16);
         }

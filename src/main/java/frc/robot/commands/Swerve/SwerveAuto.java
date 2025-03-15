@@ -4,10 +4,14 @@
 
 package frc.robot.commands.Swerve;
 
+import edu.wpi.first.math.geometry.Translation2d;
 // import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.Constants;
 import frc.robot.RobotContainer;
+import frc.robot.subsystems.Grabber.IntakeOuttake;
 
 public class SwerveAuto extends Command {
   /** Creates a new AutoSwerve. */
@@ -15,6 +19,9 @@ public class SwerveAuto extends Command {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(RobotContainer.s_Swerve);
   }
+  double translationVal;
+  double strafeVal;
+  double rotationval;
 
   // Called when the command is initially scheduled.
   @Override
@@ -22,12 +29,20 @@ public class SwerveAuto extends Command {
     //System.out.println("here");
     RobotContainer.s_Swerve.zeroHeading();
     RobotContainer.s_Swerve.resetModulesToAbsolute();
-    RobotContainer.s_Swerve.drive(new ChassisSpeeds());
+    // RobotContainer.s_Swerve.drive(new ChassisSpeeds());
+    translationVal = 1;
+    strafeVal = 0;
+    rotationval = 0;
+    
+
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+     RobotContainer.s_Swerve.drive(
+        new Translation2d(translationVal, strafeVal).times(Constants.SwerveConstants.MAX_SPEED_METERS_PER_SECOND/2),
+        rotationval, true, true);
   }
 
   // Called once the command ends or is interrupted.

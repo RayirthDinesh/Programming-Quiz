@@ -5,15 +5,17 @@
 package frc.robot;
 
 import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.commands.ParallelCommands.ElevatorAndGrabberButtonStates;
 import frc.robot.commands.ParallelCommands.ElevatorAndGrabberMovePos;
 import frc.robot.commands.ParallelCommands.ResetAll;
+import frc.robot.commands.Swerve.SwerveAuto;
 import frc.robot.commands.Swerve.SwerveEncoderJoymode;
 import frc.robot.commands.Swerve.SwerveTeleop;
-import frc.robot.subsystems.Climb.states;
 import frc.robot.subsystems.Elevator.stateLevel;
 import frc.robot.subsystems.Elevator.stateReset;
 import frc.robot.subsystems.Grabber.GrabberPlacement;
@@ -85,21 +87,22 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-
+    RobotContainer.s_Swerve.resetModulesToAbsolute();
+    CommandScheduler.getInstance().schedule(new SwerveAuto().withTimeout(2).andThen(new InstantCommand(()-> RobotContainer.s_Swerve.drive(new Translation2d(0,0).times(Constants.SwerveConstants.MAX_SPEED_METERS_PER_SECOND/2),0, true, true))));
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
-
+    
     // schedule the autonomous command (example)
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
     }
-    RobotContainer.s_Swerve.resetModulesToAbsolute();
+    
     //CommandScheduler.getInstance().setDefaultCommand(RobotContainer.s_Swerve, new SwerveTeleop());
 
     //CommandScheduler.getInstance().schedule(new SwerveAutoAlign());
 
     curPlaceGrab = RobotContainer.s_Grabber.getPlacement();
     curPlaceElevator = RobotContainer.s_Elevator.getLevel();
-    if(RobotContainer.s_Climb.getState() == states.INTIALIZING && 
+    if(
     RobotContainer.s_Grabber.getState() == States.INITIALIZING &&
     RobotContainer.s_Elevator.getState() == stateReset.INITIALIZING){
     CommandScheduler.getInstance().schedule(new ResetAll());
@@ -128,7 +131,7 @@ public class Robot extends TimedRobot {
     curPlaceGrab = RobotContainer.s_Grabber.getPlacement();
     curPlaceElevator = RobotContainer.s_Elevator.getLevel();
 
-    if(RobotContainer.s_Climb.getState() == states.INTIALIZING && 
+    if(
     RobotContainer.s_Grabber.getState() == States.INITIALIZING &&
     RobotContainer.s_Elevator.getState() == stateReset.INITIALIZING){
     CommandScheduler.getInstance().schedule(new ResetAll());
@@ -146,12 +149,9 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
 
     CommandScheduler.getInstance().setDefaultCommand(RobotContainer.s_Swerve, new SwerveTeleop());
-    if (RobotContainer.operatorJoystick.getPOV() == 270) {
-      CommandScheduler.getInstance().schedule(new ElevatorAndGrabberButtonStates(stateLevel.BARGE, GrabberPlacement.BARGE));
 
-    }
-    if (RobotContainer.operatorJoystick.getPOV() == 90) {
-      CommandScheduler.getInstance().schedule(new ElevatorAndGrabberButtonStates(stateLevel.GROUND, GrabberPlacement.GROUND));
+    if (RobotContainer.operatorJoystick.getPOV() == 0) {
+      CommandScheduler.getInstance().schedule(new ElevatorAndGrabberButtonStates(stateLevel.ALGAE_ON_TOP, GrabberPlacement.ALGAE_ON_TOP));
     }
     if (curPlaceGrab != RobotContainer.s_Grabber.getPlacement()
         && RobotContainer.s_Grabber.getState() == States.ENCODER) {

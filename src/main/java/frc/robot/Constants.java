@@ -31,7 +31,7 @@ public final class Constants {
   @SuppressWarnings({ "all" })
 
   public final class ClimbConstants {
-    public static final int MOTOR_PORT = 0;
+    // public static final int MOTOR_PORT = 0;
     public static final int LIMITSWITCH_PORT = 0;
     public static final double GEAR_RATIO = 385.7;
 
@@ -58,14 +58,15 @@ public final class Constants {
 
     public static final double LEVEL_1 = 0;
     public static final double LEVEL_2 = 0.296+0.06;
-    public static final double LEVEL_3 = 0.614;
-    public static final double LEVEL_4 = 0.92;
-    public static final double GROUND_POSITION = -0.02986;
-    public static final double FEEDER_POSITION = -0.030;
+    public static final double LEVEL_3 = 0.6140;
+    public static final double LEVEL_4 = 0.9369;
+    public static final double GROUND_POSITION = -0.019;
+    public static final double FEEDER_POSITION = -0.019;
     public static final double BARGE_POSITION = 0.9124;
     public static final double REST_POSITION = 0;
+
     public static final double PROCESSOR_POSITION = 0;
-    public static final double ALGAE_ON_TOP = -0.029;
+    public static final double ALGAE_ON_TOP = -0.017;
 
     public static final double GEAR_RATIO = 100;
   }
@@ -82,7 +83,7 @@ public final class Constants {
     public static final double TOP_SOFT_LIMIT = -0.38;
 
     public static final double LEVEL_4 = -0.1596;
-    public static final double GROUND_POSITION = -0.039;;
+    public static final double GROUND_POSITION = -0.046;
     public static final double FEEDER_POSITION = -0.3036;
     public static final double BARGE_POSITION = -0.3472;
     public static final double REST_POSITION = 0.0;
@@ -187,7 +188,7 @@ public final class Constants {
     public static final double DRIVE_KF = 0.0;
 
     /* Drive Motor Characterization */
-    public static final double DRIVE_KS = -1.42;
+    public static final double DRIVE_KS = 0;
     public static final double DRIVE_KV = 1.51;
     public static final double DRIVE_KA = 0.21;
 

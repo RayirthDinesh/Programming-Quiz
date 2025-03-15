@@ -39,7 +39,7 @@ public class GrabberReset extends Command {
       RobotContainer.s_Grabber.setState(States.INITIALIZED);
       finish = true;
     } else if(RobotContainer.s_Grabber.getLimitSwitch() && RobotContainer.s_Grabber.getState() == States.INITIALIZING ){
-      RobotContainer.s_Grabber.moveTurningMotor(RobotContainer.s_Grabber.getPos() - 0.06);
+      RobotContainer.s_Grabber.moveTurningMotor(RobotContainer.s_Grabber.getPos() - 0.012);
     }
   }
 

@@ -24,7 +24,7 @@ import frc.robot.commands.ParallelCommands.ElevatorAndGrabberButtonStates;
 import frc.robot.commands.ParallelCommands.ElevatorAndGrabberMovePos;
 import frc.robot.commands.ParallelCommands.ElevatorAndGrabberScram;
 import frc.robot.commands.ParallelCommands.ElevatorandGrabberBumperUp;
-import frc.robot.subsystems.Climb;
+// import frc.robot.subsystems.Climb;
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.Elevator.stateLevel;
 import frc.robot.subsystems.Grabber;
@@ -34,7 +34,7 @@ import frc.robot.subsystems.Vision;
 
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  public static Climb s_Climb = new Climb();
+  // public static Climb s_Climb = new Climb();
   public static Elevator s_Elevator = new Elevator();
   public static Grabber s_Grabber = new Grabber();
   public static Swerve s_Swerve = new Swerve();
@@ -66,12 +66,12 @@ public class RobotContainer {
   public static JoystickButton Next = new JoystickButton(operatorJoystick, 6);//Previous is Left Bumper
   public static JoystickButton Previous = new JoystickButton(operatorJoystick, 8);//Next is Right Bumper (R1)
   public static JoystickButton Feeder = new JoystickButton(operatorJoystick, 3);//Coral Feeder intake is circle
-  public static JoystickButton Ground = new JoystickButton(operatorJoystick, 4);//Ground Algae intake is triangle
+  public static JoystickButton Ground = new JoystickButton(operatorJoystick, 2);//Ground Algae intake is triangle
   // public static JoystickButton moveClimb = new JoystickButton(operatorJoystick, 10);
 
   public static JoystickButton Processor = new JoystickButton(operatorJoystick, 1); ///Proccessor is square
   public static JoystickButton Scram = new JoystickButton(operatorJoystick, 5); //Scram is Left Bumper (L1)
-  public static JoystickButton Algae_on_top = new JoystickButton(operatorJoystick, 2); //Algae ontop coral is x
+  public static JoystickButton Barge = new JoystickButton(operatorJoystick, 4); //Barge  is x
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
 
@@ -94,7 +94,7 @@ public class RobotContainer {
     //     new ElevatorAndGrabberMovePos(GrabberPlacement.HIGHALGAE, stateLevel.HIGHALGAE));
     // NamedCommands.registerCommand("Low Algae",
     //     new ElevatorAndGrabberMovePos(GrabberPlacement.LOWALGAE, stateLevel.LOWALGAE));
-    NamedCommands.registerCommand("Algae on top", new ElevatorAndGrabberMovePos(GrabberPlacement.ALGAE_ON_TOP, stateLevel.ALGAE_ON_TOP));
+    NamedCommands.registerCommand("Algae on top", new ElevatorAndGrabberMovePos(GrabberPlacement.GROUND, stateLevel.GROUND));
     NamedCommands.registerCommand("Intake", new GrabberIntake());
     NamedCommands.registerCommand("Outtake", new GrabberOutake());
     NamedCommands.registerCommand("AutoAimOn", new InstantCommand(() -> s_Swerve.autoaimstate = true));
@@ -149,7 +149,8 @@ public class RobotContainer {
 
     Feeder.onTrue(new ElevatorAndGrabberButtonStates(stateLevel.FEEDER, GrabberPlacement.FEEDER));
     Processor.onTrue(new ElevatorAndGrabberButtonStates(stateLevel.PROCESSOR, GrabberPlacement.PROCESSOR));
-    Algae_on_top.onTrue(new ElevatorAndGrabberButtonStates(stateLevel.ALGAE_ON_TOP, GrabberPlacement.ALGAE_ON_TOP));
+    Ground.onTrue(new ElevatorAndGrabberButtonStates(stateLevel.GROUND, GrabberPlacement.GROUND));
+    Barge.onTrue(new ElevatorAndGrabberButtonStates(stateLevel.BARGE, GrabberPlacement.BARGE));
 
     Next.onTrue(new ElevatorandGrabberBumperUp());
     Previous.onTrue(new ElevatorAndGrabberBumperDown());
