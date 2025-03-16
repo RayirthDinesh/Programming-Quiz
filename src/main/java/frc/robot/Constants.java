@@ -49,10 +49,11 @@ public final class Constants {
     public static final int FOLLOWER_MOTOR_PORT = 15;
     public static final int LIMITSWITCH_PORT = 1;
 
+    
     public static final double BOTTOM_SOFT_LIMIT =  -0.040;
     public static final double BOTTOM_HARD_LIMIT = -0.050;
-    public static final double TOP_SOFT_LIMIT =  0.9566;
-    public static final double TOP_HARD_LIMIT = 1;
+    public static final double TOP_SOFT_LIMIT =  0.937;
+    public static final double TOP_HARD_LIMIT = 0.943;
 
     // public static 
 
@@ -78,16 +79,17 @@ public final class Constants {
     public static final int LIMITSWITCH_PORT = 2;
 
     public static final double BOTTOM_HARD_LIMIT = 0.1;
-    public static final double TOP_HARD_LIMIT = -0.418;
+    public static final double TOP_HARD_LIMIT = -0.44;
     public static final double BOTTOM_SOFT_LIMIT = 0.05;
-    public static final double TOP_SOFT_LIMIT = -0.38;
+    public static final double TOP_SOFT_LIMIT = -0.4
+    ;
 
     public static final double LEVEL_4 = -0.2596;
-    public static final double GROUND_POSITION = -0.046-6*0.006;
-    public static final double FEEDER_POSITION = -0.3036-6*0.006;
-    public static final double BARGE_POSITION = -0.3472;
+    public static final double GROUND_POSITION = -0.046-10*0.006;
+    public static final double FEEDER_POSITION = -0.3036-8*0.006;
+    public static final double BARGE_POSITION = -0.3472-4*0.006;
     public static final double REST_POSITION = 0.0;
-    public static final double PROCESSOR_POSITION = -0.12-2*0.006;
+    public static final double PROCESSOR_POSITION = -0.12-4*0.006;
     public static final double ALGAE_ON_TOP = -0.154;
 
     public static final double LEVEL_1_TO_3 = -0.17831-2*0.006;

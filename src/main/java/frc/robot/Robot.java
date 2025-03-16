@@ -6,7 +6,11 @@ package frc.robot;
 
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.networktables.GenericEntry;
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
@@ -37,6 +41,8 @@ public class Robot extends TimedRobot {
   
   public GrabberPlacement curPlaceGrab;
   public stateLevel curPlaceElevator;
+
+  public GenericEntry lowestVolts = Shuffleboard.getTab("teleop").add("Lowest Voltage", 0.0).getEntry();
 
   /**
    * This function is run when the robot is first started up and should be used
@@ -141,6 +147,8 @@ public class Robot extends TimedRobot {
       m_autonomousCommand.cancel();
     }
     CameraServer.startAutomaticCapture();
+
+    
   }
 
 
@@ -171,6 +179,13 @@ public class Robot extends TimedRobot {
     }
     if (RobotContainer.driverJoystick.getPOV(0) == 180) {
       new SwerveEncoderJoymode(false).schedule();
+    }
+
+    double battvolts = RobotController.getBatteryVoltage();
+    double min = 100;
+    if (min > battvolts) {
+      min = battvolts;
+      lowestVolts.setDouble(min); 
     }
 
   }
