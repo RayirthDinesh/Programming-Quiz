@@ -24,6 +24,7 @@ import frc.robot.commands.ParallelCommands.ElevatorAndGrabberButtonStates;
 import frc.robot.commands.ParallelCommands.ElevatorAndGrabberMovePos;
 import frc.robot.commands.ParallelCommands.ElevatorAndGrabberScram;
 import frc.robot.commands.ParallelCommands.ElevatorandGrabberBumperUp;
+import frc.robot.commands.ParallelCommands.ResetAll;
 // import frc.robot.subsystems.Climb;
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.Elevator.stateLevel;
@@ -80,6 +81,7 @@ public class RobotContainer {
    */
 
   public RobotContainer() {
+    NamedCommands.registerCommand("ResetAll", new ResetAll());
     NamedCommands.registerCommand("Rest", new ElevatorAndGrabberMovePos(GrabberPlacement.REST, stateLevel.REST));
     NamedCommands.registerCommand("L1", new ElevatorAndGrabberMovePos(GrabberPlacement.L1, stateLevel.L1));
     NamedCommands.registerCommand("L2", new ElevatorAndGrabberMovePos(GrabberPlacement.L2, stateLevel.L2));
@@ -108,6 +110,8 @@ public class RobotContainer {
     autoChooser.addOption("S1-Forward", new PathPlannerAuto("S1-Forward"));
     autoChooser.addOption("S2-Forward", new PathPlannerAuto("S2-Forward"));
     autoChooser.addOption("S3-Forward", new PathPlannerAuto("S3-Forward"));
+    autoChooser.addOption("Algae T to Processor", new PathPlannerAuto("Algae T to Processor"));
+    autoChooser.addOption("Start to Reef TL 3", new PathPlannerAuto("Start to Reef TL 3"));
     autoChooser.addOption("null", new PathPlannerAuto("null"));
   }
 

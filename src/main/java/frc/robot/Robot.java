@@ -94,7 +94,7 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     RobotContainer.s_Swerve.resetModulesToAbsolute();
-    // CommandScheduler.getInstance().schedule(new SwerveAuto().withTimeout(2));
+    CommandScheduler.getInstance().schedule(new SwerveAuto().withTimeout(2));
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
     
     // schedule the autonomous command (example)

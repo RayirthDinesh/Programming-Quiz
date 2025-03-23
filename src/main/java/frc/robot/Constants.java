@@ -47,7 +47,7 @@ public final class Constants {
   public final class ElevatorConstants {
     public static final int LEADER_MOTOR_PORT = 14;
     public static final int FOLLOWER_MOTOR_PORT = 15;
-    public static final int LIMITSWITCH_PORT = 1;
+    public static final int LIMITSWITCH_PORT = 2;
 
     
     public static final double BOTTOM_SOFT_LIMIT =  -0.040;
@@ -76,7 +76,7 @@ public final class Constants {
     public static final int JOINT_MOTOR_PORT = 16;
     public static final int LEADER_NEOMOTOR_PORT = 18;
     public static final int FOLLOWER_NEOMOTOR_PORT = 17;
-    public static final int LIMITSWITCH_PORT = 2;
+    public static final int LIMITSWITCH_PORT = 1;
 
     public static final double BOTTOM_HARD_LIMIT = 0.1;
     public static final double TOP_HARD_LIMIT = -0.44;
