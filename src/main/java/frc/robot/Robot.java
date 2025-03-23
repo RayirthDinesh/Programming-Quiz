@@ -94,7 +94,7 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     RobotContainer.s_Swerve.resetModulesToAbsolute();
-    CommandScheduler.getInstance().schedule(new SwerveAuto().withTimeout(2).andThen(new InstantCommand(()-> RobotContainer.s_Swerve.drive(new Translation2d(0,0).times(Constants.SwerveConstants.MAX_SPEED_METERS_PER_SECOND/2),0, true, true))));
+    // CommandScheduler.getInstance().schedule(new SwerveAuto().withTimeout(2));
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
     
     // schedule the autonomous command (example)
@@ -114,9 +114,9 @@ public class Robot extends TimedRobot {
     // CommandScheduler.getInstance().schedule(new ResetAll());
     // }
 
-    if (m_autonomousCommand != null) {
-      m_autonomousCommand.cancel();
-    }
+    // if (m_autonomousCommand != null) {
+    //   m_autonomousCommand.cancel();
+    // }
     CameraServer.startAutomaticCapture();
   }
   

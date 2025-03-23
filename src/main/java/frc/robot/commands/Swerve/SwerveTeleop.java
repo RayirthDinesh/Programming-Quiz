@@ -74,10 +74,15 @@ public class SwerveTeleop extends Command {
 
   @Override
   public void execute() {
+    double translationVal = RobotContainer.driverJoystick.getRawAxis(1);
+    double strafeVal = RobotContainer.driverJoystick.getRawAxis(0);
+    double rotationVal = RobotContainer.driverJoystick.getRawAxis(4);
+
+
     translationSup = () -> RobotContainer.driverJoystick.getRawAxis(1);
     strafeSup = () -> RobotContainer.driverJoystick.getRawAxis(0);
 
-    rotationSup = () -> RobotContainer.driverJoystick.getRawAxis(2);
+    rotationSup = () -> RobotContainer.driverJoystick.getRawAxis(4);
 
     // robotCentricSup = () -> RobotContainer.robotCentric.getAsBoolean(); (work on
     // it if u need to)
