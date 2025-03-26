@@ -110,6 +110,7 @@ public class RobotContainer {
     autoChooser.addOption("S1-Forward", new PathPlannerAuto("S1-Forward"));
     autoChooser.addOption("S2-Forward", new PathPlannerAuto("S2-Forward"));
     autoChooser.addOption("S3-Forward", new PathPlannerAuto("S3-Forward"));
+    autoChooser.addOption("test", new PathPlannerAuto("test"));
     autoChooser.addOption("Algae T to Processor", new PathPlannerAuto("Algae T to Processor"));
     autoChooser.addOption("Start to Reef TL 3", new PathPlannerAuto("Start to Reef TL 3"));
     autoChooser.addOption("null", new PathPlannerAuto("null"));
