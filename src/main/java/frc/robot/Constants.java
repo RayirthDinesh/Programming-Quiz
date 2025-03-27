@@ -45,8 +45,8 @@ public final class Constants {
   }
 
   public final class ElevatorConstants {
-    public static final int LEADER_MOTOR_PORT = 14;
-    public static final int FOLLOWER_MOTOR_PORT = 15;
+    public static final int LEADER_MOTOR_PORT = 15;
+    public static final int FOLLOWER_MOTOR_PORT = 14;
     public static final int LIMITSWITCH_PORT = 2;
 
     

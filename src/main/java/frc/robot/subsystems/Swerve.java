@@ -234,7 +234,12 @@ public class Swerve extends SubsystemBase {
   // return current position of swerveodometry (the chassis internal positioning
   // system)
   public Pose2d getPose() {
-    return swerveOdometry.getPoseMeters();
+    if(swerveOdometry.getPoseMeters()!=null){
+      return swerveOdometry.getPoseMeters();
+    }
+    else{
+      return new Pose2d();
+    }
   }
 
   // Change the position of the swerveodometry
@@ -282,7 +287,6 @@ public class Swerve extends SubsystemBase {
   public void periodic() {
     swerveOdometry.update(getGyroYaw(), getModulePositions());
     field.setRobotPose(swerveOdometry.getPoseMeters());
-    field.setRobotPose(getPose());
     // This method will be called once per scheduler run
     EncoderModeEntry.setBoolean(encoderJoymodeState);
     SmartDashboard.putNumber("Gyro Yaw", getGyroYaw().getDegrees());
