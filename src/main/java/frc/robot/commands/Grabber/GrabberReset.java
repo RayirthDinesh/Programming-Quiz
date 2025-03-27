@@ -7,13 +7,14 @@ package frc.robot.commands.Grabber;
 
 import java.lang.Thread.State;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.Grabber.States;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class GrabberReset extends Command {
-  boolean finish = false;
+  public boolean finish = false;
   /** Creates a new reset. */
   public GrabberReset() {
     // Use addRequirements() here to declare subsystem dependencies.
@@ -39,6 +40,7 @@ public class GrabberReset extends Command {
       RobotContainer.s_Grabber.setPos(0);
       RobotContainer.s_Grabber.moveTurningMotor(0);
       finish = true;
+      end(finish);
     } 
 
     if(RobotContainer.s_Grabber.getLimitSwitch()){
@@ -55,10 +57,8 @@ public class GrabberReset extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    RobotContainer.s_Elevator.setPosition(0);
-    RobotContainer.s_Elevator.movePosition(0);
-    // RobotContainer.s_Grabber.setPos(0);
-    // RobotContainer.s_Grabber.moveTurningMotor(0);
+    RobotContainer.s_Grabber.setPos(0);
+    RobotContainer.s_Grabber.moveTurningMotor(0);
     // RobotContainer.s_Grabber.setState(States.INITIALIZED);
   }
 

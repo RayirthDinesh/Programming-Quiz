@@ -15,7 +15,9 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.commands.Elevator.ElevatorManualMoveDown;
 import frc.robot.commands.Elevator.ElevatorManualMoveUp;
+import frc.robot.commands.Elevator.ElevatorReset;
 import frc.robot.commands.Grabber.GrabberIntake;
+import frc.robot.commands.Grabber.GrabberReset;
 import frc.robot.commands.Grabber.GrabberManualMoveDown;
 import frc.robot.commands.Grabber.GrabberManualMoveUp;
 import frc.robot.commands.Grabber.GrabberOutake;
@@ -82,6 +84,8 @@ public class RobotContainer {
 
   public RobotContainer() {
     NamedCommands.registerCommand("ResetAll", new ResetAll());
+    NamedCommands.registerCommand("ResetElev", new ElevatorReset());
+    NamedCommands.registerCommand("ResetGrab", new GrabberReset());
     NamedCommands.registerCommand("Rest", new ElevatorAndGrabberMovePos(GrabberPlacement.REST, stateLevel.REST));
     NamedCommands.registerCommand("L1", new ElevatorAndGrabberMovePos(GrabberPlacement.L1, stateLevel.L1));
     NamedCommands.registerCommand("L2", new ElevatorAndGrabberMovePos(GrabberPlacement.L2, stateLevel.L2));

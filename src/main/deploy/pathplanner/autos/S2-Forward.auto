@@ -7,13 +7,19 @@
         {
           "type": "named",
           "data": {
-            "name": "ResetAll"
+            "name": "ResetGrab"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "ResetElev"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "Algae_B-Algae_M"
+            "pathName": "Algae_B-Algae_T"
           }
         }
       ]
