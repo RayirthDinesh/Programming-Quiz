@@ -74,8 +74,7 @@ public final class Constants {
 
   public final class GrabberConstants {
     public static final int JOINT_MOTOR_PORT = 16;
-    public static final int LEADER_NEOMOTOR_PORT = 18;
-    public static final int FOLLOWER_NEOMOTOR_PORT = 17;
+    public static final int GRAB_PORT = 13;
     public static final int LIMITSWITCH_PORT = 1;
 
     public static final double BOTTOM_HARD_LIMIT = 0.1;
