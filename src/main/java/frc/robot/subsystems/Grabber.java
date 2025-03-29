@@ -68,7 +68,7 @@ public class Grabber extends SubsystemBase {
 
   States curStates = States.INITIALIZING;
   GrabberPlacement curPlacement = GrabberPlacement.REST;
-  TalonFX grab = new TalonFX(13);
+  TalonFX grab = new TalonFX(Constants.GrabberConstants.GRAB_PORT);
 
   static double auxFF = 0;
   static double grabberAngle;
