@@ -56,6 +56,7 @@ public class Swerve extends SubsystemBase {
   // public GenericEntry currentRotValueEntry = joystickTab.add("Current Rotation Value", 0.005).getEntry();
   // public GenericEntry targetrotValueEntry = joystickTab.add("Target Rotation Value", 0.005).getEntry();
   GenericEntry EncoderModeEntry = Shuffleboard.getTab("Swerve").add("Encoder Mode",encoderJoymodeState).getEntry();
+  GenericEntry IdkEntry = Shuffleboard.getTab("Swerve").add("weiugweut",autoaimstate).getEntry();
   
 
   public Swerve() {
@@ -101,8 +102,8 @@ public class Swerve extends SubsystemBase {
                                                  // Also optionally outputs individual module feedforwards
         new PPHolonomicDriveController( // PPHolonomicController is the built in path following controller for holonomic
                                         // drive trains
-            new PIDConstants(5.0, 0.0, 0.0), // Translation PID constants
-            new PIDConstants(5.0, 0.0, 0.0) // Rotation PID constants
+            new PIDConstants(1.0, 0.0, 0.0), // Translation PID constants
+            new PIDConstants(1.0, 0.0, 0.0) // Rotation PID constants
         ),
         config, // The robot configuration
         () -> {
@@ -139,12 +140,12 @@ public class Swerve extends SubsystemBase {
     }
     return positions;
   }
-  public void AutoAimState() {
-    if(autoaimstate == true){
-      autoMove();
-    }
+  // public void AutoAimState() {
+  //   if(autoaimstate == true){
+  //     autoMove();
+  //   }
 
-  }
+  // }
   // move to set location
   public void drive(Translation2d translation, double rotation, boolean fieldRelative, boolean isOpenLoop) {
     SwerveModuleState[] swerveModuleStates = Constants.SwerveConstants.SWERVE_KINEMATICS.toSwerveModuleStates(
@@ -181,12 +182,19 @@ public class Swerve extends SubsystemBase {
   }
 
   public void autoMove() {
-    if (RobotContainer.s_Vision.isApriltag() == true) {
-      double strafeVal = RobotContainer.s_Vision.autostrafe() * Constants.SwerveConstants.MAX_ANGULAR_VELOCITY_RADIANS_PER_SECOND;
-      double rotationval = RobotContainer.s_Vision.autoAngle() * Constants.SwerveConstants.MAX_ANGULAR_VELOCITY_RADIANS_PER_SECOND;
-      double translationVal = RobotContainer.s_Vision.autotrans() * Constants.SwerveConstants.MAX_ANGULAR_VELOCITY_RADIANS_PER_SECOND;
-      RobotContainer.s_Swerve.drive(new Translation2d(translationVal, strafeVal).times(Constants.SwerveConstants.MAX_SPEED_METERS_PER_SECOND),
-          rotationval, false, true);
+    if (autoaimstate){
+      if (RobotContainer.s_Vision.isApriltag() == true) {
+        double strafeVal = RobotContainer.s_Vision.autostrafe() * Constants.SwerveConstants.MAX_ANGULAR_VELOCITY_RADIANS_PER_SECOND;
+        double rotationval = RobotContainer.s_Vision.autoAngle() * Constants.SwerveConstants.MAX_ANGULAR_VELOCITY_RADIANS_PER_SECOND;
+        double translationVal = RobotContainer.s_Vision.autotrans() * Constants.SwerveConstants.MAX_ANGULAR_VELOCITY_RADIANS_PER_SECOND;
+        drive(new Translation2d(translationVal, strafeVal).times(Constants.SwerveConstants.MAX_SPEED_METERS_PER_SECOND),
+            rotationval, false, true);
+      }
+      else {
+        drive(new Translation2d(0, 0), 0, false, true);
+      }
+    } else {
+      drive(new Translation2d(0, 0), 0, false, true);
     }
   }
 
@@ -289,6 +297,7 @@ public class Swerve extends SubsystemBase {
     field.setRobotPose(swerveOdometry.getPoseMeters());
     // This method will be called once per scheduler run
     EncoderModeEntry.setBoolean(encoderJoymodeState);
+    IdkEntry.setBoolean(autoaimstate);
     SmartDashboard.putNumber("Gyro Yaw", getGyroYaw().getDegrees());
 
     for (SwerveModules mod : mSwerveMods) {

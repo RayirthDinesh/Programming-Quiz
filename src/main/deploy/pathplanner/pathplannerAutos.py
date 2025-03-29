@@ -10,7 +10,7 @@ data_names = [
 ]
 
 commands = [
-    "AutoAimLeft", "AutoAimRight", "AutoAlign", "L1", "L2", "L3", "L4", "Outtake", "Intake", "Low Algae", "High Algae", "Wait"
+    "AutoAimLeft", "AutoAimRight", "L1", "L2", "L3", "L4", "Outtake", "Intake", "Low Algae", "High Algae", "Wait", "AutoAimOn", "AutoAimOff", "AutoAimMiddle"
 ]
 
 def generate_auto_file(start, middle, end, command_sequence, suffix, wait):
@@ -77,15 +77,21 @@ def generate_combinations():
                                         },
                                         {"type": "path", "data": {"pathName": f"{start}-{middle}"}},
                                         {
-                                            "type": "parallel",
+                                            "type": "named",
+                                            "data": {
+                                                "name": autoaim
+                                            }
+                                        },
+                                        {
+                                            "type": "deadline",
                                             "data": {
                                                 "commands": [
-                                                    {"type": "named", "data": {"name": autoaim}},
-                                                    {"type": "named", "data": {"name": "AutoAlign"}},
-                                                    {"type": "named", "data": {"name": l_command}}
+                                                    {"type": "named", "data": {"name": "AutoAimOn"}},
                                                 ]
                                             }
                                         },
+                                        {"type": "named", "data": {"name": "AutoAimOff"}},
+                                        {"type": "named", "data": {"name": l_command}},
                                         {"type": "named", "data": {"name": "Outtake"}},
                                         {"type": "named", "data": {"name": algae}},
                                         {"type": "named", "data": {"name": "Intake"}},
@@ -101,15 +107,21 @@ def generate_combinations():
                                         },
                                         {"type": "path", "data": {"pathName": f"{start}-{middle}"}},
                                         {
-                                            "type": "parallel",
+                                            "type": "named",
+                                            "data": {
+                                                "name": autoaim
+                                            }
+                                        },
+                                        {
+                                            "type": "deadline",
                                             "data": {
                                                 "commands": [
-                                                    {"type": "named", "data": {"name": autoaim}},
-                                                    {"type": "named", "data": {"name": "AutoAlign"}},
-                                                    {"type": "named", "data": {"name": l_command}}
+                                                    {"type": "named", "data": {"name": "AutoAimOn"}},
                                                 ]
                                             }
                                         },
+                                        {"type": "named", "data": {"name": "AutoAimOff"}},
+                                        {"type": "named", "data": {"name": l_command}},
                                         {"type": "named", "data": {"name": "Outtake"}},
                                         {"type": "named", "data": {"name": algae}},
                                         {"type": "named", "data": {"name": "Intake"}},
@@ -120,5 +132,5 @@ def generate_combinations():
                                 suffix = f"{autoaim}-{algae}-{l_command}"
                                 generate_auto_file(start, middle, end, command_sequence, suffix, wait)
         wait = True
-for i in range(10):
-    generate_combinations()
+
+generate_combinations()

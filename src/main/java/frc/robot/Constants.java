@@ -58,16 +58,16 @@ public final class Constants {
     // public static 
 
     public static final double LEVEL_1 = 0;
-    public static final double LEVEL_2 = 0.296+0.06;
-    public static final double LEVEL_3 = 0.6140;
-    public static final double LEVEL_4 = 0.92;
-    public static final double GROUND_POSITION = -0.019;
-    public static final double FEEDER_POSITION = -0.019;
-    public static final double BARGE_POSITION = 0.9124;
+    public static final double LEVEL_2 = -0.296+0.06;
+    public static final double LEVEL_3 = -0.6140;
+    public static final double LEVEL_4 = -0.92;
+    public static final double GROUND_POSITION = 0.019;
+    public static final double FEEDER_POSITION = 0.019;
+    public static final double BARGE_POSITION = -0.9124;
     public static final double REST_POSITION = 0;
 
     public static final double PROCESSOR_POSITION = 0;
-    public static final double ALGAE_ON_TOP = -0.017;
+    public static final double ALGAE_ON_TOP = 0.017;
 
     public static final double GEAR_RATIO = 100;
   }

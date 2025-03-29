@@ -24,6 +24,8 @@ import frc.robot.subsystems.Elevator.stateLevel;
 import frc.robot.subsystems.Elevator.stateReset;
 import frc.robot.subsystems.Grabber.GrabberPlacement;
 import frc.robot.subsystems.Grabber.States;
+import frc.robot.subsystems.Vision.autoAim;
+import frc.robot.subsystems.Vision;
 ;
 
 /**
@@ -94,13 +96,15 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     RobotContainer.s_Swerve.resetModulesToAbsolute();
-    CommandScheduler.getInstance().schedule(new SwerveAuto().withTimeout(2));
+    // CommandScheduler.getInstance().schedule(new SwerveAuto().withTimeout(2));
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
     
-    // schedule the autonomous command (example)
+    //schedule the autonomous command (example)
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
     }
+
+
     
     //CommandScheduler.getInstance().setDefaultCommand(RobotContainer.s_Swerve, new SwerveTeleop());
 

@@ -3,6 +3,7 @@ package frc.robot;
 import com.pathplanner.lib.auto.NamedCommands;
 import com.pathplanner.lib.commands.PathPlannerAuto;
 
+import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 import edu.wpi.first.wpilibj.shuffleboard.ComplexWidget;
@@ -27,6 +28,8 @@ import frc.robot.commands.ParallelCommands.ElevatorAndGrabberMovePos;
 import frc.robot.commands.ParallelCommands.ElevatorAndGrabberScram;
 import frc.robot.commands.ParallelCommands.ElevatorandGrabberBumperUp;
 import frc.robot.commands.ParallelCommands.ResetAll;
+import frc.robot.commands.Swerve.SwerveAutoAlign;
+import frc.robot.commands.Swerve.SwerveAutoAlignAuto;
 // import frc.robot.subsystems.Climb;
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.Elevator.stateLevel;
@@ -103,11 +106,12 @@ public class RobotContainer {
     NamedCommands.registerCommand("Algae on top", new ElevatorAndGrabberMovePos(GrabberPlacement.GROUND, stateLevel.GROUND));
     NamedCommands.registerCommand("Intake", new GrabberIntake());
     NamedCommands.registerCommand("Outtake", new GrabberOutake());
-    NamedCommands.registerCommand("AutoAimOn", new InstantCommand(() -> s_Swerve.autoaimstate = true));
-    NamedCommands.registerCommand("AutoAimOff", new InstantCommand(() -> s_Swerve.autoaimstate = false));
+    NamedCommands.registerCommand("AutoAimOn", new InstantCommand(() -> s_Swerve.autoaimstate = true).andThen(new SwerveAutoAlignAuto()));
+    NamedCommands.registerCommand("AutoAimOff", new InstantCommand(() -> s_Swerve.autoaimstate = false).andThen(new InstantCommand(() -> RobotContainer.s_Swerve.drive(new Translation2d(0, 0), 0, false, true))));
     NamedCommands.registerCommand("AutoAimRight", new InstantCommand(() -> s_Vision.setAutoAim(Vision.autoAim.RIGHT)));
     NamedCommands.registerCommand("AutoAimMid", new InstantCommand(() -> s_Vision.setAutoAim(Vision.autoAim.MIDDLE)));
     NamedCommands.registerCommand("AutoAimLeft", new InstantCommand(() -> s_Vision.setAutoAim(Vision.autoAim.LEFT)));
+    NamedCommands.registerCommand("stop", getAutonomousCommand());
     // Configure the trigger bindings
     configureBindings();
     // autoChooser.setDefaultOption("SPEAKER Routine", new SpeakerRoutine());
