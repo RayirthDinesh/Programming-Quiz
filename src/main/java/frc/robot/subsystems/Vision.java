@@ -147,9 +147,9 @@ public class Vision extends SubsystemBase {
       double targetX = x;
   
       if (currentAutoAim == autoAim.LEFT) {
-          targetX = 14.5;
+          targetX = 12.3;
       } else if (currentAutoAim == autoAim.RIGHT) {
-          targetX = -19.3; //we minused this by 1 //was -20.3
+          targetX = -18.2; //we minused this by 1 //was -20.3
           //-19.48
       } else if (currentAutoAim == autoAim.MIDDLE) {
           targetX = 0;
@@ -185,7 +185,7 @@ public class Vision extends SubsystemBase {
     public double autotrans() {
         targetarea = area;
         if(currentAutoAim!=autoAim.MIDDLE){
-            return -autoAnglePID.calculate(targetarea, 9.585-2.13);
+            return -autoAnglePID.calculate(targetarea, 8.55-2.13);
         }
         else{
             return -autoAnglePID.calculate(targetarea, 11);
