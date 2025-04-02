@@ -59,7 +59,7 @@ public final class Constants {
 
     public static final double LEVEL_1 = 0;
     public static final double LEVEL_2 = -0.296+0.06;
-    public static final double LEVEL_3 = -0.6140;
+    public static final double LEVEL_3 = -0.5033;
     public static final double LEVEL_4 = -0.92;
     public static final double GROUND_POSITION = 0.019;
     public static final double FEEDER_POSITION = 0.019;
@@ -74,27 +74,27 @@ public final class Constants {
 
   public final class GrabberConstants {
     public static final int JOINT_MOTOR_PORT = 16;
-    public static final int GRAB_PORT = 13;
+    public static final int GRAB_PORT = 17;
     public static final int LIMITSWITCH_PORT = 1;
 
-    public static final double BOTTOM_HARD_LIMIT = 0.1;
-    public static final double TOP_HARD_LIMIT = -0.44;
-    public static final double BOTTOM_SOFT_LIMIT = 0.05;
-    public static final double TOP_SOFT_LIMIT = -0.4
-    ;
+    // public static final double TOP_HARD_LIMIT = 0.1;
+    // public static final double BOTTOM_HARD_LIMIT = -0.44;
+    // public static final double TOP_SOFT_LIMIT = 0.05;
+    // public static final double BOTTOM_SOFT_LIMIT = -0.4 ;
 
-    public static final double LEVEL_4 = -0.2596;
-    public static final double GROUND_POSITION = -0.046-10*0.006;
-    public static final double FEEDER_POSITION = -0.3036-8*0.006;
-    public static final double BARGE_POSITION = -0.3472-4*0.006;
+    public static final double LEVEL_4 = 0.4198;
+    public static final double GROUND_POSITION = 0.17181;
+    public static final double FEEDER_POSITION = 0.6492056;
+    public static final double BARGE_POSITION = 0.3472-4*0.006;
     public static final double REST_POSITION = 0.0;
-    public static final double PROCESSOR_POSITION = -0.12-4*0.006;
-    public static final double ALGAE_ON_TOP = -0.154;
+    public static final double PROCESSOR_POSITION = 0.19181;
+    public static final double ALGAE_ON_TOP = 0.154;
 
-    public static final double LEVEL_1_TO_3 = -0.17831-2*0.006;
-    public static final double LEVEL_1 = -0.19100097-4*0.006;
+    public static final double LEVEL_1_TO_3 = 0.17831+27*0.006;
+    public static final double LEVEL_1 = 0.32824;
 
-    public static final double GEAR_RATIO = 100;
+
+    public static final double GEAR_RATIO = 102.4;
     public static final double CURRENT_LIMIT = 12;
   }
 

@@ -1,8 +1,5 @@
 package frc.robot.subsystems;
 
-import java.lang.reflect.Field;
-import java.util.Map;
-
 import com.ctre.phoenix6.configs.Pigeon2Configuration;
 import com.ctre.phoenix6.hardware.Pigeon2;
 import com.pathplanner.lib.auto.AutoBuilder;
@@ -24,12 +21,10 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 import edu.wpi.first.wpilibj.shuffleboard.ComplexWidget;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
-import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
-import frc.robot.Robot;
 import frc.robot.RobotContainer;
 import frc.robot.SwerveModules;
 
@@ -102,8 +97,8 @@ public class Swerve extends SubsystemBase {
                                                  // Also optionally outputs individual module feedforwards
         new PPHolonomicDriveController( // PPHolonomicController is the built in path following controller for holonomic
                                         // drive trains
-            new PIDConstants(1.0, 0.0, 0.0), // Translation PID constants
-            new PIDConstants(1.0, 0.0, 0.0) // Rotation PID constants
+            new PIDConstants(0.5, 0.0, 0.0), // Translation PID constants
+            new PIDConstants(0.5, 0.0, 0.0) // Rotation PID constants
         ),
         config, // The robot configuration
         () -> {
@@ -182,6 +177,7 @@ public class Swerve extends SubsystemBase {
   }
 
   public void autoMove() {
+    System.out.println("i");
     if (autoaimstate){
       if (RobotContainer.s_Vision.isApriltag() == true) {
         double strafeVal = RobotContainer.s_Vision.autostrafe() * Constants.SwerveConstants.MAX_ANGULAR_VELOCITY_RADIANS_PER_SECOND;
@@ -201,7 +197,7 @@ public class Swerve extends SubsystemBase {
   // set speeds of all modules and move to current location
   public void drive(ChassisSpeeds speeds) {
     SwerveModuleState[] swerveModuleStates = Constants.SwerveConstants.SWERVE_KINEMATICS.toSwerveModuleStates(speeds);
-    SwerveDriveKinematics.desaturateWheelSpeeds(swerveModuleStates, Constants.SwerveConstants.MAX_SPEED_METERS_PER_SECOND);
+    SwerveDriveKinematics.desaturateWheelSpeeds(swerveModuleStates, Constants.SwerveConstants.MAX_SPEED_METERS_PER_SECOND/2);
     mSpeeds = speeds;
 
     for (SwerveModules mod : mSwerveMods) {

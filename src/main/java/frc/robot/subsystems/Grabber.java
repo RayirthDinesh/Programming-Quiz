@@ -8,13 +8,6 @@ import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.controls.MotionMagicVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.NeutralModeValue;
-import com.revrobotics.spark.SparkClosedLoopController;
-import com.revrobotics.spark.SparkLowLevel.MotorType;
-import com.revrobotics.spark.SparkMax;
-import com.revrobotics.spark.config.MAXMotionConfig;
-import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
-import com.revrobotics.spark.config.SparkMaxConfig;
-
 import edu.wpi.first.networktables.GenericEntry;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Timer;
@@ -22,7 +15,6 @@ import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
-import frc.robot.RobotContainer;
 
 public class Grabber extends SubsystemBase {
   /** Creates a new Grabber. */
@@ -87,20 +79,23 @@ public class Grabber extends SubsystemBase {
   public Grabber() {
     var slot0config = talonWristConfig.Slot0;
     var magicmotionconfig = talonWristConfig.MotionMagic;
-    turning.setInverted(true);
+    // turning.setInverted(true);
 
-    slot0config.kP = 23;
+    slot0config.kP = 13;
     slot0config.kI = 0;
     slot0config.kD = 0;
 
     magicmotionconfig.MotionMagicAcceleration = 30;
     magicmotionconfig.MotionMagicCruiseVelocity = 30;
 
+    talonWristConfig.CurrentLimits.StatorCurrentLimit = 35;
+    talonWristConfig.CurrentLimits.StatorCurrentLimitEnable = true;;
+
     turning.getConfigurator().apply(talonWristConfig);
 
     grab.setNeutralMode(NeutralModeValue.Brake);
 
-    talonGrabConfig.CurrentLimits.StatorCurrentLimit = 80;
+    talonGrabConfig.CurrentLimits.StatorCurrentLimit = 40;
     talonGrabConfig.CurrentLimits.StatorCurrentLimitEnable = true;
 
     grab.getConfigurator().apply(talonGrabConfig);
@@ -119,20 +114,20 @@ public class Grabber extends SubsystemBase {
   public void moveTurningMotor(double pos) {
     target = pos;
     System.out.println(pos);
-    if (curStates == States.ENCODER) {
+    // if (curStates == States.ENCODER) {
 
-      if (getPos() > Constants.GrabberConstants.BOTTOM_HARD_LIMIT
-          || getPos() < Constants.GrabberConstants.TOP_HARD_LIMIT) {
-        turning.disable();
-        target = 0;
-      }
-      if (getPos() > Constants.GrabberConstants.BOTTOM_SOFT_LIMIT) {
-        target = Constants.GrabberConstants.REST_POSITION;
-      }
-      if (getPos() < Constants.GrabberConstants.TOP_SOFT_LIMIT) {
-        target = Constants.GrabberConstants.BARGE_POSITION;
-      }
-    }
+    //   if (getPos() > Constants.GrabberConstants.BOTTOM_HARD_LIMIT
+    //       || getPos() < Constants.GrabberConstants.TOP_HARD_LIMIT) {
+    //     turning.disable();
+    //     target = 0;
+    //   }
+    //   if (getPos() > Constants.GrabberConstants.BOTTOM_SOFT_LIMIT) {
+    //     target = Constants.GrabberConstants.REST_POSITION;
+    //   }
+    //   if (getPos() < Constants.GrabberConstants.TOP_SOFT_LIMIT) {
+    //     target = Constants.GrabberConstants.BARGE_POSITION;
+    //   }
+    // }
 
     turning.setControl(motion.withPosition(target * Constants.GrabberConstants.GEAR_RATIO));
   }
@@ -181,7 +176,7 @@ public class Grabber extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
     grabberAngle = 0 + ((getPos() * 360 / Constants.GrabberConstants.GEAR_RATIO)); // try removing gear ratios
-    auxFF = /* FFWEntry.getDouble(-0.15) */ -0.35 * Math.sin(Math.toRadians(grabberAngle)); // -0.128
+    auxFF = /* FFWEntry.getDouble(-0.15) */ 0.13 * Math.sin(Math.toRadians(grabberAngle)); // -0.128
     // auxFF = 0.35 * Math.sin(Math.toRadians((getPos()-25)));
     jointLimitswitchEntry.setBoolean(getLimitSwitch());
     jontCurrentPosEntry.setDouble(getPos());

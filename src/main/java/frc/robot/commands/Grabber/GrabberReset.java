@@ -17,6 +17,7 @@ public class GrabberReset extends Command {
   public void initialize() {
     if (!RobotContainer.s_Grabber.getLimitSwitch()) {
       RobotContainer.s_Grabber.setState(States.NOT_INITIALIZED);
+      finish = true;
     }
   }
 
@@ -24,15 +25,14 @@ public class GrabberReset extends Command {
   @Override
   public void execute() {
     if (RobotContainer.s_Grabber.getLimitSwitch()) {
-      RobotContainer.s_Grabber.moveTurningMotor(RobotContainer.s_Grabber.getPos() - 0.03);
-      RobotContainer.s_Grabber.setState(States.INITIALIZED);
+      RobotContainer.s_Grabber.moveTurningMotor(RobotContainer.s_Grabber.getPos() + 0.03);
+      
     } 
     if (!RobotContainer.s_Grabber.getLimitSwitch() && RobotContainer.s_Grabber.getState() != States.NOT_INITIALIZED) {
+      RobotContainer.s_Grabber.setState(States.INITIALIZED);
       finish = true;
     }
-    if (RobotContainer.s_Grabber.getState() == States.NOT_INITIALIZED && !RobotContainer.s_Grabber.getLimitSwitch()) {
-      RobotContainer.s_Grabber.moveTurningMotor(RobotContainer.s_Grabber.getPos() + 0.03);
-    }
+    
   }
 
   // Called once the command ends or is interrupted.

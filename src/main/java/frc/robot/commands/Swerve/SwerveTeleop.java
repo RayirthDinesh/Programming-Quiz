@@ -17,8 +17,6 @@ public class SwerveTeleop extends Command {
   private boolean initFlag = true;
   private static DoubleSupplier translationSup;
   private static DoubleSupplier strafeSup;
-  private static DoubleSupplier rotationSupX;
-  private static DoubleSupplier rotationSupY;
   private static DoubleSupplier rotationSup;
   static double rawRotation;
   static double rotationval;
@@ -74,15 +72,14 @@ public class SwerveTeleop extends Command {
 
   @Override
   public void execute() {
-    double translationVal = RobotContainer.driverJoystick.getRawAxis(1);
-    double strafeVal = RobotContainer.driverJoystick.getRawAxis(0);
-    double rotationVal = RobotContainer.driverJoystick.getRawAxis(4);
+    translationVal = RobotContainer.driverJoystick.getRawAxis(1);
+    strafeVal = RobotContainer.driverJoystick.getRawAxis(0);
 
 
     translationSup = () -> RobotContainer.driverJoystick.getRawAxis(1);
     strafeSup = () -> RobotContainer.driverJoystick.getRawAxis(0);
 
-    rotationSup = () -> RobotContainer.driverJoystick.getRawAxis(4);
+    rotationSup = () -> RobotContainer.driverJoystick.getRawAxis(2);
 
     // robotCentricSup = () -> RobotContainer.robotCentric.getAsBoolean(); (work on
     // it if u need to)
@@ -98,7 +95,7 @@ public class SwerveTeleop extends Command {
     // translationVal = squareAxis(logAxis(translationSup.getAsDouble()),
     // Constants.stickDeadband + 0.3);
 
-    if (RobotContainer.s_Vision.getAutoAim() != autoAim.NONE && RobotContainer.s_Vision.isApriltag()) {
+    if (RobotContainer.s_Vision.getAutoAim() != autoAim.NONE && RobotContainer.s_Vision.isApriltag() /*&& RobotContainer.s_Swerve.autoaimstate*/) {
 
       strafeVal = -RobotContainer.s_Vision.autostrafe();
       rotationval = -RobotContainer.s_Vision.autoAngle()

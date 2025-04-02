@@ -3,7 +3,6 @@ package frc.robot;
 import com.pathplanner.lib.auto.NamedCommands;
 import com.pathplanner.lib.commands.PathPlannerAuto;
 
-import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 import edu.wpi.first.wpilibj.shuffleboard.ComplexWidget;
@@ -28,13 +27,13 @@ import frc.robot.commands.ParallelCommands.ElevatorAndGrabberMovePos;
 import frc.robot.commands.ParallelCommands.ElevatorAndGrabberScram;
 import frc.robot.commands.ParallelCommands.ElevatorandGrabberBumperUp;
 import frc.robot.commands.ParallelCommands.ResetAll;
-import frc.robot.commands.Swerve.SwerveAutoAlign;
 import frc.robot.commands.Swerve.SwerveAutoAlignAuto;
 // import frc.robot.subsystems.Climb;
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.Elevator.stateLevel;
 import frc.robot.subsystems.Grabber;
 import frc.robot.subsystems.Grabber.GrabberPlacement;
+import frc.robot.subsystems.Grabber.IntakeOuttake;
 import frc.robot.subsystems.Swerve;
 import frc.robot.subsystems.Vision;
 
@@ -107,7 +106,7 @@ public class RobotContainer {
     NamedCommands.registerCommand("Intake", new GrabberIntake());
     NamedCommands.registerCommand("Outtake", new GrabberOutake());
     NamedCommands.registerCommand("AutoAimOn", new InstantCommand(() -> s_Swerve.autoaimstate = true).andThen(new SwerveAutoAlignAuto()));
-    NamedCommands.registerCommand("AutoAimOff", new InstantCommand(() -> s_Swerve.autoaimstate = false).andThen(new InstantCommand(() -> RobotContainer.s_Swerve.drive(new Translation2d(0, 0), 0, false, true))));
+    // NamedCommands.registerCommand("AutoAimOff", new InstantCommand(() -> s_Swerve.autoaimstate = false).andThen(new InstantCommand(() -> RobotContainer.s_Swerve.drive(new Translation2d(0, 0), 0, false, true))));
     NamedCommands.registerCommand("AutoAimRight", new InstantCommand(() -> s_Vision.setAutoAim(Vision.autoAim.RIGHT)));
     NamedCommands.registerCommand("AutoAimMid", new InstantCommand(() -> s_Vision.setAutoAim(Vision.autoAim.MIDDLE)));
     NamedCommands.registerCommand("AutoAimLeft", new InstantCommand(() -> s_Vision.setAutoAim(Vision.autoAim.LEFT)));
@@ -118,7 +117,7 @@ public class RobotContainer {
     autoChooser.addOption("S1-Forward", new PathPlannerAuto("S1-Forward"));
     autoChooser.addOption("S2-Forward", new PathPlannerAuto("S2-Forward"));
     autoChooser.addOption("S3-Forward", new PathPlannerAuto("S3-Forward"));
-    autoChooser.addOption("test", new PathPlannerAuto("test"));
+    autoChooser.addOption("Testing2", new PathPlannerAuto("Testing2"));
     autoChooser.addOption("Algae T to Processor", new PathPlannerAuto("Algae T to Processor"));
     autoChooser.addOption("Start to Reef TL 3", new PathPlannerAuto("Start to Reef TL 3"));
     autoChooser.addOption("null", new PathPlannerAuto("null"));
@@ -140,6 +139,7 @@ public class RobotContainer {
    */
   private void configureBindings() {
     m_IntakeButton.onTrue(new GrabberIntake());
+    m_IntakeButton.onFalse(new InstantCommand(() -> s_Grabber.setIntakeOutake(IntakeOuttake.NOTHING)));
     m_OuttakeButton.onTrue(new GrabberOutake());
 
     wristDown.onTrue(new GrabberManualMoveDown());
