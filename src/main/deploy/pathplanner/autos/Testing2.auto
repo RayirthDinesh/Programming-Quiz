@@ -19,13 +19,31 @@
         {
           "type": "named",
           "data": {
-            "name": "AutoAimRight"
+            "name": "AutoAimLeft"
           }
         },
         {
           "type": "named",
           "data": {
             "name": "AutoAimOn"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "L1"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 1.5
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Outtake"
           }
         }
       ]

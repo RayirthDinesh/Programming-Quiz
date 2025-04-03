@@ -131,6 +131,7 @@ public class Robot extends TimedRobot {
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
     // this line or comment it out.
+    System.out.println("here");
     RobotContainer.s_Swerve.resetModulesToAbsolute();
     curPlaceGrab = RobotContainer.s_Grabber.getPlacement();
     curPlaceElevator = RobotContainer.s_Elevator.getLevel();
@@ -153,7 +154,7 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during operator control. */
   @Override
   public void teleopPeriodic() {
-
+    System.out.println("here");
     CommandScheduler.getInstance().setDefaultCommand(RobotContainer.s_Swerve, new SwerveTeleop());
 
     if (RobotContainer.operatorJoystick.getPOV() == 0) {

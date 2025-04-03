@@ -20,7 +20,6 @@ public class SwerveAutoAlignAuto extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    
     timer.start();
   }
 
@@ -30,14 +29,16 @@ public class SwerveAutoAlignAuto extends Command {
     if (timer.hasElapsed(2)){
       finish = true;
     }
-    System.out.println("h");
+    System.out.println("hhffffffffffffffffffffffffjhfjfhfjhfhjhfj");
     RobotContainer.s_Swerve.autoMove();
+    // finish = true;
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
     RobotContainer.s_Swerve.autoaimstate = false;
+    RobotContainer.s_Swerve.autoMove();
   }
 
   // Returns true when the command should end.

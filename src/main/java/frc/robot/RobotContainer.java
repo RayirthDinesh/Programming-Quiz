@@ -50,7 +50,7 @@ public class RobotContainer {
 
   public static JoystickButton m_IntakeButton = new JoystickButton(driverJoystick, 5);
   public static JoystickButton m_OuttakeButton = new JoystickButton(driverJoystick, 6);
-  public static JoystickButton zeroGyro = new JoystickButton(driverJoystick, 10);
+  public static JoystickButton zeroGyro = new JoystickButton(driverJoystick, 2);
 
   public static JoystickButton CenterAim = new JoystickButton(driverJoystick, 4);
   public static JoystickButton LeftAim = new JoystickButton(driverJoystick, 1);
@@ -106,7 +106,7 @@ public class RobotContainer {
     NamedCommands.registerCommand("Intake", new GrabberIntake());
     NamedCommands.registerCommand("Outtake", new GrabberOutake());
     NamedCommands.registerCommand("AutoAimOn", new InstantCommand(() -> s_Swerve.autoaimstate = true).andThen(new SwerveAutoAlignAuto()));
-    // NamedCommands.registerCommand("AutoAimOff", new InstantCommand(() -> s_Swerve.autoaimstate = false).andThen(new InstantCommand(() -> RobotContainer.s_Swerve.drive(new Translation2d(0, 0), 0, false, true))));
+    //NamedCommands.registerCommand("AutoAimOff", new InstantCommand(() -> s_Swerve.autoaimstate = false).andThen(new InstantCommand(() -> RobotContainer.s_Swerve.drive(new Translation2d(0, 0), 0, false, true))));
     NamedCommands.registerCommand("AutoAimRight", new InstantCommand(() -> s_Vision.setAutoAim(Vision.autoAim.RIGHT)));
     NamedCommands.registerCommand("AutoAimMid", new InstantCommand(() -> s_Vision.setAutoAim(Vision.autoAim.MIDDLE)));
     NamedCommands.registerCommand("AutoAimLeft", new InstantCommand(() -> s_Vision.setAutoAim(Vision.autoAim.LEFT)));

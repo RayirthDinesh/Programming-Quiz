@@ -180,10 +180,10 @@ public class Swerve extends SubsystemBase {
     System.out.println("i");
     if (autoaimstate){
       if (RobotContainer.s_Vision.isApriltag() == true) {
-        double strafeVal = RobotContainer.s_Vision.autostrafe() * Constants.SwerveConstants.MAX_ANGULAR_VELOCITY_RADIANS_PER_SECOND;
-        double rotationval = RobotContainer.s_Vision.autoAngle() * Constants.SwerveConstants.MAX_ANGULAR_VELOCITY_RADIANS_PER_SECOND;
-        double translationVal = RobotContainer.s_Vision.autotrans() * Constants.SwerveConstants.MAX_ANGULAR_VELOCITY_RADIANS_PER_SECOND;
-        drive(new Translation2d(translationVal, strafeVal).times(Constants.SwerveConstants.MAX_SPEED_METERS_PER_SECOND),
+        double strafeVal = -RobotContainer.s_Vision.autostrafe() * Constants.SwerveConstants.MAX_ANGULAR_VELOCITY_RADIANS_PER_SECOND/4;
+        double rotationval = -RobotContainer.s_Vision.autoAngle() * Constants.SwerveConstants.MAX_ANGULAR_VELOCITY_RADIANS_PER_SECOND/4;
+        double translationVal = -RobotContainer.s_Vision.autotrans() * Constants.SwerveConstants.MAX_ANGULAR_VELOCITY_RADIANS_PER_SECOND/4;
+        drive(new Translation2d(translationVal, strafeVal),
             rotationval, false, true);
       }
       else {
