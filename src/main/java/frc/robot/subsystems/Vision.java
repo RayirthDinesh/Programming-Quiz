@@ -147,7 +147,7 @@ public class Vision extends SubsystemBase {
       double targetX = x;
   
       if (currentAutoAim == autoAim.LEFT) {
-          targetX = 12.3;
+          targetX = 11.3;
       } else if (currentAutoAim == autoAim.RIGHT) {
           targetX = -18.2; //we minused this by 1 //was -20.3
           //-19.48
@@ -188,7 +188,7 @@ public class Vision extends SubsystemBase {
             return -autoAnglePID.calculate(targetarea, 8.55-2.13);
         }
         else{
-            return -autoAnglePID.calculate(targetarea, 11);
+            return -autoAnglePID.calculate(targetarea, 14);
         }
       
     }

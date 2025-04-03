@@ -4,6 +4,8 @@
 
 package frc.robot.subsystems;
 
+import java.util.function.BooleanSupplier;
+
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.controls.MotionMagicVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
@@ -15,6 +17,9 @@ import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.RobotContainer;
+import frc.robot.subsystems.Elevator.stateLevel;
+import frc.robot.subsystems.Vision.autoAim;
 
 public class Grabber extends SubsystemBase {
   /** Creates a new Grabber. */
@@ -196,10 +201,20 @@ public class Grabber extends SubsystemBase {
         break;
       case ENCODER:
         switch (intakeOuttake) {
+          
           case INTAKE:
-            grab.set(-0.6);
+            if(RobotContainer.s_Vision.getAutoAim() == autoAim.MIDDLE){
+              grab.set(-0.8);
+            }
+            else{
+              grab.set(-0.6);
+            }
+            
             break;
           case OUTTAKE:
+            if(getPlacement() == GrabberPlacement.BARGE){
+              grab.set(0.8);
+            }
             grab.set(0.3);
             Ticker(1, true);
             break;
