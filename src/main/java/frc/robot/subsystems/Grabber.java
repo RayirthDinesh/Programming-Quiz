@@ -215,7 +215,10 @@ public class Grabber extends SubsystemBase {
             if(getPlacement() == GrabberPlacement.BARGE){
               grab.set(0.8);
             }
-            grab.set(0.3);
+            else{
+              grab.set(0.3);
+            }
+           
             Ticker(1, true);
             break;
           case NOTHING:

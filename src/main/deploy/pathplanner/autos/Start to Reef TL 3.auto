@@ -7,7 +7,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Start to Reef TL 3"
+            "pathName": null
           }
         },
         {
@@ -20,6 +20,6 @@
     }
   },
   "resetOdom": true,
-  "folder": "Start to Reef",
+  "folder": null,
   "choreoAuto": false
 }
