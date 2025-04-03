@@ -115,6 +115,7 @@ public class RobotContainer {
     configureBindings();
     // autoChooser.setDefaultOption("SPEAKER Routine", new SpeakerRoutine());
     autoChooser.addOption("S1-Forward", new PathPlannerAuto("S1-Forward"));
+    autoChooser.addOption("kys", new PathPlannerAuto("kys"));
     autoChooser.addOption("S2-Forward", new PathPlannerAuto("S2-Forward"));
     autoChooser.addOption("S3-Forward", new PathPlannerAuto("S3-Forward"));
     autoChooser.addOption("Testing2", new PathPlannerAuto("Testing2"));
