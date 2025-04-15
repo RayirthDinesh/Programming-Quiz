@@ -146,6 +146,9 @@ public class Elevator extends SubsystemBase {
     return currentLevel;
   }
 
+  public static void TrackAprilTag(){
+
+  }
   
 
   @Override

@@ -6,20 +6,14 @@ package frc.robot;
 
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.networktables.GenericEntry;
-import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frc.robot.commands.ParallelCommands.ElevatorAndGrabberButtonStates;
-import frc.robot.commands.ParallelCommands.ElevatorAndGrabberMovePos;
-import frc.robot.commands.ParallelCommands.ResetAll;
-import frc.robot.commands.Swerve.SwerveEncoderJoymode;
+import frc.robot.commands.Elevator.ElevatorReset;
 import frc.robot.commands.Swerve.SwerveTeleop;
 import frc.robot.subsystems.Elevator.stateLevel;
-import frc.robot.subsystems.Elevator.stateReset;
-import frc.robot.subsystems.Grabber.GrabberPlacement;
-import frc.robot.subsystems.Grabber.States;
+
 ;
 
 /**
@@ -35,7 +29,6 @@ public class Robot extends TimedRobot {
   private final RobotContainer m_robotContainer;
   public static final CTREConfigs ctreConfigs = new CTREConfigs();
   
-  public GrabberPlacement curPlaceGrab;
   public stateLevel curPlaceElevator;
 
   public GenericEntry lowestVolts = Shuffleboard.getTab("teleop").add("Lowest Voltage", 0.0).getEntry();
@@ -131,22 +124,8 @@ public class Robot extends TimedRobot {
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
     // this line or comment it out.
-    System.out.println("here");
-    RobotContainer.s_Swerve.resetModulesToAbsolute();
-    curPlaceGrab = RobotContainer.s_Grabber.getPlacement();
-    curPlaceElevator = RobotContainer.s_Elevator.getLevel();
-
-    if(
-    RobotContainer.s_Grabber.getState() == States.INITIALIZING &&
-    RobotContainer.s_Elevator.getState() == stateReset.INITIALIZING){
-    CommandScheduler.getInstance().schedule(new ResetAll());
-    }
-
-    if (m_autonomousCommand != null) {
-      m_autonomousCommand.cancel();
-    }
-    CameraServer.startAutomaticCapture();
-
+    CommandScheduler.getInstance().setDefaultCommand(RobotContainer.s_Swerve, new SwerveTeleop());
+    CommandScheduler.getInstance().schedule(new ElevatorReset());
     
   }
 
@@ -154,38 +133,6 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during operator control. */
   @Override
   public void teleopPeriodic() {
-    System.out.println("here");
-    CommandScheduler.getInstance().setDefaultCommand(RobotContainer.s_Swerve, new SwerveTeleop());
-
-    if (RobotContainer.operatorJoystick.getPOV() == 0) {
-      CommandScheduler.getInstance().schedule(new ElevatorAndGrabberButtonStates(stateLevel.ALGAE_ON_TOP, GrabberPlacement.ALGAE_ON_TOP));
-    }
-    if (curPlaceGrab != RobotContainer.s_Grabber.getPlacement()
-        && RobotContainer.s_Grabber.getState() == States.ENCODER) {
-          System.out.println(RobotContainer.operatorJoystick.getPOV());
-      if (curPlaceElevator != RobotContainer.s_Elevator.getLevel()
-          && RobotContainer.s_Elevator.getState() == stateReset.INITIALIZED) {
-            //System.out.println(RobotContainer.operatorJoystick.getPOV());
-        
-        curPlaceGrab = RobotContainer.s_Grabber.getPlacement();
-        curPlaceElevator = RobotContainer.s_Elevator.getLevel();
-        CommandScheduler.getInstance().schedule(new ElevatorAndGrabberMovePos(curPlaceGrab, curPlaceElevator));
-      }
-    }
-
-    if (RobotContainer.driverJoystick.getPOV(0) == 0) {
-      new SwerveEncoderJoymode(true).schedule();
-    }
-    if (RobotContainer.driverJoystick.getPOV(0) == 180) {
-      new SwerveEncoderJoymode(false).schedule();
-    }
-
-    double battvolts = RobotController.getBatteryVoltage();
-    double min = 100;
-    if (min > battvolts) {
-      min = battvolts;
-      lowestVolts.setDouble(min); 
-    }
 
   }
 

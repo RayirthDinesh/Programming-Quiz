@@ -25,7 +25,6 @@ import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
-import frc.robot.RobotContainer;
 import frc.robot.SwerveModules;
 
 public class Swerve extends SubsystemBase {
@@ -176,23 +175,7 @@ public class Swerve extends SubsystemBase {
     }
   }
 
-  public void autoMove() {
-    System.out.println("i");
-    if (autoaimstate){
-      if (RobotContainer.s_Vision.isApriltag() == true) {
-        double strafeVal = -RobotContainer.s_Vision.autostrafe() * Constants.SwerveConstants.MAX_ANGULAR_VELOCITY_RADIANS_PER_SECOND/4;
-        double rotationval = -RobotContainer.s_Vision.autoAngle() * Constants.SwerveConstants.MAX_ANGULAR_VELOCITY_RADIANS_PER_SECOND/4;
-        double translationVal = -RobotContainer.s_Vision.autotrans() * Constants.SwerveConstants.MAX_ANGULAR_VELOCITY_RADIANS_PER_SECOND/4;
-        drive(new Translation2d(translationVal, strafeVal),
-            rotationval, false, true);
-      }
-      else {
-        drive(new Translation2d(0, 0), 0, false, true);
-      }
-    } else {
-      drive(new Translation2d(0, 0), 0, false, true);
-    }
-  }
+
 
   // set speeds of all modules and move to current location
   public void drive(ChassisSpeeds speeds) {

@@ -30,21 +30,11 @@ public final class Constants {
    */
   @SuppressWarnings({ "all" })
 
-  public final class ClimbConstants {
-    // public static final int MOTOR_PORT = 0;
-    public static final int LIMITSWITCH_PORT = 0;
-    public static final double GEAR_RATIO = 385.7;
 
-    public static final double BOTTOM_SOFT_LIMIT = -15;
-    public static final double BOTTOM_HARD_LIMIT = -30;
-    public static final double TOP_SOFT_LIMIT = 30;
-    public static final double TOP_HARD_LIMIT = 33;
-
-    public static final double CURRENT_LIMIT = 30;
-    public static final double MOVE_TO_CAGE_POSITION = -0.4;
-  }
 
   public final class ElevatorConstants {
+    public static final double Arm_Height = 0.7;
+
     public static final int LEADER_MOTOR_PORT = 15;
     public static final int FOLLOWER_MOTOR_PORT = 14;
     public static final int LIMITSWITCH_PORT = 2;
@@ -72,31 +62,6 @@ public final class Constants {
     public static final double GEAR_RATIO = 100;
   }
 
-  public final class GrabberConstants {
-    public static final int JOINT_MOTOR_PORT = 16;
-    public static final int GRAB_PORT = 17;
-    public static final int LIMITSWITCH_PORT = 1;
-
-    // public static final double TOP_HARD_LIMIT = 0.1;
-    // public static final double BOTTOM_HARD_LIMIT = -0.44;
-    // public static final double TOP_SOFT_LIMIT = 0.05;
-    // public static final double BOTTOM_SOFT_LIMIT = -0.4 ;
-
-    public static final double LEVEL_4 = 0.3949;
-    public static final double GROUND_POSITION = 0.17181;
-    public static final double FEEDER_POSITION = 0.6492056;
-    public static final double BARGE_POSITION = 0.71209;
-    public static final double REST_POSITION = 0.0;
-    public static final double PROCESSOR_POSITION = 0.19181;
-    public static final double ALGAE_ON_TOP = 0.2579;
-
-    public static final double LEVEL_1_TO_3 = 0.17831+27*0.006;
-    public static final double LEVEL_1 = 0.32824;
-
-
-    public static final double GEAR_RATIO = 102.4;
-    public static final double CURRENT_LIMIT = 12;
-  }
 
   public final class SwerveConstants {
     public static final double STICK_ROTATION_DEADBAND = 0.05;

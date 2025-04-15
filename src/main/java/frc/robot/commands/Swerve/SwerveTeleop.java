@@ -10,7 +10,6 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
-import frc.robot.subsystems.Vision.autoAim;
 
 public class SwerveTeleop extends Command {
 
@@ -95,14 +94,8 @@ public class SwerveTeleop extends Command {
     // translationVal = squareAxis(logAxis(translationSup.getAsDouble()),
     // Constants.stickDeadband + 0.3);
 
-    if (RobotContainer.s_Vision.getAutoAim() != autoAim.NONE && RobotContainer.s_Vision.isApriltag() /*&& RobotContainer.s_Swerve.autoaimstate*/) {
-
-      strafeVal = -RobotContainer.s_Vision.autostrafe();
-      rotationval = -RobotContainer.s_Vision.autoAngle()
-          * Constants.SwerveConstants.MAX_ANGULAR_VELOCITY_RADIANS_PER_SECOND / 3;
-      translationVal = -RobotContainer.s_Vision.autotrans()
-          * Constants.SwerveConstants.MAX_ANGULAR_VELOCITY_RADIANS_PER_SECOND / 3;
-      fieldRelative = false;
+    if (null != null) {
+      
 
     } else {
       translationVal = -squareAxis(logAxis(translationSup.getAsDouble()), Constants.SwerveConstants.STICK_DEADBAND);
